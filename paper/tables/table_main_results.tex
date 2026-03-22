@@ -1,34 +1,38 @@
 \begin{table}[t]
   \centering
   \scriptsize
-  \caption{Synthetic reference panel and promoted real-OOD benchmark. Values are mean $\pm$ std over seeds. Best mean \AUPRC{} in each row is bold.}
+  \caption{Synthetic reference panel and promoted real-OOD benchmark. Values are mean $\pm$ std over seeds. Best mean \AUPRC{} in each row is bold. The promoted pooled-LM baseline \texttt{DTI-LM} is included where matched 3-seed results are available.}
   \label{tab:main-results}
   \setlength{\tabcolsep}{3.5pt}
   \resizebox{\linewidth}{!}{
-  \begin{tabular}{@{}llcccc@{}}
+  \begin{tabular}{@{}llccccc@{}}
     \toprule
-    Benchmark & Seeds & base (\AUPRC{}/\AUROC{}) & RAICD (\AUPRC{}/\AUROC{}) & FTM sparse (\AUPRC{}/\AUROC{}) & Winner \\
+    Benchmark & Seeds & base (\AUPRC{}/\AUROC{}) & RAICD (\AUPRC{}/\AUROC{}) & FTM sparse (\AUPRC{}/\AUROC{}) & DTI-LM (\AUPRC{}/\AUROC{}) & Winner \\
     \midrule
     \texttt{BindingDB\_Kd / unseen\_drug} & 3 &
     \textbf{0.5509 $\pm$ 0.0900 / 0.7794 $\pm$ 0.0534} &
     0.5228 $\pm$ 0.0828 / 0.7803 $\pm$ 0.0506 &
+    -- &
     -- &
     base \\
     \texttt{BindingDB\_Kd / blind\_start} & 3 &
     0.3737 $\pm$ 0.0229 / 0.6778 $\pm$ 0.0151 &
     \textbf{0.4024 $\pm$ 0.0508 / 0.6844 $\pm$ 0.0145} &
     -- &
+    0.3636 $\pm$ 0.0693 / 0.6490 $\pm$ 0.0642 &
     RAICD \\
     \texttt{BindingDB\_Kd / unseen\_target} & 3 &
     0.5224 $\pm$ 0.0602 / 0.7741 $\pm$ 0.0161 &
     -- &
     \textbf{0.5439 $\pm$ 0.0791 / 0.7848 $\pm$ 0.0204} &
+    0.5136 $\pm$ 0.0730 / 0.7970 $\pm$ 0.0159 &
     FTM \\
     \texttt{BindingDB\_patent / patent\_temporal} & 3 &
-    \textbf{0.7772 $\pm$ 0.0086 / 0.7223 $\pm$ 0.0109} &
+    0.7772 $\pm$ 0.0086 / 0.7223 $\pm$ 0.0109 &
     0.7692 $\pm$ 0.0018 / 0.7032 $\pm$ 0.0010 &
     0.7721 $\pm$ 0.0025 / 0.7059 $\pm$ 0.0037 &
-    base \\
+    \textbf{0.7825 $\pm$ 0.0078 / 0.7362 $\pm$ 0.0083} &
+    DTI-LM \\
     \bottomrule
   \end{tabular}}
 \end{table}

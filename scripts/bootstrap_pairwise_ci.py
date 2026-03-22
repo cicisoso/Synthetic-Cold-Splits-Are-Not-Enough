@@ -53,6 +53,90 @@ COMPARISONS = {
             "results/full_bindingdb_patent_ftm/BindingDB_patent_patent_temporal_ftm_seed2_chem32_top4_shr8p0.json",
         ],
     },
+    "patent_base_vs_dtilm": {
+        "a_name": "base",
+        "b_name": "DTI-LM",
+        "a_paths": [
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed0.json",
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed1.json",
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/recent_panel_stage1/BindingDB_patent_patent_temporal_dtilm_seed0.json",
+            "results/recent_dtilm_patent_multiseed/BindingDB_patent_patent_temporal_dtilm_seed1.json",
+            "results/recent_dtilm_patent_multiseed/BindingDB_patent_patent_temporal_dtilm_seed2.json",
+        ],
+    },
+    "kd_unseen_target_base_vs_ftm": {
+        "a_name": "base",
+        "b_name": "FTM",
+        "a_paths": [
+            "results/full_unseen_target_base_multiseed/BindingDB_Kd_unseen_target_base_seed0.json",
+            "results/full_unseen_target_base_multiseed/BindingDB_Kd_unseen_target_base_seed1.json",
+            "results/full_unseen_target_base_multiseed/BindingDB_Kd_unseen_target_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/full_ftm_unseen_target_sparse_multiseed/BindingDB_Kd_unseen_target_ftm_seed0_chem32_top4_shr8p0.json",
+            "results/full_ftm_unseen_target_sparse_multiseed/BindingDB_Kd_unseen_target_ftm_seed1_chem32_top4_shr8p0.json",
+            "results/full_ftm_unseen_target_sparse_multiseed/BindingDB_Kd_unseen_target_ftm_seed2_chem32_top4_shr8p0.json",
+        ],
+    },
+    "ki_base_vs_raicd": {
+        "a_name": "base",
+        "b_name": "RAICD",
+        "a_paths": [
+            "results/full_bindingdb_ki_unseen_target_base_multiseed/BindingDB_Ki_unseen_target_base_seed0.json",
+            "results/full_bindingdb_ki_unseen_target_base_multiseed/BindingDB_Ki_unseen_target_base_seed1.json",
+            "results/full_bindingdb_ki_unseen_target_base_multiseed/BindingDB_Ki_unseen_target_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/full_bindingdb_ki_unseen_target_raicd_multiseed/BindingDB_Ki_unseen_target_raicd_seed0_both.json",
+            "results/full_bindingdb_ki_unseen_target_raicd_multiseed/BindingDB_Ki_unseen_target_raicd_seed1_both.json",
+            "results/full_bindingdb_ki_unseen_target_raicd_multiseed/BindingDB_Ki_unseen_target_raicd_seed2_both.json",
+        ],
+    },
+    "ki_base_vs_ftm": {
+        "a_name": "base",
+        "b_name": "FTM",
+        "a_paths": [
+            "results/full_bindingdb_ki_unseen_target_base_multiseed/BindingDB_Ki_unseen_target_base_seed0.json",
+            "results/full_bindingdb_ki_unseen_target_base_multiseed/BindingDB_Ki_unseen_target_base_seed1.json",
+            "results/full_bindingdb_ki_unseen_target_base_multiseed/BindingDB_Ki_unseen_target_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/full_bindingdb_ki_unseen_target_ftm_multiseed/BindingDB_Ki_unseen_target_ftm_seed0_chem32_top4_shr8p0.json",
+            "results/full_bindingdb_ki_unseen_target_ftm_multiseed/BindingDB_Ki_unseen_target_ftm_seed1_chem32_top4_shr8p0.json",
+            "results/full_bindingdb_ki_unseen_target_ftm_multiseed/BindingDB_Ki_unseen_target_ftm_seed2_chem32_top4_shr8p0.json",
+        ],
+    },
+    "davis_base_vs_raicd": {
+        "a_name": "base",
+        "b_name": "RAICD",
+        "a_paths": [
+            "results/full_davis_unseen_target_base_multiseed/DAVIS_unseen_target_base_seed0.json",
+            "results/full_davis_unseen_target_base_multiseed/DAVIS_unseen_target_base_seed1.json",
+            "results/full_davis_unseen_target_base_multiseed/DAVIS_unseen_target_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/full_davis_unseen_target_raicd_multiseed/DAVIS_unseen_target_raicd_seed0_both.json",
+            "results/full_davis_unseen_target_raicd_multiseed/DAVIS_unseen_target_raicd_seed1_both.json",
+            "results/full_davis_unseen_target_raicd_multiseed/DAVIS_unseen_target_raicd_seed2_both.json",
+        ],
+    },
+    "davis_base_vs_ftm": {
+        "a_name": "base",
+        "b_name": "FTM",
+        "a_paths": [
+            "results/full_davis_unseen_target_base_multiseed/DAVIS_unseen_target_base_seed0.json",
+            "results/full_davis_unseen_target_base_multiseed/DAVIS_unseen_target_base_seed1.json",
+            "results/full_davis_unseen_target_base_multiseed/DAVIS_unseen_target_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/full_davis_unseen_target_ftm_multiseed/DAVIS_unseen_target_ftm_seed0_chem32_top4_shr8p0.json",
+            "results/full_davis_unseen_target_ftm_multiseed/DAVIS_unseen_target_ftm_seed1_chem32_top4_shr8p0.json",
+            "results/full_davis_unseen_target_ftm_multiseed/DAVIS_unseen_target_ftm_seed2_chem32_top4_shr8p0.json",
+        ],
+    },
 }
 
 
@@ -120,11 +204,15 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--num-bootstrap", type=int, default=2000)
     parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--only", nargs="*", default=None)
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
 
     results = {}
+    selected = set(args.only) if args.only else set(COMPARISONS.keys())
     for name, spec in COMPARISONS.items():
+        if name not in selected:
+            continue
         a_seed_data = [load_preds(Path(path)) for path in spec["a_paths"] if Path(path).exists()]
         b_seed_data = [load_preds(Path(path)) for path in spec["b_paths"] if Path(path).exists()]
         if len(a_seed_data) != len(spec["a_paths"]) or len(b_seed_data) != len(spec["b_paths"]):

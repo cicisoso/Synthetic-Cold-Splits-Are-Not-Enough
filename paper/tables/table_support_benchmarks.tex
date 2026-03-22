@@ -1,21 +1,25 @@
 \begin{table}[t]
   \centering
   \scriptsize
-  \caption{Secondary real-OOD support benchmarks. These panels are seed0-only and therefore serve as supporting counterexamples rather than headline evidence.}
+  \caption{Secondary real-OOD support benchmarks. These panels now use matched 3-seed evaluation, but remain supporting counterexamples rather than headline evidence because they reinforce rather than replace the patent temporal benchmark.}
   \label{tab:support}
-  \setlength{\tabcolsep}{4pt}
-  \begin{tabular}{@{}lccc@{}}
+  \setlength{\tabcolsep}{3.5pt}
+  \resizebox{\linewidth}{!}{
+  \begin{tabular}{@{}lcccc@{}}
     \toprule
-    Benchmark & base (\AUPRC{}/\AUROC{}) & FTM sparse (\AUPRC{}/\AUROC{}) & $\Delta$ vs.\ base \\
+    Benchmark & base (\AUPRC{}/\AUROC{}) & RAICD (\AUPRC{}/\AUROC{}) & FTM sparse (\AUPRC{}/\AUROC{}) & Winner \\
     \midrule
     \texttt{BindingDB\_Ki / unseen\_target} &
-    0.6574 / 0.7103 &
-    0.6295 / 0.6855 &
-    -0.0279 / -0.0248 \\
+    \textbf{0.6934 $\pm$ 0.0257 / 0.7192 $\pm$ 0.0068} &
+    0.6685 $\pm$ 0.0223 / 0.6919 $\pm$ 0.0052 &
+    0.6760 $\pm$ 0.0333 / 0.7007 $\pm$ 0.0110 &
+    base \\
     \texttt{DAVIS / unseen\_target} &
-    0.4258 / 0.8849 &
-    0.3705 / 0.8757 &
-    -0.0554 / -0.0092 \\
+    \textbf{0.4097 $\pm$ 0.0275 / 0.8613 $\pm$ 0.0153} &
+    0.3839 $\pm$ 0.0134 / 0.8565 $\pm$ 0.0154 &
+    0.3787 $\pm$ 0.0312 / 0.8577 $\pm$ 0.0101 &
+    base \\
     \bottomrule
   \end{tabular}
+  }
 \end{table}

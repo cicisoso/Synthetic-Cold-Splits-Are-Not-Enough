@@ -1,0 +1,20 @@
+\begin{table}[t]
+  \centering
+  \scriptsize
+  \caption{Reusable benchmark artifacts released with each split. The release is designed so that external predictions can be scored without re-running the in-repo training code.}
+  \label{tab:resource-release}
+  \setlength{\tabcolsep}{3.5pt}
+  \resizebox{\linewidth}{!}{
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Artifact & Example files & Purpose \\
+    \midrule
+    Split manifest & \texttt{manifest.json} & versioned metadata, split counts, prevalence, seed, and canonical paths \\
+    Partition tables & \texttt{train.csv}, \texttt{valid.csv}, \texttt{test.csv} & canonical labeled partitions with \texttt{example\_id} and exported overlap scores \\
+    Pair tables & \texttt{train\_pairs.csv}, \texttt{test\_pairs.csv} & lightweight pair-only views for external model pipelines \\
+    Entity tables & \texttt{drugs.csv}, \texttt{targets.csv} & unique drug / target vocabularies aligned to the exported split IDs \\
+    Full joined table & \texttt{all.csv}, \texttt{all\_pairs.csv} & complete resource snapshot for auditing or custom slicing \\
+    Standalone evaluator & \texttt{scripts/evaluate\_prediction\_csv.py} & scores a prediction CSV against the canonical reference split and returns global + overlap-bucket metrics \\
+    \bottomrule
+  \end{tabular}}
+\end{table}

@@ -37,16 +37,35 @@ def affinity_to_pkd(dataset: str, y: np.ndarray) -> np.ndarray:
     return y_to_pkd(y)
 
 
+def parse_patent_temporal_split(split: str, available_valid_years: list[int]) -> int:
+    if split == "patent_temporal":
+        return max(available_valid_years)
+    prefix = "patent_temporal_v"
+    if split.startswith(prefix):
+        valid_year = int(split[len(prefix):])
+        if valid_year not in available_valid_years:
+            raise ValueError(f"Unsupported patent validation year {valid_year}; available years: {available_valid_years}")
+        return valid_year
+    raise ValueError(f"Unsupported local benchmark split: {split}")
+
+
 def load_local_benchmark_split(dataset: str, split: str) -> Dict[str, pd.DataFrame]:
-    if dataset != "BindingDB_patent" or split != "patent_temporal":
+    if dataset != "BindingDB_patent":
         raise ValueError(f"Unsupported local benchmark dataset/split: {dataset} / {split}")
     base_dir = LOCAL_BENCHMARK_DIR / "bindingdb_patent"
     train_val = pd.read_csv(base_dir / "train_val.csv")
     test = pd.read_csv(base_dir / "test.csv")
-    valid_year = int(train_val["Year"].max())
-    train = train_val[train_val["Year"] < valid_year].reset_index(drop=True)
-    valid = train_val[train_val["Year"] == valid_year].reset_index(drop=True)
-    return {"train": train, "valid": valid, "test": test.reset_index(drop=True)}
+    train_val["Year"] = train_val["Year"].astype(int)
+    test["Year"] = test["Year"].astype(int)
+    available_valid_years = sorted(train_val["Year"].unique().tolist())
+    valid_year = parse_patent_temporal_split(split, available_valid_years)
+    full_frame = pd.concat([train_val, test], axis=0, ignore_index=True)
+    train = full_frame[full_frame["Year"] < valid_year].reset_index(drop=True)
+    valid = full_frame[full_frame["Year"] == valid_year].reset_index(drop=True)
+    test_frame = full_frame[full_frame["Year"] > valid_year].reset_index(drop=True)
+    if len(valid) == 0 or len(test_frame) == 0:
+        raise ValueError(f"Patent split {split} produced empty valid/test partition")
+    return {"train": train, "valid": valid, "test": test_frame}
 
 
 def split_dataframe(dataset: str, split: str, seed: int, frac: Iterable[float]) -> Dict[str, pd.DataFrame]:

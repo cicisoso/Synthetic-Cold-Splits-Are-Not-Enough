@@ -1,0 +1,25 @@
+\begin{table}[t]
+  \centering
+  \scriptsize
+  \caption{Explicit specification of the promoted patent benchmarks. The temporal partition is fixed by year; the random seed changes model stochasticity, not the partition itself.}
+  \label{tab:patent-spec}
+  \setlength{\tabcolsep}{3.5pt}
+  \resizebox{\linewidth}{!}{
+  \begin{tabular}{@{}lll@{}}
+    \toprule
+    Aspect & \texttt{patent\_temporal} & \texttt{patent\_temporal\_v2017} \\
+    \midrule
+    Source files & \texttt{train\_val.csv + test.csv} & \texttt{train\_val.csv + test.csv} \\
+    Train years & 2013--2017 & 2013--2016 \\
+    Validation year & 2018 & 2017 \\
+    Test years & 2019--2021 & 2018--2021 \\
+    Rows (train / valid / test) & 142,275 / 41,155 / 49,028 & 90,771 / 51,504 / 90,183 \\
+    Pos. rate (train / valid / test) & 0.566 / 0.534 / 0.575 & 0.568 / 0.562 / 0.556 \\
+    Label transform & \multicolumn{2}{l}{raw patent value $Y \mapsto \mathrm{p}K_d = 9 - Y / \ln(10)$; positive label if $\mathrm{p}K_d \ge 7.0$} \\
+    Overlap policy & \multicolumn{2}{l}{no cold-entity filtering; entity overlap is allowed, exported, and diagnosed via \texttt{overlap\_score} buckets} \\
+    Duplicate policy & \multicolumn{2}{l}{pair rows are kept after year partition; entity export tables are deduplicated by canonical ID} \\
+    Seed semantics & \multicolumn{2}{l}{partition is fixed across seeds; seed affects training / initialization only} \\
+    OOD interpretation & \multicolumn{2}{l}{temporal/provenance OOD rather than pure time-only shift} \\
+    \bottomrule
+  \end{tabular}}
+\end{table}

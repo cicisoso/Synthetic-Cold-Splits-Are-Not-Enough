@@ -1,40 +1,48 @@
-# RAICD: Retrieval-Augmented Inductive Cold-start DTI
+# Distribution-Shift Benchmarking for DTI
 
-Minimal research framework for the topic:
+Research workspace for:
 
 `cold start in drug target interaction prediction`
 
-This repository was bootstrapped from scratch to execute a focused research pipeline around one chosen idea:
+The repository started from an internal method exploration around retrieval-augmented cold-start DTI, but the current primary output is a benchmark/resource paper:
 
-- `RAICD`: Retrieval-Augmented Inductive Cold-start DTI
+`Synthetic Cold Splits Are Not Enough: Distribution-Shift Benchmarking for Drug-Target Interaction Prediction`
 
-The core claim is that cold-start DTI, especially unseen-drug and blind-start settings, is not only an encoding problem. It is a conditional evidence aggregation problem: given an unseen drug or target, the model should retrieve the most relevant seen entities from the training bank and aggregate their evidence in a pair-conditioned way.
+The current thesis is benchmark-first rather than method-first:
+
+- synthetic cold-start DTI splits are regime-dependent even within one dataset
+- synthetic cold splits and real OOD shifts are not interchangeable evaluation settings
+- model rankings can reverse when the benchmark axis changes
+- reusable split manifests and a standalone evaluator are part of the contribution
 
 ## What is included
 
+- benchmark-first paper materials under [paper](/root/exp/dti_codex/paper) and [reports](/root/exp/dti_codex/reports)
 - Stage 1 report in [reports/IDEA_REPORT.md](/root/exp/dti_codex/reports/IDEA_REPORT.md)
-- Implementation plan in [reports/IMPLEMENTATION_PLAN.md](/root/exp/dti_codex/reports/IMPLEMENTATION_PLAN.md)
-- PyTorch implementation of:
+- implementation history in [reports/IMPLEMENTATION_PLAN.md](/root/exp/dti_codex/reports/IMPLEMENTATION_PLAN.md)
+- PyTorch implementations of:
+  - compact internal DTI panel: `base`, `RAICD`, `FTM sparse`
   - hashed protein featurization
   - RDKit Morgan drug featurization
   - train-only retrieval banks
-  - base encoder and retrieval-augmented model
-  - warm / unseen-drug / unseen-target / blind-start splits via TDC
+  - synthetic `warm / unseen-drug / unseen-target / blind-start` splits via TDC
+  - local patent temporal splits for real-OOD evaluation
+- reusable benchmark resources under `benchmark_resources/<dataset>/<split>/seed<k>/`
+- unified offline evaluator: [scripts/evaluate_prediction_csv.py](/root/exp/dti_codex/scripts/evaluate_prediction_csv.py)
+- pooled-LM recent baseline trainer: [scripts/train_recent_baseline.py](/root/exp/dti_codex/scripts/train_recent_baseline.py)
+- benchmark exporter: [scripts/export_benchmark_resource.py](/root/exp/dti_codex/scripts/export_benchmark_resource.py)
 - runnable training entrypoint: [scripts/train_raicd.py](/root/exp/dti_codex/scripts/train_raicd.py)
 - smoke and experiment launch scripts under [scripts](/root/exp/dti_codex/scripts)
 
-## Round 1 results
+## Current benchmark snapshot
 
-On `BindingDB_Kd` with binary labels from `pKd >= 7.0`:
+The current paper-ready topline results are summarized in [reports/BENCHMARK_TABLE_LIVE.md](/root/exp/dti_codex/reports/BENCHMARK_TABLE_LIVE.md). The high-level read is:
 
-- `unseen_drug`
-  - `base`: AUPRC `0.608`, AUROC `0.823`
-  - `raicd` with similarity-biased attention: AUPRC `0.614`, AUROC `0.840`
-- `blind_start`
-  - `base`: AUPRC `0.352`, AUROC `0.658`
-  - `raicd` with similarity-biased attention: AUPRC `0.407`, AUROC `0.686`
-
-These results suggest the retrieval idea is worth keeping, especially for stricter cold-start settings.
+- `BindingDB_Kd / blind_start`: retrieval (`RAICD`) wins over `base`
+- `BindingDB_Kd / unseen_drug`: retrieval loses to `base`
+- `BindingDB_Kd / unseen_target`: `FTM sparse` wins over `base`
+- `BindingDB_patent / patent_temporal`: `DTI-LM` is the strongest recent baseline, while the internal-panel ordering reverses relative to synthetic `blind_start`
+- `BindingDB_Ki` and `DAVIS` support the claim that synthetic target-cold gains do not reliably transfer
 
 ## Environment
 
@@ -58,6 +66,17 @@ Already installed in the `research` environment during this run:
 ```bash
 bash scripts/run_smoke.sh
 ```
+
+## Export A Reusable Benchmark Split
+
+```bash
+PYTHONPATH=src python scripts/export_benchmark_resource.py \
+  --dataset BindingDB_Kd \
+  --split unseen_target \
+  --seed 0
+```
+
+This writes canonical train/valid/test CSVs, entity tables, pair tables, and a manifest under `benchmark_resources/`.
 
 ## Initial experiment
 
@@ -84,6 +103,24 @@ PYTHONPATH=src python scripts/train_raicd.py \
   --batch-size 256 \
   --pkd-threshold 7.0
 ```
+
+## Recent Baseline Adapters
+
+```bash
+PYTHONPATH=src python scripts/train_recent_baseline.py \
+  --dataset BindingDB_Kd \
+  --split unseen_target \
+  --model dtilm \
+  --seed 0 \
+  --epochs 4
+```
+
+The current recent-baseline panel exposes:
+
+- `dtilm`: pooled ChemBERTa + ESM2 MLP adapter aligned to the DTI-LM setup
+- `hyperpcm`: task-conditioned pooled-LM adapter aligned to recent HyperPCM-style target-conditioned modeling
+
+These adapters are intentionally run on the same exported split resources and evaluator as the in-repo models.
 
 ## Notes
 

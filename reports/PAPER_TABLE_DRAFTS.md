@@ -4,47 +4,48 @@
 
 ### Caption Draft
 
-Synthetic cold splits and real distribution shifts yield different model rankings. `RAICD` helps on `BindingDB_Kd / blind_start` but loses on `BindingDB_patent / patent_temporal`, while `FTM sparse` helps on synthetic `unseen_target` but fails to transfer consistently to real-OOD settings.
+Synthetic cold splits and real distribution shifts yield different model rankings. `RAICD` helps on `BindingDB_Kd / blind_start` but loses on `BindingDB_patent / patent_temporal`, `FTM sparse` helps on synthetic `unseen_target` but fails to transfer consistently to shifted target-cold panels, and the promoted pooled-LM baseline `DTI-LM` becomes strongest on patent temporal.
 
 ### LaTeX-Friendly Table Content
 
-| Benchmark | Seeds | Base AUPRC / AUROC | RAICD AUPRC / AUROC | FTM AUPRC / AUROC | Winner by AUPRC |
-|-----------|-------|--------------------|---------------------|-------------------|-----------------|
-| `BindingDB_Kd / unseen_drug` | 3 | `0.5509 ± 0.0900 / 0.7794 ± 0.0534` | `0.5228 ± 0.0828 / 0.7803 ± 0.0506` | `n/a` | `base` |
-| `BindingDB_Kd / blind_start` | 3 | `0.3737 ± 0.0229 / 0.6778 ± 0.0151` | `0.4024 ± 0.0508 / 0.6844 ± 0.0145` | `n/a` | `RAICD` |
-| `BindingDB_Kd / unseen_target` | 3 | `0.5224 ± 0.0602 / 0.7741 ± 0.0161` | `n/a` | `0.5439 ± 0.0791 / 0.7848 ± 0.0204` | `FTM` |
-| `BindingDB_patent / patent_temporal` | 3 | `0.7772 ± 0.0086 / 0.7223 ± 0.0109` | `0.7692 ± 0.0018 / 0.7032 ± 0.0010` | `0.7721 ± 0.0025 / 0.7059 ± 0.0037` | `base` |
+| Benchmark | Seeds | Base AUPRC / AUROC | RAICD AUPRC / AUROC | FTM AUPRC / AUROC | DTI-LM AUPRC / AUROC | Winner by AUPRC |
+|-----------|-------|--------------------|---------------------|-------------------|----------------------|-----------------|
+| `BindingDB_Kd / unseen_drug` | 3 | `0.5509 ± 0.0900 / 0.7794 ± 0.0534` | `0.5228 ± 0.0828 / 0.7803 ± 0.0506` | `n/a` | `n/a` | `base` |
+| `BindingDB_Kd / blind_start` | 3 | `0.3737 ± 0.0229 / 0.6778 ± 0.0151` | `0.4024 ± 0.0508 / 0.6844 ± 0.0145` | `n/a` | `0.3636 ± 0.0693 / 0.6490 ± 0.0642` | `RAICD` |
+| `BindingDB_Kd / unseen_target` | 3 | `0.5224 ± 0.0602 / 0.7741 ± 0.0161` | `n/a` | `0.5439 ± 0.0791 / 0.7848 ± 0.0204` | `0.5136 ± 0.0730 / 0.7970 ± 0.0159` | `FTM` |
+| `BindingDB_patent / patent_temporal` | 3 | `0.7772 ± 0.0086 / 0.7223 ± 0.0109` | `0.7692 ± 0.0018 / 0.7032 ± 0.0010` | `0.7721 ± 0.0025 / 0.7059 ± 0.0037` | `0.7825 ± 0.0078 / 0.7362 ± 0.0083` | `DTI-LM` |
 
 ### Text Draft
 
-The synthetic reference panel already shows that cold-start DTI is regime-dependent: retrieval helps on `blind_start` but not on `unseen_drug`, while target-memory helps on synthetic `unseen_target`. However, this ranking does not transfer to real-OOD settings. On the promoted temporal benchmark `BindingDB_patent / patent_temporal`, `base` is the best model over 3 seeds, outperforming `RAICD` by `0.0080` AUPRC and `0.0191` AUROC and outperforming `FTM` by `0.0050` AUPRC and `0.0164` AUROC.
+The synthetic reference panel already shows that cold-start DTI is regime-dependent: retrieval helps on `blind_start` but not on `unseen_drug`, while target-memory helps on synthetic `unseen_target`. However, this ranking does not transfer to real-OOD settings. Within the compact internal panel on `BindingDB_patent / patent_temporal`, `base` remains the strongest model over 3 seeds, outperforming `RAICD` by `0.0080` AUPRC and `0.0191` AUROC and outperforming `FTM` by `0.0050` AUPRC and `0.0164` AUROC. When the panel is expanded with a recent pooled-LM baseline, `DTI-LM` reaches `0.7825 ± 0.0078 / 0.7362 ± 0.0083`, exceeding the compact internal `base` by `0.0053` AUPRC and `0.0139` AUROC.
 
-Paired bootstrap confidence intervals strengthen this comparison. On synthetic `blind_start`, the `RAICD - base` AUPRC delta is `+0.0288` with 95% CI `[+0.0145, +0.0431]`. On patent temporal, the `RAICD - base` delta is `-0.0080` with 95% CI `[-0.0101, -0.0059]`, and the `FTM - base` delta is `-0.0050` with 95% CI `[-0.0072, -0.0029]`.
+Paired bootstrap confidence intervals strengthen the internal-panel comparison. On synthetic `blind_start`, the `RAICD - base` AUPRC delta is `+0.0288` with 95% CI `[+0.0145, +0.0431]`. On patent temporal, the `RAICD - base` delta is `-0.0080` with 95% CI `[-0.0101, -0.0059]`, and the `FTM - base` delta is `-0.0050` with 95% CI `[-0.0072, -0.0029]`.
 
 ### Main-Text Placement Decision
 
-Keep `BindingDB_patent / patent_temporal` in the main table and move `BindingDB_Ki` and `DAVIS` to appendix support. The reason is evidential strength rather than convenience:
+Keep `BindingDB_patent / patent_temporal` in the main table and move `BindingDB_Ki` and `DAVIS` to appendix support. `DTI-LM` now belongs in the main table as the promoted recent baseline. The reason is evidential strength rather than convenience:
 
 - `BindingDB_patent` has a matched 3-seed panel for `base / RAICD / FTM`
+- `DTI-LM` also has a matched 3-seed topline on this benchmark and materially changes the best-model row winner
 - it is the cleanest synthetic-vs-real ranking reversal
-- `BindingDB_Ki` and `DAVIS` are useful negative-transfer support, but they are currently seed-0 only and do not carry the full three-model evidence chain
+- `BindingDB_Ki` and `DAVIS` are useful negative-transfer support, but they reinforce rather than replace the patent narrative
 
 ## Appendix Table A1: Additional Real-OOD Support Benchmarks
 
 ### Caption Draft
 
-Preliminary real-OOD support screens are consistent with the main temporal benchmark conclusion. Both assay-shifted BindingDB and the external DAVIS benchmark suggest that the target-memory gain observed on synthetic `BindingDB_Kd / unseen_target` does not transfer reliably.
+Additional real-OOD support benchmarks are consistent with the main temporal benchmark conclusion. Both assay-shifted BindingDB and the external DAVIS benchmark suggest that the target-memory gain observed on synthetic `BindingDB_Kd / unseen_target` does not transfer reliably.
 
 ### Table Content
 
-| Benchmark | Seeds | Base AUPRC / AUROC | FTM AUPRC / AUROC | Delta vs Base |
-|-----------|-------|--------------------|-------------------|---------------|
-| `BindingDB_Ki / unseen_target` | 1 | `0.6574 / 0.7103` | `0.6295 / 0.6855` | `-0.0279 / -0.0248` |
-| `DAVIS / unseen_target` | 1 | `0.4258 / 0.8849` | `0.3705 / 0.8757` | `-0.0553 / -0.0092` |
+| Benchmark | Seeds | Base AUPRC / AUROC | RAICD AUPRC / AUROC | FTM AUPRC / AUROC | Winner by AUPRC |
+|-----------|-------|--------------------|---------------------|-------------------|-----------------|
+| `BindingDB_Ki / unseen_target` | 3 | `0.6934 ± 0.0257 / 0.7192 ± 0.0068` | `0.6685 ± 0.0223 / 0.6919 ± 0.0052` | `0.6760 ± 0.0333 / 0.7007 ± 0.0110` | `base` |
+| `DAVIS / unseen_target` | 3 | `0.4097 ± 0.0275 / 0.8613 ± 0.0153` | `0.3839 ± 0.0134 / 0.8565 ± 0.0154` | `0.3787 ± 0.0312 / 0.8577 ± 0.0101` | `base` |
 
 ### Text Draft
 
-These auxiliary benchmarks are consistent with the benchmark-centric interpretation, but they should remain secondary because they are currently seed0-only support. Even though `FTM sparse` improves synthetic `BindingDB_Kd / unseen_target`, it loses on both `BindingDB_Ki` and `DAVIS`, suggesting that the apparent gain is not robust to assay or dataset shift. This keeps `BindingDB_patent` as the main real-OOD benchmark and positions `BindingDB_Ki` and `DAVIS` as supporting counterexamples rather than co-equal headline benchmarks.
+These auxiliary benchmarks are now matched 3-seed support, but they should still remain secondary because they do not add a cleaner ranking-reversal axis than the patent benchmark. Even though `FTM sparse` improves synthetic `BindingDB_Kd / unseen_target`, it loses on both `BindingDB_Ki` and `DAVIS`, and `RAICD` also remains below `base` on both. This keeps `BindingDB_patent` as the main real-OOD benchmark and positions `BindingDB_Ki` and `DAVIS` as supporting counterexamples rather than co-equal headline benchmarks.
 
 ## Figure 2 Draft: Patent Shift Diagnosis
 

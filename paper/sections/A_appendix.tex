@@ -1,12 +1,36 @@
 \section{Appendix}
 
+\subsection{Patent benchmark specification}
+
+Because the main paper depends on \texttt{BindingDB\_patent / patent\_temporal}, we make its construction explicit here. Table~\ref{tab:patent-spec} enumerates the year boundaries, split counts, label construction, overlap policy, and seed semantics for both the main patent split and the earlier-cutoff robustness variant.
+
+\input{tables/table_patent_spec}
+
 \subsection{Additional real-OOD support benchmarks}
 
-The main paper focuses on the strongest evidence chain: the synthetic \texttt{BindingDB\_Kd} reference panel, the 3-seed \texttt{BindingDB\_patent} ranking reversal, and the patent year/overlap diagnosis. Two additional seed0 support benchmarks provide consistent but weaker evidence.
+The main paper focuses on the strongest evidence chain: the synthetic \texttt{BindingDB\_Kd} reference panel, the 3-seed \texttt{BindingDB\_patent} ranking reversal, and the patent year/overlap diagnosis. \texttt{BindingDB\_Ki} and \texttt{DAVIS} remain supporting real-OOD benchmarks: both now use matched 3-seed evaluation, but they reinforce rather than replace the patent temporal story.
 
 \input{tables/table_support_benchmarks}
 
-On the \texttt{BindingDB\_Ki} support split, \texttt{base} reaches $0.6574 / 0.7103$, while \texttt{FTM sparse} reaches $0.6295 / 0.6855$. On \texttt{DAVIS / unseen\_target}, \texttt{base} reaches $0.4258 / 0.8849$, while \texttt{FTM sparse} reaches $0.3705 / 0.8757$. These support screens suggest that the synthetic \texttt{unseen\_target} gain of \texttt{FTM sparse} does not consistently transfer to additional OOD settings.
+On \texttt{BindingDB\_Ki / unseen\_target}, \texttt{base} remains the strongest internal model at $0.6934 \pm 0.0257 / 0.7192 \pm 0.0068$, ahead of both \texttt{RAICD} and \texttt{FTM sparse}. On \texttt{DAVIS / unseen\_target}, the same ordering remains: \texttt{base} reaches $0.4097 \pm 0.0275 / 0.8613 \pm 0.0153$, while \texttt{RAICD} and \texttt{FTM sparse} are both lower. Seed0 support screens for the strongest recent baseline \texttt{DTI-LM} are also negative on both datasets, so the synthetic \texttt{unseen\_target} gain does not reliably transfer even after expanding the model family.
+
+\subsection{Paired uncertainty support}
+
+Table~\ref{tab:bootstrap-summary} summarizes the paired bootstrap intervals for every comparison used in a headline ranking claim. The main synthetic gain (\texttt{RAICD} on \texttt{blind\_start}), the synthetic target-cold gain (\texttt{FTM} on \texttt{unseen\_target}), and the real-OOD losses on \texttt{BindingDB\_Ki} and \texttt{DAVIS} all keep their sign under paired resampling. This makes the paper's wording more disciplined: the main and support claims are no longer based only on seed-mean ordering.
+
+\input{tables/table_bootstrap_summary}
+
+\subsection{Recent baseline screening and promotion}
+
+To avoid cherry-picking concerns, Table~\ref{tab:recent-screening} summarizes the seed0 screening pass used to decide which recent baselines to promote. The promotion criterion was simple: prioritize the strongest recent model on the primary real-OOD benchmark \texttt{patent\_temporal}, then keep any additional recent baseline that is competitive enough to test whether the main conclusion changes.
+
+\input{tables/table_recent_screening}
+
+\subsection{Reusable benchmark resources}
+
+The benchmark release is intended to be reused independently of the in-repo models. Table~\ref{tab:resource-release} lists the concrete artifacts exported for each split and how they interact with the standalone evaluator. In practice, an external user only needs the canonical split bundle plus a prediction CSV keyed by \texttt{example\_id}; the evaluator then reproduces the same global metrics and overlap-bucket metrics reported in this paper.
+
+\input{tables/table_resource_release}
 
 \subsection{Method-centric ablations}
 

@@ -15,6 +15,27 @@ Generated from local result JSON files.
 | Benchmark | Seeds | Base AUPRC / AUROC | RAICD AUPRC / AUROC | FTM AUPRC / AUROC | Delta vs Base | Note |
 |-----------|-------|--------------------|---------------------|-------------------|---------------|------|
 | `BindingDB_patent / patent_temporal` | 3/3 | `0.7772 ± 0.0086 / 0.7223 ± 0.0109` | `0.7692 ± 0.0018 / 0.7032 ± 0.0010` | `0.7721 ± 0.0025 / 0.7059 ± 0.0037` | `RAICD -0.0080 / -0.0191, FTM -0.0050 / -0.0164` | temporal shift is the promoted real-OOD axis |
-| `BindingDB_Ki / unseen_target` | 1/1 | `0.6574 / 0.7103` | `n/a` | `0.6295 / 0.6855` | `FTM -0.0279 / -0.0248` | assay shift is negative for target-memory |
-| `DAVIS / unseen_target` | 1/1 | `0.4258 / 0.8849` | `n/a` | `0.3705 / 0.8757` | `FTM -0.0554 / -0.0092` | external dataset shift is negative for target-memory |
+| `BindingDB_Ki / unseen_target` | 3/3 | `0.6934 ± 0.0257 / 0.7192 ± 0.0068` | `0.6685 ± 0.0223 / 0.6919 ± 0.0052` | `0.6760 ± 0.0333 / 0.7007 ± 0.0110` | `RAICD -0.0249 / -0.0273, FTM -0.0174 / -0.0185` | assay shift still favors `base` |
+| `DAVIS / unseen_target` | 3/3 | `0.4097 ± 0.0275 / 0.8613 ± 0.0153` | `0.3839 ± 0.0134 / 0.8565 ± 0.0154` | `0.3787 ± 0.0312 / 0.8577 ± 0.0101` | `RAICD -0.0258 / -0.0048, FTM -0.0310 / -0.0036` | external dataset shift still favors `base` |
 
+## Expanded Recent-Baseline Panel
+
+| Benchmark | Seeds | DTI-LM AUPRC / AUROC | HyperPCM AUPRC / AUROC | Note |
+|-----------|-------|----------------------|------------------------|------|
+| `BindingDB_patent / patent_temporal` | `3 / 3` | `0.7825 ± 0.0078 / 0.7362 ± 0.0083` | `0.7753 ± 0.0050 / 0.7368 ± 0.0090` | `DTI-LM` remains the strongest recent baseline by mean AUPRC; `HyperPCM` is close on AUROC |
+| `BindingDB_Kd / blind_start` | `3 / 3` | `0.3636 ± 0.0693 / 0.6490 ± 0.0642` | `0.3828 ± 0.1024 / 0.6807 ± 0.0824` | `HyperPCM` is highly unstable and still does not beat `RAICD` on mean AUPRC |
+| `BindingDB_Kd / unseen_target` | `3 / 3` | `0.5136 ± 0.0730 / 0.7970 ± 0.0159` | `0.4955 ± 0.0793 / 0.7810 ± 0.0191` | neither recent pooled-LM baseline beats `FTM` on mean AUPRC |
+
+## Recent-Baseline Support Screens
+
+| Benchmark | Seeds | Base AUPRC / AUROC | DTI-LM AUPRC / AUROC | Delta vs Base | Note |
+|-----------|-------|--------------------|----------------------|---------------|------|
+| `BindingDB_Ki / unseen_target` | `seed0` | `0.6574 / 0.7103` | `0.6410 / 0.6946` | `-0.0165 / -0.0157` | strongest recent baseline still remains below `base` on assay-shift target-cold |
+| `DAVIS / unseen_target` | `seed0` | `0.4009 / 0.8817` | `0.3478 / 0.8674` | `-0.0530 / -0.0143` | strongest recent baseline still remains below `base` on external dataset shift |
+
+## Patent Robustness Probe
+
+| Benchmark | Seeds | Base AUPRC / AUROC | DTI-LM AUPRC / AUROC | Delta vs Base | Note |
+|-----------|-------|--------------------|----------------------|---------------|------|
+| `BindingDB_patent / patent_temporal` | `3 / 3` | `0.7772 ± 0.0086 / 0.7223 ± 0.0109` | `0.7825 ± 0.0078 / 0.7362 ± 0.0083` | `+0.0054 / +0.0139` | paired bootstrap CI for AUPRC delta is `[+0.0028, +0.0079]` |
+| `BindingDB_patent / patent_temporal_v2017` | `3 / 3` | `0.7044 ± 0.0058 / 0.6624 ± 0.0079` | `0.7134 ± 0.0027 / 0.6754 ± 0.0039` | `+0.0091 / +0.0131` | earlier-cutoff matched 3-seed probe preserves the same winner direction |

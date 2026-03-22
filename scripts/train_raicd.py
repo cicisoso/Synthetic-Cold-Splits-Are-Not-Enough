@@ -21,7 +21,7 @@ ROUTER_EXPERT_NAMES = ["base", "drug_only", "target_only", "both"]
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train retrieval-augmented cold-start DTI models.")
     parser.add_argument("--dataset", type=str, default="BindingDB_Kd")
-    parser.add_argument("--split", type=str, default="unseen_drug", choices=["warm", "unseen_drug", "unseen_target", "blind_start", "patent_temporal"])
+    parser.add_argument("--split", type=str, default="unseen_drug")
     parser.add_argument("--model", type=str, default="raicd", choices=["base", "raicd", "router", "ftm", "rftm"])
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--epochs", type=int, default=8)

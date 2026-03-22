@@ -1,0 +1,28 @@
+{
+  "resource_version": 1,
+  "dataset": "BindingDB_Kd",
+  "split": "unseen_target",
+  "seed": 0,
+  "frac": [
+    0.7,
+    0.1,
+    0.2
+  ],
+  "pkd_threshold": 7.0,
+  "train_rows": 512,
+  "valid_rows": 128,
+  "test_rows": 128,
+  "train_positive_rate": 0.224609375,
+  "valid_positive_rate": 0.1328125,
+  "test_positive_rate": 0.2578125,
+  "unique_drugs": 336,
+  "unique_targets": 420,
+  "paths": {
+    "train_csv": "benchmark_resources_smoke/BindingDB_Kd/unseen_target/seed0/train.csv",
+    "valid_csv": "benchmark_resources_smoke/BindingDB_Kd/unseen_target/seed0/valid.csv",
+    "test_csv": "benchmark_resources_smoke/BindingDB_Kd/unseen_target/seed0/test.csv",
+    "all_csv": "benchmark_resources_smoke/BindingDB_Kd/unseen_target/seed0/all.csv",
+    "drugs_csv": "benchmark_resources_smoke/BindingDB_Kd/unseen_target/seed0/drugs.csv",
+    "targets_csv": "benchmark_resources_smoke/BindingDB_Kd/unseen_target/seed0/targets.csv"
+  }
+}

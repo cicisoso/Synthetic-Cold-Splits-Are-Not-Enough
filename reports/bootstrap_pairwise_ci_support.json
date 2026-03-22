@@ -1,0 +1,87 @@
+{
+  "kd_unseen_target_base_vs_ftm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "FTM",
+    "observed_seed_deltas": [
+      0.04174149026896634,
+      0.02972155582708269,
+      -0.00718471391383646
+    ],
+    "observed_mean_delta": 0.02142611072740419,
+    "ci95": [
+      0.014330663297703888,
+      0.028645738286505004
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 1000
+  },
+  "ki_base_vs_raicd": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RAICD",
+    "observed_seed_deltas": [
+      -0.020004982057598708,
+      -0.027853377945349256,
+      -0.02687770339236717
+    ],
+    "observed_mean_delta": -0.02491202113177171,
+    "ci95": [
+      -0.027087832913232596,
+      -0.02257567126666915
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 1000
+  },
+  "ki_base_vs_ftm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "FTM",
+    "observed_seed_deltas": [
+      -0.02793247304349733,
+      -0.0013984845319675587,
+      -0.022824588394226186
+    ],
+    "observed_mean_delta": -0.017385181989897025,
+    "ci95": [
+      -0.019659375879026105,
+      -0.015037060268548157
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 1000
+  },
+  "davis_base_vs_raicd": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RAICD",
+    "observed_seed_deltas": [
+      -0.029166095782072243,
+      -0.044406899284590406,
+      -0.004031964979841152
+    ],
+    "observed_mean_delta": -0.025868320015501267,
+    "ci95": [
+      -0.037544623569577724,
+      -0.012683036128477449
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 1000
+  },
+  "davis_base_vs_ftm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "FTM",
+    "observed_seed_deltas": [
+      -0.06326488959221821,
+      -0.03398459018267408,
+      0.004197920322506932
+    ],
+    "observed_mean_delta": -0.03101718648412845,
+    "ci95": [
+      -0.0433985093193154,
+      -0.017714827239723376
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 1000
+  }
+}

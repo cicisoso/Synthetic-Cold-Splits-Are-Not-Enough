@@ -1,0 +1,26 @@
+\begin{table}[t]
+  \centering
+  \scriptsize
+  \caption{Transparent seed0 screening used to decide which recent baselines were promoted to matched three-seed evaluation. The primary promotion criterion was performance on \texttt{BindingDB\_patent / patent\_temporal}, the main real-OOD benchmark.}
+  \label{tab:recent-screening}
+  \setlength{\tabcolsep}{3.5pt}
+  \resizebox{\linewidth}{!}{
+  \begin{tabular}{@{}lccccp{4.8cm}@{}}
+    \toprule
+    Model & \texttt{patent\_temporal} & \texttt{blind\_start} & \texttt{unseen\_target} & Promotion & Rationale \\
+    \midrule
+    \texttt{DTI-LM} &
+    0.7897 / 0.7435 &
+    0.3873 / 0.7130 &
+    0.5308 / 0.8011 &
+    main 3-seed promotion &
+    strongest seed0 recent baseline on the primary real-OOD benchmark; therefore promoted in the main text \\
+    \texttt{HyperPCM} &
+    0.7686 / 0.7247 &
+    0.3896 / 0.7447 &
+    0.5294 / 0.7990 &
+    secondary 3-seed promotion &
+    competitive on synthetic seed0 axes, but weaker on the main patent benchmark; promoted only to test whether the main conclusion changes \\
+    \bottomrule
+  \end{tabular}}
+\end{table}
