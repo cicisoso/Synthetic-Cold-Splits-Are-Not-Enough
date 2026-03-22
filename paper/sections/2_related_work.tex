@@ -1,0 +1,13 @@
+\section{Related Work}
+
+\paragraph{Synthetic cold-start evaluation in DTI.}
+Cold-start evaluation has become standard practice in DTI and drug-target affinity prediction. Recent models routinely report random, held-out drug, held-out target, or blind-start splits on BindingDB-derived and DAVIS-derived benchmarks \citep{ahmed2024dtilm,luo2024druglamp,ouyang2024pmmr,liu2025spdti,yu2025gsdti,zhao2025coldstartcpi}. This literature established synthetic cold-start testing as a useful proxy for inductive generalization. However, it often treats different split definitions as variations of the same evaluation problem. Our results suggest that this assumption is too coarse, because different synthetic regimes already produce different model rankings.
+
+\paragraph{Retrieval, inductive, and memory-based DTI models.}
+Another line of work designs architectures intended to transfer information from seen entities to unseen drugs or targets. Retrieval-based or transfer-oriented models attempt to reuse evidence from related compounds and proteins, while inductive or prototype-like systems aim to improve robustness under entity holdout \citep{luo2024druglamp,ouyang2024pmmr,liu2025spdti,yu2025gsdti,zhao2025coldstartcpi}. Our work does not claim that these mechanisms are ineffective. On the contrary, we recover setting-specific gains for retrieval on synthetic \texttt{blind\_start} and for target-memory on synthetic \texttt{unseen\_target}. The central point is different: benchmark choice determines whether these gains appear.
+
+\paragraph{Distribution shift and benchmark design.}
+Recent benchmark studies in molecular machine learning and related biomedical prediction problems have shown that model rankings can change under scaffold, temporal, or domain-shifted evaluation \citep{ektefaie2024generalizability,shen2025ddiben,delafuente2025inductive}. Our paper brings that diagnostic perspective into DTI. Unlike a leaderboard paper, we intentionally keep the model panel compact. The main result is not that one architecture dominates many baselines, but that even a small, representative panel is enough to expose ranking instability across benchmark definitions.
+
+\paragraph{Positioning.}
+Prior DTI papers typically optimize for one split regime or propose a stronger model within a fixed benchmark setup. This paper instead studies whether model rankings remain stable across synthetic cold-start regimes and a real-OOD patent benchmark, then diagnoses the shift structure behind disagreements.

@@ -1,0 +1,109 @@
+\begin{thebibliography}{11}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Liu et~al.(2007)Liu, Lin, Wen, Jorissen, and Gilson]{liu2007bindingdb}
+T.~Liu, Y.~Lin, X.~Wen, R.~N. Jorissen, and M.~K. Gilson.
+\newblock {BindingDB}: a web-accessible database of experimentally determined
+  protein-ligand binding affinities.
+\newblock \emph{Nucleic Acids Research}, 35\penalty0 (Database):\penalty0
+  D198--D201, 2007.
+\newblock \doi{10.1093/nar/gkl999}.
+\newblock URL \url{https://doi.org/10.1093/nar/gkl999}.
+
+\bibitem[Davis et~al.(2011)Davis, Hunt, Herrgard, Ciceri, Wodicka, Pallares,
+  Hocker, Treiber, and Zarrinkar]{davis2011kinase}
+Mindy~I Davis, Jeremy~P Hunt, Sanna Herrgard, Pietro Ciceri, Lisa~M Wodicka,
+  Gabriel Pallares, Michael Hocker, Daniel~K Treiber, and Patrick~P Zarrinkar.
+\newblock Comprehensive analysis of kinase inhibitor selectivity.
+\newblock \emph{Nature Biotechnology}, 29\penalty0 (11):\penalty0 1046--1051,
+  2011.
+\newblock \doi{10.1038/nbt.1990}.
+\newblock URL \url{https://doi.org/10.1038/nbt.1990}.
+
+\bibitem[Ahmed et~al.(2024)Ahmed, Ansari, and Zhang]{ahmed2024dtilm}
+Khandakar~Tanvir Ahmed, Md~Istiaq Ansari, and Wei Zhang.
+\newblock {DTI-LM}: language model powered drug--target interaction prediction.
+\newblock \emph{Bioinformatics}, 40\penalty0 (9), 2024.
+\newblock \doi{10.1093/bioinformatics/btae533}.
+\newblock URL \url{https://doi.org/10.1093/bioinformatics/btae533}.
+
+\bibitem[Luo et~al.(2024)Luo, Wu, Sun, and Wang]{luo2024druglamp}
+Zhengchao Luo, Wei Wu, Qichen Sun, and Jinzhuo Wang.
+\newblock Accurate and transferable drug--target interaction prediction with
+  {DrugLAMP}.
+\newblock \emph{Bioinformatics}, 40\penalty0 (12), 2024.
+\newblock \doi{10.1093/bioinformatics/btae693}.
+\newblock URL \url{https://doi.org/10.1093/bioinformatics/btae693}.
+
+\bibitem[Ouyang et~al.(2024)Ouyang, Feng, Cui, Li, Zhang, and
+  Wang]{ouyang2024pmmr}
+Xike Ouyang, Yannuo Feng, Chen Cui, Yunhe Li, Li~Zhang, and Han Wang.
+\newblock Improving generalizability of drug--target binding prediction by
+  pre-trained multi-view molecular representations.
+\newblock \emph{Bioinformatics}, 41\penalty0 (1), 2024.
+\newblock \doi{10.1093/bioinformatics/btaf002}.
+\newblock URL \url{https://doi.org/10.1093/bioinformatics/btaf002}.
+
+\bibitem[Liu et~al.(2025)Liu, Liu, Xu, Xia, and Li]{liu2025spdti}
+Sizhe Liu, Yuchen Liu, Haofeng Xu, Jun Xia, and Stan~Z. Li.
+\newblock {SP-DTI}: subpocket-informed transformer for drug--target interaction
+  prediction.
+\newblock \emph{Bioinformatics}, 41\penalty0 (3), 2025.
+\newblock \doi{10.1093/bioinformatics/btaf011}.
+\newblock URL \url{https://doi.org/10.1093/bioinformatics/btaf011}.
+
+\bibitem[Yu et~al.(2025)Yu, Zhou, Jiang, Shi, and Li]{yu2025gsdti}
+Qinze Yu, Chang Zhou, Jiyue Jiang, Xiangyu Shi, and Yu~Li.
+\newblock {GS-DTI}: a graph-structure-aware framework leveraging large language
+  models for drug--target interaction prediction.
+\newblock \emph{Bioinformatics}, 41\penalty0 (8), 2025.
+\newblock \doi{10.1093/bioinformatics/btaf445}.
+\newblock URL \url{https://doi.org/10.1093/bioinformatics/btaf445}.
+
+\bibitem[Zhao et~al.(2025)Zhao, Zhao, Guo, Zheng, Li, Ling, Tang, Li, and
+  Wang]{zhao2025coldstartcpi}
+Qichang Zhao, Haochen Zhao, Linyuan Guo, Kai Zheng, Yajie Li, Qiao Ling, Jing
+  Tang, Yaohang Li, and Jianxin Wang.
+\newblock {ColdstartCPI}: induced-fit theory-guided {DTI} predictive model with
+  improved generalization performance.
+\newblock \emph{Nature Communications}, 16\penalty0 (1), 2025.
+\newblock \doi{10.1038/s41467-025-61745-7}.
+\newblock URL \url{https://doi.org/10.1038/s41467-025-61745-7}.
+
+\bibitem[Ektefaie et~al.(2024)Ektefaie, Shen, Bykova, Marin, Zitnik, and
+  Farhat]{ektefaie2024generalizability}
+Yasha Ektefaie, Andrew Shen, Daria Bykova, Maximillian~G. Marin, Marinka
+  Zitnik, and Maha Farhat.
+\newblock Evaluating generalizability of artificial intelligence models for
+  molecular datasets.
+\newblock \emph{Nature Machine Intelligence}, 6\penalty0 (12):\penalty0
+  1512--1524, 2024.
+\newblock \doi{10.1038/s42256-024-00931-6}.
+\newblock URL \url{https://doi.org/10.1038/s42256-024-00931-6}.
+
+\bibitem[Shen et~al.(2025)Shen, Zhou, Zhang, and Yao]{shen2025ddiben}
+Zhenqian Shen, Mingyang Zhou, Yongqi Zhang, and Quanming Yao.
+\newblock Benchmarking drug--drug interaction prediction methods: a perspective
+  of distribution changes.
+\newblock \emph{Bioinformatics}, 41\penalty0 (11), 2025.
+\newblock \doi{10.1093/bioinformatics/btaf569}.
+\newblock URL \url{https://doi.org/10.1093/bioinformatics/btaf569}.
+
+\bibitem[de~la Fuente et~al.(2025)de~la Fuente, Serrano, Veleiro, Casals, Vera,
+  Pizurica, G\'omez-Cebri\'an, Puchades-Carrasco, Pineda-Lucena, Ochoa, Vicent,
+  Gevaert, and Hernaez]{delafuente2025inductive}
+Jesus de~la Fuente, Guillermo Serrano, Ux\'{\i}a Veleiro, Mikel Casals, Laura
+  Vera, Marija Pizurica, Nuria G\'omez-Cebri\'an, Leonor Puchades-Carrasco,
+  Antonio Pineda-Lucena, Idoia Ochoa, Silve Vicent, Olivier Gevaert, and Mikel
+  Hernaez.
+\newblock Towards a more inductive world for drug repurposing approaches.
+\newblock \emph{Nature Machine Intelligence}, 7\penalty0 (3):\penalty0
+  495--508, 2025.
+\newblock \doi{10.1038/s42256-025-00987-y}.
+\newblock URL \url{https://doi.org/10.1038/s42256-025-00987-y}.
+
+\end{thebibliography}

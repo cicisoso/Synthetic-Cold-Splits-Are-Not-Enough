@@ -1,0 +1,20 @@
+\begin{table}[t]
+  \centering
+  \scriptsize
+  \caption{Benchmark taxonomy and seed0 split statistics. Test prevalence differs substantially across benchmark families, so \AUPRC{} should be compared within benchmark rather than across rows.}
+  \label{tab:taxonomy}
+  \setlength{\tabcolsep}{4pt}
+  \resizebox{\linewidth}{!}{
+  \begin{tabular}{@{}llrrr@{}}
+    \toprule
+    Benchmark & Shift family & Synth.? & Test rows & Pos. rate \\
+    \midrule
+    \texttt{Kd / unseen\_drug} & drug-cold & yes & 12,744 & 0.1966 \\
+    \texttt{Kd / blind\_start} & drug+target-cold & yes & 2,821 & 0.2031 \\
+    \texttt{Kd / unseen\_target} & target-cold & yes & 12,052 & 0.2239 \\
+    \texttt{patent / patent\_temporal} & temporal+source & no & 49,028 & 0.5745 \\
+    \texttt{Ki / unseen\_target} & assay+target-cold & mixed & 70,380 & 0.4652 \\
+    \texttt{DAVIS / unseen\_target} & dataset+target-cold & mixed & 5,168 & 0.0615 \\
+    \bottomrule
+  \end{tabular}}
+\end{table}

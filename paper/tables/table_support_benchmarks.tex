@@ -1,0 +1,21 @@
+\begin{table}[t]
+  \centering
+  \scriptsize
+  \caption{Secondary real-OOD support benchmarks. These panels are seed0-only and therefore serve as supporting counterexamples rather than headline evidence.}
+  \label{tab:support}
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabular}{@{}lccc@{}}
+    \toprule
+    Benchmark & base (\AUPRC{}/\AUROC{}) & FTM sparse (\AUPRC{}/\AUROC{}) & $\Delta$ vs.\ base \\
+    \midrule
+    \texttt{BindingDB\_Ki / unseen\_target} &
+    0.6574 / 0.7103 &
+    0.6295 / 0.6855 &
+    -0.0279 / -0.0248 \\
+    \texttt{DAVIS / unseen\_target} &
+    0.4258 / 0.8849 &
+    0.3705 / 0.8757 &
+    -0.0554 / -0.0092 \\
+    \bottomrule
+  \end{tabular}
+\end{table}

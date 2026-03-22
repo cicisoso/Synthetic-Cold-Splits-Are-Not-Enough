@@ -1,0 +1,6 @@
+{"epoch": 1, "train_loss": 0.6833167057484388, "train_main_loss": 0.6833167057484388, "train_expert_loss": 0.0, "train_profile_loss": 0.0, "train_profile_magnitude_loss": 0.0, "valid_auprc": 0.6536921064372481, "valid_auroc": 0.6475620786527619}
+{"epoch": 2, "train_loss": 0.5850870348513126, "train_main_loss": 0.5850870348513126, "train_expert_loss": 0.0, "train_profile_loss": 0.0, "train_profile_magnitude_loss": 0.0, "valid_auprc": 0.6589083210338934, "valid_auroc": 0.643496640719917}
+{"saved_to": "results/smoke_bindingdb_ki_unseen_target_base/BindingDB_Ki_unseen_target_base_seed0.json", "test_auprc": 0.548197136988078, "test_auroc": 0.5852450880549873}
+{"epoch": 1, "train_loss": 0.6688885185867548, "train_main_loss": 0.6687937183305621, "train_expert_loss": 0.0, "train_profile_loss": 0.0004739982837236312, "train_profile_magnitude_loss": 0.0, "valid_auprc": 0.6506915432933116, "valid_auroc": 0.65380779092362}
+{"epoch": 2, "train_loss": 0.590909845661372, "train_main_loss": 0.5907899476587772, "train_expert_loss": 0.0, "train_profile_loss": 0.0005995120041006885, "train_profile_magnitude_loss": 0.0, "valid_auprc": 0.6561735491726836, "valid_auroc": 0.649487963697546}
+{"saved_to": "results/smoke_bindingdb_ki_unseen_target_ftm/BindingDB_Ki_unseen_target_ftm_seed0_chem32_top4_shr8p0.json", "test_auprc": 0.5323165812787478, "test_auroc": 0.5794469513763583}

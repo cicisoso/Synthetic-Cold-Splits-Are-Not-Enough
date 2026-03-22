@@ -1,0 +1,41 @@
+\section{Results}
+
+\subsection{Synthetic cold splits are already regime-dependent}
+
+We begin with the \texttt{BindingDB\_Kd} synthetic reference panel. Table~\ref{tab:main-results} shows the main pattern: even within a single dataset, model rankings are not stable across split definitions. On \texttt{unseen\_drug}, the plain \texttt{base} model achieves $0.5509 \pm 0.0900$ \AUPRC{}, while \texttt{RAICD} drops to $0.5228 \pm 0.0828$. On \texttt{blind\_start}, the pattern reverses, and \texttt{RAICD} improves over \texttt{base} from $0.3737 \pm 0.0229$ to $0.4024 \pm 0.0508$. On \texttt{unseen\_target}, \texttt{FTM sparse} becomes the strongest model, improving \AUPRC{} from $0.5224 \pm 0.0602$ to $0.5439 \pm 0.0791$.
+
+\input{tables/table_main_results}
+
+These results matter because they show that ``synthetic cold-start DTI'' is already not a single evaluation condition. Different synthetic regimes reward different modeling choices, so it is unsafe to generalize from one split to another without explicit evidence.
+
+\subsection{Real temporal shift reverses the retrieval conclusion}
+
+We next evaluate the same panel on \texttt{BindingDB\_patent / patent\_temporal}, our primary real-OOD benchmark. Over three seeds, the plain \texttt{base} model reaches $0.7772 \pm 0.0086$ \AUPRC{} and $0.7223 \pm 0.0109$ \AUROC{}. \texttt{RAICD} falls to $0.7692 \pm 0.0018$ \AUPRC{} and $0.7032 \pm 0.0010$ \AUROC{}, while \texttt{FTM sparse} reaches $0.7721 \pm 0.0025$ \AUPRC{} and $0.7059 \pm 0.0037$ \AUROC{}. Figure~\ref{fig:delta-summary} compresses the main benchmark story into within-benchmark \AUPRC{} deltas relative to \texttt{base}: the same retrieval bias that wins on synthetic \texttt{blind\_start} becomes negative on patent temporal OOD. Paired bootstrap intervals support both patent losses relative to \texttt{base}: \texttt{RAICD - base} $= -0.0080$ with 95\% CI $[-0.0101, -0.0059]$, and \texttt{FTM - base} $= -0.0050$ with 95\% CI $[-0.0072, -0.0029]$.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/benchmark_delta_summary.pdf}
+  \caption{Mean \AUPRC{} delta relative to \texttt{base} within each benchmark. Error bars show paired bootstrap 95\% intervals where available. Synthetic \texttt{blind\_start} favors retrieval, but the promoted patent temporal benchmark reverses that conclusion.}
+  \label{fig:delta-summary}
+\end{figure}
+
+This is the central ranking reversal in the paper. Retrieval is the winning inductive bias on synthetic \texttt{blind\_start}, but it loses clearly on real temporal/provenance OOD. The synthetic \texttt{blind\_start} gain is itself stable under paired bootstrap (\texttt{RAICD - base} $= +0.0288$, 95\% CI $[+0.0145, +0.0431]$), which makes the reversal more consequential rather than easier to dismiss. \texttt{FTM sparse} remains closer to \texttt{base} than \texttt{RAICD}, but still underperforms the plain model on both \AUPRC{} and \AUROC{}.
+
+\subsection{Temporal shift is structured across year bands and overlap levels}
+
+To explain why the temporal benchmark changes the ranking, we analyze the patent results by year and by overlap bucket. Figure~\ref{fig:patent-diagnosis} shows that the temporal gap is uneven rather than uniform. In the large 2019 slice, \texttt{base} and \texttt{FTM} are nearly tied in \AUPRC{} ($0.7626$ vs.\ $0.7624$), but \texttt{base} maintains a clearer \AUROC{} advantage ($0.7086$ vs.\ $0.6992$). In 2020, the gap becomes much larger: \texttt{base} reaches $0.8715 / 0.8135$, while \texttt{RAICD} and \texttt{FTM} drop to $0.8395 / 0.7596$ and $0.8358 / 0.7534$, respectively. The 2021 slice is small, but follows the same ordering.
+
+The overlap-bucket analysis reveals another useful pattern. In the lowest-overlap bucket, \texttt{base} is the strongest model and both \texttt{RAICD} and \texttt{FTM} remain slightly weaker. In the middle-overlap bucket, \texttt{RAICD} and \texttt{FTM} gain a modest \AUPRC{} advantage over \texttt{base}, but still lose on \AUROC{}. In the highest-overlap bucket, \texttt{base} again dominates on both metrics. Together, these results suggest that temporal OOD is not just a colder version of synthetic cold-start. Instead, it changes which subpopulations dominate the aggregate result, and therefore changes the model ranking.
+
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=\linewidth]{figures/patent_shift_diagnosis.pdf}
+  \caption{Patent temporal diagnosis in terms of mean \AUPRC{}. Left: year-band slices. Right: test-set overlap buckets computed from the saved overlap score. The strongest degradation appears in the 2020 slice, while the middle-overlap bucket is the only regime where \texttt{RAICD} or \texttt{FTM} gain a small \AUPRC{} edge over \texttt{base}.}
+  \label{fig:patent-diagnosis}
+\end{figure}
+
+\subsection{Preliminary support screens are consistent with the benchmark-centric interpretation}
+
+We treat \texttt{BindingDB\_Ki / unseen\_target} and \texttt{DAVIS / unseen\_target} as preliminary support screens rather than primary headline benchmarks. Both are informative because they test whether the synthetic \texttt{unseen\_target} advantage of \texttt{FTM sparse} transfers beyond \texttt{BindingDB\_Kd}. In these seed0 screens, it does not. On \texttt{BindingDB\_Ki}, \texttt{FTM sparse} falls from the \texttt{base} score of $0.6574 / 0.7103$ to $0.6295 / 0.6855$. On \texttt{DAVIS}, it falls from $0.4258 / 0.8849$ to $0.3705 / 0.8757$.
+
+These auxiliary negatives are consistent with the main claim of the paper, but they should not carry the same argumentative weight as the patent benchmark because they are currently seed0-only support. Their role is narrower: they show that the synthetic \texttt{unseen\_target} gain of \texttt{FTM sparse} is not obviously portable across additional OOD settings.

@@ -1,0 +1,71 @@
+Found local copy...
+Loading...
+Done!
+{"epoch": 1, "train_loss": 0.7603359529917034, "valid_auprc": 0.5697900766399097, "valid_auroc": 0.8344503058788773}
+{"epoch": 2, "train_loss": 0.5974661284025523, "valid_auprc": 0.5106665824307979, "valid_auroc": 0.804587161730019}
+{"epoch": 3, "train_loss": 0.5402770791953062, "valid_auprc": 0.4880189508823883, "valid_auroc": 0.7761702047416333}
+{"epoch": 4, "train_loss": 0.495829738809617, "valid_auprc": 0.5653930379781937, "valid_auroc": 0.8241095098237955}
+{"epoch": 5, "train_loss": 0.44595765968922574, "valid_auprc": 0.5798333147408117, "valid_auroc": 0.8356342213485071}
+{"epoch": 6, "train_loss": 0.42272365745312107, "valid_auprc": 0.6239067103990703, "valid_auroc": 0.86711153854011}
+{"saved_to": "results/multiseed_unseen_drug_base/BindingDB_Kd_unseen_drug_base_seed0.json", "test_auprc": 0.607960693721252, "test_auroc": 0.8229452024752136}
+Found local copy...
+Loading...
+Done!
+{"epoch": 1, "train_loss": 0.7303924482228706, "valid_auprc": 0.5753022649371353, "valid_auroc": 0.8319221890650461}
+{"epoch": 2, "train_loss": 0.5943938362769056, "valid_auprc": 0.6155496347645669, "valid_auroc": 0.8631018773875917}
+{"epoch": 3, "train_loss": 0.5426497504235765, "valid_auprc": 0.5822870067418217, "valid_auroc": 0.8456888599745742}
+{"epoch": 4, "train_loss": 0.5016276260621515, "valid_auprc": 0.5898403008523236, "valid_auroc": 0.8519830662687805}
+{"epoch": 5, "train_loss": 0.4719187455479763, "valid_auprc": 0.5850987150175205, "valid_auroc": 0.8326228897657468}
+{"epoch": 6, "train_loss": 0.4338940602222289, "valid_auprc": 0.5732402582226847, "valid_auroc": 0.8478206621063764}
+{"saved_to": "results/multiseed_unseen_drug_raicd/BindingDB_Kd_unseen_drug_raicd_seed0_both.json", "test_auprc": 0.6141001379521394, "test_auroc": 0.8395366119016971}
+Found local copy...
+Loading...
+Done!
+{"epoch": 1, "train_loss": 0.7712834166744772, "valid_auprc": 0.3107253059978107, "valid_auroc": 0.6324845885821495}
+{"epoch": 2, "train_loss": 0.5740127875036416, "valid_auprc": 0.296846380821785, "valid_auroc": 0.6291610828196192}
+{"epoch": 3, "train_loss": 0.5240100104608769, "valid_auprc": 0.22440312640729365, "valid_auroc": 0.5906370052711517}
+{"epoch": 4, "train_loss": 0.4909578016643372, "valid_auprc": 0.2683535768357862, "valid_auroc": 0.6167068703654068}
+{"epoch": 5, "train_loss": 0.4626380638866491, "valid_auprc": 0.2632634392997407, "valid_auroc": 0.6184222281783257}
+{"epoch": 6, "train_loss": 0.4392964285540023, "valid_auprc": 0.2897267978065129, "valid_auroc": 0.6308407040114357}
+{"saved_to": "results/multiseed_blind_base/BindingDB_Kd_blind_start_base_seed0.json", "test_auprc": 0.35224938829661545, "test_auroc": 0.6583012707048499}
+Found local copy...
+Loading...
+Done!
+{"epoch": 1, "train_loss": 0.7425440994578358, "valid_auprc": 0.2796202996034667, "valid_auroc": 0.6624944161529526}
+{"epoch": 2, "train_loss": 0.5867975308844653, "valid_auprc": 0.18580202560793263, "valid_auroc": 0.5733494148128295}
+{"epoch": 3, "train_loss": 0.5366471864089905, "valid_auprc": 0.2500234310199776, "valid_auroc": 0.6191905655320289}
+{"epoch": 4, "train_loss": 0.4966715113275848, "valid_auprc": 0.16780080531110325, "valid_auroc": 0.5598856428124721}
+{"epoch": 5, "train_loss": 0.4574071291980842, "valid_auprc": 0.21023735473821314, "valid_auroc": 0.5896363798802824}
+{"epoch": 6, "train_loss": 0.4415685719790749, "valid_auprc": 0.1782230896906938, "valid_auroc": 0.556562137049942}
+{"saved_to": "results/multiseed_blind_raicd/BindingDB_Kd_blind_start_raicd_seed0_both.json", "test_auprc": 0.4069071869135946, "test_auroc": 0.685582452969636}
+Found local copy...
+Loading...
+Done!
+{"epoch": 1, "train_loss": 0.812805409046539, "valid_auprc": 0.42592228349099703, "valid_auroc": 0.7385001882215158}
+{"epoch": 2, "train_loss": 0.6642310966840492, "valid_auprc": 0.4230297167284257, "valid_auroc": 0.729261997378841}
+{"epoch": 3, "train_loss": 0.6054011357560527, "valid_auprc": 0.38538275167187136, "valid_auroc": 0.6935948915286376}
+{"epoch": 4, "train_loss": 0.5720944941137435, "valid_auprc": 0.31748916357932866, "valid_auroc": 0.642018187775361}
+{"epoch": 5, "train_loss": 0.530147244693365, "valid_auprc": 0.3410840964482282, "valid_auroc": 0.6751680051307791}
+{"epoch": 6, "train_loss": 0.5011390090613638, "valid_auprc": 0.2678662896585696, "valid_auroc": 0.6165342144888739}
+{"saved_to": "results/multiseed_unseen_drug_base/BindingDB_Kd_unseen_drug_base_seed1.json", "test_auprc": 0.4238620186315492, "test_auroc": 0.7042884776071247}
+Found local copy...
+Loading...
+Done!
+{"epoch": 1, "train_loss": 0.8302481600832776, "valid_auprc": 0.3791726733196843, "valid_auroc": 0.7275012548101054}
+{"epoch": 2, "train_loss": 0.6635247152026571, "valid_auprc": 0.4120775557168944, "valid_auroc": 0.7376908357035302}
+{"epoch": 3, "train_loss": 0.6135584324857642, "valid_auprc": 0.3962725240912012, "valid_auroc": 0.7190743335564106}
+{"epoch": 4, "train_loss": 0.5659139181418044, "valid_auprc": 0.38750052639549387, "valid_auroc": 0.7037123208410017}
+{"epoch": 5, "train_loss": 0.5280508125951943, "valid_auprc": 0.3507277206704795, "valid_auroc": 0.6796759104344432}
+{"epoch": 6, "train_loss": 0.49321457100712685, "valid_auprc": 0.31649505015128443, "valid_auroc": 0.6696048393843065}
+{"saved_to": "results/multiseed_unseen_drug_raicd/BindingDB_Kd_unseen_drug_raicd_seed1_both.json", "test_auprc": 0.4136952074534551, "test_auroc": 0.7158762269856175}
+Found local copy...
+Loading...
+Done!
+Traceback (most recent call last):
+  File "/root/exp/dti_codex/scripts/train_raicd.py", line 219, in <module>
+    main()
+  File "/root/exp/dti_codex/scripts/train_raicd.py", line 119, in main
+    artifacts = prepare_split_artifacts(
+  File "/root/exp/dti_codex/src/raicd/data.py", line 202, in prepare_split_artifacts
+    for j, local_idx in enumerate(drug_neighbor_indices[i]):
+IndexError: index 6138 is out of bounds for axis 0 with size 6138

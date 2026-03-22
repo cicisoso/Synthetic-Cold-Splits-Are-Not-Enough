@@ -1,0 +1,13 @@
+\section{Appendix}
+
+\subsection{Additional real-OOD support benchmarks}
+
+The main paper focuses on the strongest evidence chain: the synthetic \texttt{BindingDB\_Kd} reference panel, the 3-seed \texttt{BindingDB\_patent} ranking reversal, and the patent year/overlap diagnosis. Two additional seed0 support benchmarks provide consistent but weaker evidence.
+
+\input{tables/table_support_benchmarks}
+
+On the \texttt{BindingDB\_Ki} support split, \texttt{base} reaches $0.6574 / 0.7103$, while \texttt{FTM sparse} reaches $0.6295 / 0.6855$. On \texttt{DAVIS / unseen\_target}, \texttt{base} reaches $0.4258 / 0.8849$, while \texttt{FTM sparse} reaches $0.3705 / 0.8757$. These support screens suggest that the synthetic \texttt{unseen\_target} gain of \texttt{FTM sparse} does not consistently transfer to additional OOD settings.
+
+\subsection{Method-centric ablations}
+
+Earlier project stages explored routers, conservative target-memory variants, and selective fallback rules. These analyses were useful for method diagnosis, but they do not define the final paper narrative. The benchmark paper is intentionally centered on ranking instability across shift definitions rather than on proposing a new best-performing method.

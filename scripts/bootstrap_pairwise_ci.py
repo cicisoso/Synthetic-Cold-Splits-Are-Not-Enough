@@ -1,0 +1,148 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import json
+import random
+import statistics
+from pathlib import Path
+
+from sklearn.metrics import average_precision_score
+
+
+COMPARISONS = {
+    "blind_start_raicd_vs_base": {
+        "a_name": "base",
+        "b_name": "RAICD",
+        "a_paths": [
+            "results/full_blind_base/BindingDB_Kd_blind_start_base_seed0.json",
+            "results/multiseed_blind_base/BindingDB_Kd_blind_start_base_seed1.json",
+            "results/multiseed_blind_base/BindingDB_Kd_blind_start_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/full_blind_raicd_simattn/BindingDB_Kd_blind_start_raicd_seed0.json",
+            "results/multiseed_blind_raicd/BindingDB_Kd_blind_start_raicd_seed1_both.json",
+            "results/multiseed_blind_raicd/BindingDB_Kd_blind_start_raicd_seed2_both.json",
+        ],
+    },
+    "patent_base_vs_raicd": {
+        "a_name": "base",
+        "b_name": "RAICD",
+        "a_paths": [
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed0.json",
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed1.json",
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/full_bindingdb_patent_raicd/BindingDB_patent_patent_temporal_raicd_seed0_both.json",
+            "results/full_bindingdb_patent_raicd/BindingDB_patent_patent_temporal_raicd_seed1_both.json",
+            "results/full_bindingdb_patent_raicd/BindingDB_patent_patent_temporal_raicd_seed2_both.json",
+        ],
+    },
+    "patent_base_vs_ftm": {
+        "a_name": "base",
+        "b_name": "FTM",
+        "a_paths": [
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed0.json",
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed1.json",
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/full_bindingdb_patent_ftm/BindingDB_patent_patent_temporal_ftm_seed0_chem32_top4_shr8p0.json",
+            "results/full_bindingdb_patent_ftm/BindingDB_patent_patent_temporal_ftm_seed1_chem32_top4_shr8p0.json",
+            "results/full_bindingdb_patent_ftm/BindingDB_patent_patent_temporal_ftm_seed2_chem32_top4_shr8p0.json",
+        ],
+    },
+}
+
+
+def load_preds(path: Path) -> tuple[list[int], list[float], float]:
+    with path.open() as fh:
+        data = json.load(fh)
+    labels = [int(x) for x in data["test_predictions"]["labels"]]
+    probs = [float(x) for x in data["test_predictions"]["probabilities"]]
+    auprc = float(data["test_metrics"]["auprc"])
+    return labels, probs, auprc
+
+
+def percentile(sorted_values: list[float], q: float) -> float:
+    if not sorted_values:
+        raise ValueError("empty list")
+    if len(sorted_values) == 1:
+        return sorted_values[0]
+    pos = q * (len(sorted_values) - 1)
+    lo = int(pos)
+    hi = min(lo + 1, len(sorted_values) - 1)
+    frac = pos - lo
+    return sorted_values[lo] * (1 - frac) + sorted_values[hi] * frac
+
+
+def bootstrap_mean_delta(
+    a_seed_data: list[tuple[list[int], list[float], float]],
+    b_seed_data: list[tuple[list[int], list[float], float]],
+    num_bootstrap: int,
+    seed: int,
+) -> dict:
+    rng = random.Random(seed)
+    observed_deltas = []
+    for (_, _, a_auprc), (_, _, b_auprc) in zip(a_seed_data, b_seed_data):
+        observed_deltas.append(b_auprc - a_auprc)
+    observed_mean = statistics.mean(observed_deltas)
+
+    boot_means: list[float] = []
+    for _ in range(num_bootstrap):
+        seed_deltas = []
+        for (labels_a, probs_a, _), (labels_b, probs_b, _) in zip(a_seed_data, b_seed_data):
+            if labels_a != labels_b:
+                raise ValueError("label mismatch between paired runs")
+            n = len(labels_a)
+            indices = [rng.randrange(n) for _ in range(n)]
+            sample_labels = [labels_a[i] for i in indices]
+            sample_probs_a = [probs_a[i] for i in indices]
+            sample_probs_b = [probs_b[i] for i in indices]
+            delta = average_precision_score(sample_labels, sample_probs_b) - average_precision_score(sample_labels, sample_probs_a)
+            seed_deltas.append(float(delta))
+        boot_means.append(statistics.mean(seed_deltas))
+    boot_means.sort()
+    ci_low = percentile(boot_means, 0.025)
+    ci_high = percentile(boot_means, 0.975)
+    prob_positive = sum(value > 0 for value in boot_means) / len(boot_means)
+    return {
+        "observed_seed_deltas": observed_deltas,
+        "observed_mean_delta": observed_mean,
+        "ci95": [ci_low, ci_high],
+        "prob_delta_gt_0": prob_positive,
+        "num_bootstrap": num_bootstrap,
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--num-bootstrap", type=int, default=2000)
+    parser.add_argument("--seed", type=int, default=0)
+    parser.add_argument("--output", type=Path, default=None)
+    args = parser.parse_args()
+
+    results = {}
+    for name, spec in COMPARISONS.items():
+        a_seed_data = [load_preds(Path(path)) for path in spec["a_paths"] if Path(path).exists()]
+        b_seed_data = [load_preds(Path(path)) for path in spec["b_paths"] if Path(path).exists()]
+        if len(a_seed_data) != len(spec["a_paths"]) or len(b_seed_data) != len(spec["b_paths"]):
+            results[name] = {"status": "incomplete"}
+            continue
+        stats = bootstrap_mean_delta(a_seed_data, b_seed_data, args.num_bootstrap, args.seed)
+        results[name] = {
+            "status": "done",
+            "a_name": spec["a_name"],
+            "b_name": spec["b_name"],
+            **stats,
+        }
+
+    if args.output:
+        args.output.write_text(json.dumps(results, indent=2))
+    else:
+        print(json.dumps(results, indent=2))
+
+
+if __name__ == "__main__":
+    main()
