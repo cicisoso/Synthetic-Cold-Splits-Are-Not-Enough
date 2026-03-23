@@ -23,6 +23,8 @@ The current thesis is benchmark-first rather than method-first:
 - PyTorch implementations of:
   - benchmark reference encoder: `base`
   - recent external literature baselines: `DTI-LM`, `HyperPCM`
+  - classical learner control: `RandomForest` on the same Morgan + hashed-k-mer pair features used by `base`
+  - graph-based baseline: `GraphDTA-lite` with a molecular GCN and protein CNN
   - hashed protein featurization
   - RDKit Morgan drug featurization
   - train-only retrieval banks
@@ -31,6 +33,8 @@ The current thesis is benchmark-first rather than method-first:
 - reusable benchmark resources under `benchmark_resources/<dataset>/<split>/seed<k>/`
 - unified offline evaluator: [scripts/evaluate_prediction_csv.py](/root/exp/dti_codex/scripts/evaluate_prediction_csv.py)
 - pooled-LM recent baseline trainer: [scripts/train_recent_baseline.py](/root/exp/dti_codex/scripts/train_recent_baseline.py)
+- classical baseline trainer: [scripts/train_classical_baseline.py](/root/exp/dti_codex/scripts/train_classical_baseline.py)
+- graph baseline trainer: [scripts/train_graph_baseline.py](/root/exp/dti_codex/scripts/train_graph_baseline.py)
 - benchmark exporter: [scripts/export_benchmark_resource.py](/root/exp/dti_codex/scripts/export_benchmark_resource.py)
 - runnable training entrypoint: [scripts/train_raicd.py](/root/exp/dti_codex/scripts/train_raicd.py)
 - smoke and experiment launch scripts under [scripts](/root/exp/dti_codex/scripts)
@@ -39,11 +43,12 @@ The current thesis is benchmark-first rather than method-first:
 
 The current paper-ready topline results are summarized in [reports/EXTERNAL_PANEL_LIVE.md](/root/exp/dti_codex/reports/EXTERNAL_PANEL_LIVE.md). The high-level read is:
 
-- `BindingDB_Kd / unseen_drug`: `HyperPCM` is currently strongest by mean AUPRC
-- `BindingDB_Kd / blind_start`: `HyperPCM` also has the highest mean AUPRC, but with larger variance
+- `BindingDB_Kd / unseen_drug`: `RF` is currently strongest by mean AUPRC
+- `BindingDB_Kd / blind_start`: `RF` is currently strongest by mean AUPRC
 - `BindingDB_Kd / unseen_target`: `base` remains strongest by mean AUPRC
-- `BindingDB_patent / patent_temporal`: `DTI-LM` is the strongest model by mean AUPRC and remains above `base` under the alternative `v2017` cutoff
-- shifted target-cold support panels are being refreshed with the same external-baseline panel so the manuscript no longer depends on internal probe models
+- `BindingDB_patent / patent_temporal`: `RF` is currently strongest by mean AUPRC
+- `BindingDB_nonpatent_Kd / nonpatent_temporal`: `RF` is currently strongest by mean AUPRC
+- shifted target-cold support panels remain useful as support, but they do not overturn the main expanded-panel read
 
 ## Environment
 
@@ -122,6 +127,37 @@ The current recent-baseline panel exposes:
 - `hyperpcm`: task-conditioned pooled-LM adapter aligned to recent HyperPCM-style target-conditioned modeling
 
 These adapters are intentionally run on the same exported split resources and evaluator as the in-repo models, and they are now the main comparison panel used by the paper.
+
+## Additional Baselines
+
+Two new panel-expansion baselines are now wired into the same resource/evaluator contract:
+
+- `rf`: a RandomForest classifier trained on the exact Morgan + hashed-k-mer pair features used by `base`. This isolates the effect of the learner from the effect of the representation.
+- `graphdta`: a GraphDTA-style baseline with a molecular graph encoder and a protein CNN. This adds a genuinely different inductive bias beyond pooled LM and fixed-vector baselines.
+
+Example commands:
+
+```bash
+PYTHONPATH=src python scripts/train_classical_baseline.py \
+  --dataset BindingDB_Kd \
+  --split unseen_target \
+  --model rf \
+  --seed 0
+```
+
+```bash
+PYTHONPATH=src python scripts/train_graph_baseline.py \
+  --dataset BindingDB_Kd \
+  --split unseen_target \
+  --model graphdta \
+  --seed 0 \
+  --epochs 6
+```
+
+Stage-1 launcher scripts:
+
+- [scripts/run_rf_panel_stage1.sh](/root/exp/dti_codex/scripts/run_rf_panel_stage1.sh)
+- [scripts/run_graphdta_panel_stage1.sh](/root/exp/dti_codex/scripts/run_graphdta_panel_stage1.sh)
 
 ## Notes
 

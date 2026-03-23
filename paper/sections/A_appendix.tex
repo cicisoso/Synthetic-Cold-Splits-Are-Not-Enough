@@ -20,15 +20,15 @@ Because every ranking claim is anchored against \texttt{base}, we make that syst
 
 \subsection{Additional real-OOD support benchmarks}
 
-The main paper focuses on the strongest evidence chain: the synthetic \texttt{BindingDB\_Kd} reference panel, the 3-seed \texttt{BindingDB\_patent} ranking reversal, and the patent year/overlap diagnosis. \texttt{BindingDB\_Ki} and \texttt{DAVIS} remain supporting real-OOD benchmarks: both now use matched 3-seed evaluation, but they reinforce rather than replace the patent temporal story.
+The main paper focuses on the strongest evidence chain: the synthetic \texttt{BindingDB\_Kd} reference panel, the promoted temporal benchmarks, and the patent year/overlap diagnosis. \texttt{BindingDB\_Ki} and \texttt{DAVIS} remain supporting real-OOD benchmarks: both now use matched 3-seed evaluation, but they reinforce rather than replace the temporal story. To keep the promotion budget focused on the most decision-relevant axes, the support table keeps the promoted external baselines rather than rerunning the full five-model panel.
 
 \input{tables/table_support_benchmarks}
 
-On \texttt{BindingDB\_Ki / unseen\_target}, Table~\ref{tab:support} shows that \texttt{base} remains ahead of both \texttt{DTI-LM} and \texttt{HyperPCM}. On \texttt{DAVIS / unseen\_target}, \texttt{base} and \texttt{DTI-LM} are nearly tied on mean \AUPRC{}, but \texttt{base} keeps the slightly stronger mean \AUPRC{} and therefore remains the nominal winner for the paper's primary ranking metric. Together, these support panels reinforce the main paper's message that strong recent baselines do not transfer uniformly across OOD definitions.
+On the \texttt{BindingDB\_Ki} support split, Table~\ref{tab:support} shows that \texttt{base} remains ahead of both \texttt{DTI-LM} and \texttt{HyperPCM}. On \texttt{DAVIS}, \texttt{base} and \texttt{DTI-LM} are nearly tied on mean \AUPRC{}, but \texttt{base} stays slightly higher on the paper's primary ranking metric. Together, these support panels reinforce the main message that strong recent baselines do not transfer uniformly across OOD definitions.
 
 \subsection{Review-driven robustness probes}
 
-The external review highlighted two concrete risks: that the promoted patent result might be driven mainly by provenance rather than temporal shift, and that the synthetic \texttt{unseen\_drug} split might still be chemically too permissive. Table~\ref{tab:robustness-probes} records the targeted fixes. The first probe constructs a non-patent temporal benchmark directly from the official BindingDB release and shows that \texttt{DTI-LM} still stays ahead of \texttt{base} over matched 3-seed evaluation. The second probe replaces entity holdout with a Murcko-scaffold holdout and shows that the original synthetic \texttt{HyperPCM} edge does not survive this stricter split.
+The external review highlighted two concrete risks: that the promoted patent result might be driven mainly by provenance rather than temporal shift, and that the synthetic \texttt{unseen\_drug} split might still be chemically too permissive. Table~\ref{tab:robustness-probes} records the targeted fixes. The first probe constructs a non-patent temporal benchmark directly from the official BindingDB release and shows that even before the learner-control expansion, \texttt{DTI-LM} stays ahead of \texttt{base} over matched 3-seed evaluation. The second probe replaces entity holdout with a Murcko-scaffold holdout and shows that the original synthetic \texttt{HyperPCM} edge does not survive this stricter split.
 
 \input{tables/table_robustness_probes}
 

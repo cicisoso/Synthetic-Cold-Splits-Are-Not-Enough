@@ -25,6 +25,7 @@ plt.rcParams.update(
 
 COLORS = {
     "base": "#4C566A",
+    "rf": "#2F855A",
     "dtilm": "#2A7FFF",
     "hyperpcm": "#D97706",
 }
@@ -37,18 +38,27 @@ def save(fig: plt.Figure, name: str) -> None:
 
 
 def plot_delta_summary() -> None:
-    benchmarks = ["Kd\nunseen_drug", "Kd\nblind_start", "Kd\nunseen_target", "patent\ntemporal"]
+    benchmarks = ["Kd\nunseen_drug", "Kd\nblind_start", "Kd\nunseen_target", "patent\ntemporal", "nonpatent\ntemporal"]
     x = np.arange(len(benchmarks))
-    width = 0.28
+    width = 0.22
 
-    dtilm = np.array([-0.0505, -0.0100, -0.0088, 0.0054])
-    hyperpcm = np.array([0.0185, 0.0092, -0.0269, -0.0019])
+    rf = np.array([0.1830, 0.0775, -0.0042, 0.0463, 0.0832])
+    dtilm = np.array([-0.0505, -0.0100, -0.0088, 0.0054, 0.0163])
+    hyperpcm = np.array([0.0185, 0.0092, -0.0269, -0.0019, np.nan])
 
+    rf_ci = {
+        0: (0.1739, 0.1919),
+        1: (0.0546, 0.1030),
+        2: (-0.0175, 0.0084),
+        3: (0.0441, 0.0484),
+        4: (0.0737, 0.0920),
+    }
     dtilm_ci = {
         0: (-0.0614, -0.0399),
         1: (-0.0304, 0.0132),
         2: (-0.0206, 0.0021),
         3: (0.0028, 0.0079),
+        4: (0.0064, 0.0265),
     }
     hyperpcm_ci = {
         0: (0.0082, 0.0279),
@@ -60,8 +70,22 @@ def plot_delta_summary() -> None:
     fig, ax = plt.subplots(figsize=(6.2, 3.2))
     ax.axhline(0.0, color="black", linewidth=0.9, linestyle="--", alpha=0.7)
 
+    for idx, value in enumerate(rf):
+        xpos = x[idx] - width
+        ax.bar(xpos, value, width=width, color=COLORS["rf"], label="RF" if idx == 0 else None)
+        lo, hi = rf_ci[idx]
+        ax.errorbar(
+            xpos,
+            value,
+            yerr=[[value - lo], [hi - value]],
+            fmt="none",
+            ecolor="black",
+            capsize=3,
+            linewidth=0.9,
+        )
+
     for idx, value in enumerate(dtilm):
-        xpos = x[idx] - width / 2
+        xpos = x[idx]
         ax.bar(xpos, value, width=width, color=COLORS["dtilm"], label="DTI-LM" if idx == 0 else None)
         lo, hi = dtilm_ci[idx]
         ax.errorbar(
@@ -75,7 +99,9 @@ def plot_delta_summary() -> None:
         )
 
     for idx, value in enumerate(hyperpcm):
-        xpos = x[idx] + width / 2
+        if np.isnan(value):
+            continue
+        xpos = x[idx] + width
         ax.bar(xpos, value, width=width, color=COLORS["hyperpcm"], label="HyperPCM" if idx == 0 else None)
         lo, hi = hyperpcm_ci[idx]
         ax.errorbar(
@@ -91,8 +117,8 @@ def plot_delta_summary() -> None:
     ax.set_xticks(x)
     ax.set_xticklabels(benchmarks)
     ax.set_ylabel("Mean AUPRC delta vs base")
-    ax.set_ylim(-0.07, 0.04)
-    ax.legend(frameon=False, loc="upper right", ncol=2)
+    ax.set_ylim(-0.07, 0.22)
+    ax.legend(frameon=False, loc="upper right", ncol=3)
     save(fig, "benchmark_delta_summary.pdf")
 
 
@@ -104,18 +130,18 @@ def plot_patent_diagnosis() -> None:
 
     year_stats = {
         "base": ([0.7626, 0.8716], [0.0098, 0.0121]),
+        "rf": ([0.8062, 0.9098], [0.0013, 0.0005]),
         "dtilm": ([0.7734, 0.8533], [0.0071, 0.0100]),
-        "hyperpcm": ([0.7637, 0.8516], [0.0049, 0.0139]),
     }
     overlap_stats = {
         "base": ([0.5551, 0.7218, 0.9237], [0.0190, 0.0167, 0.0030]),
+        "rf": ([0.6005, 0.7606, 0.9426], [0.0034, 0.0012, 0.0005]),
         "dtilm": ([0.6353, 0.7489, 0.8866], [0.0175, 0.0094, 0.0097]),
-        "hyperpcm": ([0.6147, 0.7513, 0.8767], [0.0208, 0.0060, 0.0042]),
     }
 
     fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.1), sharey=False)
 
-    for key, label in [("base", "base"), ("dtilm", "DTI-LM"), ("hyperpcm", "HyperPCM")]:
+    for key, label in [("base", "base"), ("rf", "RF"), ("dtilm", "DTI-LM")]:
         y, err = year_stats[key]
         axes[0].errorbar(
             x_year,
@@ -133,7 +159,7 @@ def plot_patent_diagnosis() -> None:
     axes[0].set_title("Patent year bands")
     axes[0].set_ylim(0.72, 0.99)
 
-    for key, label in [("base", "base"), ("dtilm", "DTI-LM"), ("hyperpcm", "HyperPCM")]:
+    for key, label in [("base", "base"), ("rf", "RF"), ("dtilm", "DTI-LM")]:
         y, err = overlap_stats[key]
         axes[1].errorbar(
             x_overlap,

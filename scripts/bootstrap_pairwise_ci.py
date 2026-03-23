@@ -39,6 +39,34 @@ COMPARISONS = {
             "results/recent_hyperpcm_unseen_drug_multiseed/BindingDB_Kd_unseen_drug_hyperpcm_seed2.json",
         ],
     },
+    "unseen_drug_base_vs_rf": {
+        "a_name": "base",
+        "b_name": "RF",
+        "a_paths": [
+            "results/full_base/BindingDB_Kd_unseen_drug_base_seed0.json",
+            "results/multiseed_unseen_drug_base/BindingDB_Kd_unseen_drug_base_seed1.json",
+            "results/multiseed_unseen_drug_base/BindingDB_Kd_unseen_drug_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/rf_panel_stage1/BindingDB_Kd_unseen_drug_rf_seed0.json",
+            "results/rf_unseen_drug_multiseed/BindingDB_Kd_unseen_drug_rf_seed1.json",
+            "results/rf_unseen_drug_multiseed/BindingDB_Kd_unseen_drug_rf_seed2.json",
+        ],
+    },
+    "unseen_drug_hyperpcm_vs_rf": {
+        "a_name": "HyperPCM",
+        "b_name": "RF",
+        "a_paths": [
+            "results/recent_hyperpcm_unseen_drug_multiseed/BindingDB_Kd_unseen_drug_hyperpcm_seed0.json",
+            "results/recent_hyperpcm_unseen_drug_multiseed/BindingDB_Kd_unseen_drug_hyperpcm_seed1.json",
+            "results/recent_hyperpcm_unseen_drug_multiseed/BindingDB_Kd_unseen_drug_hyperpcm_seed2.json",
+        ],
+        "b_paths": [
+            "results/rf_panel_stage1/BindingDB_Kd_unseen_drug_rf_seed0.json",
+            "results/rf_unseen_drug_multiseed/BindingDB_Kd_unseen_drug_rf_seed1.json",
+            "results/rf_unseen_drug_multiseed/BindingDB_Kd_unseen_drug_rf_seed2.json",
+        ],
+    },
     "blind_start_base_vs_dtilm": {
         "a_name": "base",
         "b_name": "DTI-LM",
@@ -65,6 +93,20 @@ COMPARISONS = {
             "results/recent_panel_stage1/BindingDB_Kd_blind_start_hyperpcm_seed0.json",
             "results/recent_hyperpcm_blind_multiseed/BindingDB_Kd_blind_start_hyperpcm_seed1.json",
             "results/recent_hyperpcm_blind_multiseed/BindingDB_Kd_blind_start_hyperpcm_seed2.json",
+        ],
+    },
+    "blind_start_base_vs_rf": {
+        "a_name": "base",
+        "b_name": "RF",
+        "a_paths": [
+            "results/full_blind_base/BindingDB_Kd_blind_start_base_seed0.json",
+            "results/multiseed_blind_base/BindingDB_Kd_blind_start_base_seed1.json",
+            "results/multiseed_blind_base/BindingDB_Kd_blind_start_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/rf_panel_stage1/BindingDB_Kd_blind_start_rf_seed0.json",
+            "results/rf_blind_multiseed/BindingDB_Kd_blind_start_rf_seed1.json",
+            "results/rf_blind_multiseed/BindingDB_Kd_blind_start_rf_seed2.json",
         ],
     },
     "blind_start_raicd_vs_base": {
@@ -137,6 +179,34 @@ COMPARISONS = {
             "results/recent_hyperpcm_patent_multiseed/BindingDB_patent_patent_temporal_hyperpcm_seed2.json",
         ],
     },
+    "patent_base_vs_rf": {
+        "a_name": "base",
+        "b_name": "RF",
+        "a_paths": [
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed0.json",
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed1.json",
+            "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/rf_panel_stage1/BindingDB_patent_patent_temporal_rf_seed0.json",
+            "results/rf_patent_multiseed/BindingDB_patent_patent_temporal_rf_seed1.json",
+            "results/rf_patent_multiseed/BindingDB_patent_patent_temporal_rf_seed2.json",
+        ],
+    },
+    "patent_dtilm_vs_rf": {
+        "a_name": "DTI-LM",
+        "b_name": "RF",
+        "a_paths": [
+            "results/recent_panel_stage1/BindingDB_patent_patent_temporal_dtilm_seed0.json",
+            "results/recent_dtilm_patent_multiseed/BindingDB_patent_patent_temporal_dtilm_seed1.json",
+            "results/recent_dtilm_patent_multiseed/BindingDB_patent_patent_temporal_dtilm_seed2.json",
+        ],
+        "b_paths": [
+            "results/rf_panel_stage1/BindingDB_patent_patent_temporal_rf_seed0.json",
+            "results/rf_patent_multiseed/BindingDB_patent_patent_temporal_rf_seed1.json",
+            "results/rf_patent_multiseed/BindingDB_patent_patent_temporal_rf_seed2.json",
+        ],
+    },
     "nonpatent_base_vs_dtilm": {
         "a_name": "base",
         "b_name": "DTI-LM",
@@ -149,6 +219,34 @@ COMPARISONS = {
             "results/recent_bindingdb_nonpatent_temporal_dtilm/BindingDB_nonpatent_Kd_nonpatent_temporal_dtilm_seed0.json",
             "results/recent_bindingdb_nonpatent_temporal_dtilm/BindingDB_nonpatent_Kd_nonpatent_temporal_dtilm_seed1.json",
             "results/recent_bindingdb_nonpatent_temporal_dtilm/BindingDB_nonpatent_Kd_nonpatent_temporal_dtilm_seed2.json",
+        ],
+    },
+    "nonpatent_base_vs_rf": {
+        "a_name": "base",
+        "b_name": "RF",
+        "a_paths": [
+            "results/full_bindingdb_nonpatent_temporal_base/BindingDB_nonpatent_Kd_nonpatent_temporal_base_seed0.json",
+            "results/full_bindingdb_nonpatent_temporal_base/BindingDB_nonpatent_Kd_nonpatent_temporal_base_seed1.json",
+            "results/full_bindingdb_nonpatent_temporal_base/BindingDB_nonpatent_Kd_nonpatent_temporal_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/rf_panel_stage1/BindingDB_nonpatent_Kd_nonpatent_temporal_rf_seed0.json",
+            "results/rf_nonpatent_multiseed/BindingDB_nonpatent_Kd_nonpatent_temporal_rf_seed1.json",
+            "results/rf_nonpatent_multiseed/BindingDB_nonpatent_Kd_nonpatent_temporal_rf_seed2.json",
+        ],
+    },
+    "nonpatent_dtilm_vs_rf": {
+        "a_name": "DTI-LM",
+        "b_name": "RF",
+        "a_paths": [
+            "results/recent_bindingdb_nonpatent_temporal_dtilm/BindingDB_nonpatent_Kd_nonpatent_temporal_dtilm_seed0.json",
+            "results/recent_bindingdb_nonpatent_temporal_dtilm/BindingDB_nonpatent_Kd_nonpatent_temporal_dtilm_seed1.json",
+            "results/recent_bindingdb_nonpatent_temporal_dtilm/BindingDB_nonpatent_Kd_nonpatent_temporal_dtilm_seed2.json",
+        ],
+        "b_paths": [
+            "results/rf_panel_stage1/BindingDB_nonpatent_Kd_nonpatent_temporal_rf_seed0.json",
+            "results/rf_nonpatent_multiseed/BindingDB_nonpatent_Kd_nonpatent_temporal_rf_seed1.json",
+            "results/rf_nonpatent_multiseed/BindingDB_nonpatent_Kd_nonpatent_temporal_rf_seed2.json",
         ],
     },
     "scaffold_drug_base_vs_hyperpcm": {
@@ -205,6 +303,20 @@ COMPARISONS = {
             "results/recent_panel_stage1/BindingDB_Kd_unseen_target_hyperpcm_seed0.json",
             "results/recent_hyperpcm_unseen_target_multiseed/BindingDB_Kd_unseen_target_hyperpcm_seed1.json",
             "results/recent_hyperpcm_unseen_target_multiseed/BindingDB_Kd_unseen_target_hyperpcm_seed2.json",
+        ],
+    },
+    "kd_unseen_target_base_vs_rf": {
+        "a_name": "base",
+        "b_name": "RF",
+        "a_paths": [
+            "results/full_unseen_target_base_multiseed/BindingDB_Kd_unseen_target_base_seed0.json",
+            "results/full_unseen_target_base_multiseed/BindingDB_Kd_unseen_target_base_seed1.json",
+            "results/full_unseen_target_base_multiseed/BindingDB_Kd_unseen_target_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/rf_panel_stage1/BindingDB_Kd_unseen_target_rf_seed0.json",
+            "results/rf_unseen_target_multiseed/BindingDB_Kd_unseen_target_rf_seed1.json",
+            "results/rf_unseen_target_multiseed/BindingDB_Kd_unseen_target_rf_seed2.json",
         ],
     },
     "ki_base_vs_raicd": {

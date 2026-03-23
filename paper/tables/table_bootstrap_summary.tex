@@ -1,7 +1,7 @@
 \begin{table}[t]
   \centering
   \scriptsize
-  \caption{Paired bootstrap support for the main external-panel comparisons against \texttt{base}, plus the review-driven robustness probes. Positive deltas favor the second model in the comparison; negative deltas favor \texttt{base}.}
+  \caption{Paired bootstrap support for the expanded-panel comparisons. Positive deltas favor the second model in the comparison; negative deltas favor the first.}
   \label{tab:bootstrap-summary}
   \setlength{\tabcolsep}{3.5pt}
   \resizebox{\linewidth}{!}{
@@ -9,16 +9,16 @@
     \toprule
     Comparison & Mean \AUPRC{} delta & 95\% CI \\
     \midrule
-    \texttt{unseen\_drug}: \texttt{DTI-LM - base} & $-0.0505$ & [$-0.0614$, $-0.0399$] \\
-    \texttt{unseen\_drug}: \texttt{HyperPCM - base} & $+0.0185$ & [$+0.0082$, $+0.0279$] \\
-    \texttt{blind\_start}: \texttt{DTI-LM - base} & $-0.0100$ & [$-0.0304$, $+0.0132$] \\
-    \texttt{blind\_start}: \texttt{HyperPCM - base} & $+0.0092$ & [$-0.0134$, $+0.0317$] \\
+    \texttt{unseen\_drug}: \texttt{RF - base} & $+0.1830$ & [$+0.1739$, $+0.1919$] \\
+    \texttt{unseen\_drug}: \texttt{RF - HyperPCM} & $+0.1645$ & [$+0.1558$, $+0.1733$] \\
+    \texttt{blind\_start}: \texttt{RF - base} & $+0.0775$ & [$+0.0546$, $+0.1030$] \\
     \texttt{scaffold\_drug}: \texttt{HyperPCM - base} & $-0.0086$ & [$-0.0203$, $+0.0025$] \\
-    \texttt{unseen\_target}: \texttt{DTI-LM - base} & $-0.0088$ & [$-0.0206$, $+0.0021$] \\
-    \texttt{unseen\_target}: \texttt{HyperPCM - base} & $-0.0269$ & [$-0.0390$, $-0.0151$] \\
-    \texttt{patent}: \texttt{DTI-LM - base} & $+0.0054$ & [$+0.0028$, $+0.0079$] \\
-    \texttt{patent}: \texttt{HyperPCM - base} & $-0.0019$ & [$-0.0045$, $+0.0009$] \\
+    \texttt{unseen\_target}: \texttt{RF - base} & $-0.0042$ & [$-0.0175$, $+0.0084$] \\
+    \texttt{patent}: \texttt{RF - base} & $+0.0463$ & [$+0.0441$, $+0.0484$] \\
+    \texttt{patent}: \texttt{RF - DTI-LM} & $+0.0409$ & [$+0.0384$, $+0.0433$] \\
     \texttt{nonpatent\_temporal}: \texttt{DTI-LM - base} & $+0.0163$ & [$+0.0064$, $+0.0265$] \\
+    \texttt{nonpatent\_temporal}: \texttt{RF - base} & $+0.0832$ & [$+0.0737$, $+0.0920$] \\
+    \texttt{nonpatent\_temporal}: \texttt{RF - DTI-LM} & $+0.0670$ & [$+0.0564$, $+0.0764$] \\
     \bottomrule
   \end{tabular}}
 \end{table}

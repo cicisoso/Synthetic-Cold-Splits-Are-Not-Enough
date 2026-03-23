@@ -1,0 +1,138 @@
+{
+  "unseen_drug_base_vs_rf": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RF",
+    "observed_seed_deltas": [
+      0.11992324046312564,
+      0.31654386408160046,
+      0.11249976901460446
+    ],
+    "observed_mean_delta": 0.18298895785311017,
+    "ci95": [
+      0.17389450068071657,
+      0.19194760357337684
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "unseen_drug_hyperpcm_vs_rf": {
+    "status": "done",
+    "a_name": "HyperPCM",
+    "b_name": "RF",
+    "observed_seed_deltas": [
+      0.14615307674337963,
+      0.12012246556912709,
+      0.22713190157558316
+    ],
+    "observed_mean_delta": 0.16446914796269663,
+    "ci95": [
+      0.1558159015612285,
+      0.17325347627730553
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "blind_start_base_vs_rf": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RF",
+    "observed_seed_deltas": [
+      0.09650987109849757,
+      0.09261245864335621,
+      0.043417279782769824
+    ],
+    "observed_mean_delta": 0.07751320317487453,
+    "ci95": [
+      0.05460093009316961,
+      0.10297372728935565
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "patent_base_vs_rf": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RF",
+    "observed_seed_deltas": [
+      0.050563438696481056,
+      0.05509012900691346,
+      0.033165612456799165
+    ],
+    "observed_mean_delta": 0.046273060053397895,
+    "ci95": [
+      0.044056862927640744,
+      0.04840407725902974
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "patent_dtilm_vs_rf": {
+    "status": "done",
+    "a_name": "DTI-LM",
+    "b_name": "RF",
+    "observed_seed_deltas": [
+      0.03517185198426309,
+      0.037241867510902305,
+      0.050282882433120846
+    ],
+    "observed_mean_delta": 0.040898867309428745,
+    "ci95": [
+      0.03837042215263555,
+      0.04329222137027863
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "nonpatent_base_vs_rf": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RF",
+    "observed_seed_deltas": [
+      0.06603801713750046,
+      0.07885456497970955,
+      0.10474417194168595
+    ],
+    "observed_mean_delta": 0.08321225135296532,
+    "ci95": [
+      0.07370807882750573,
+      0.09197772895900203
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "nonpatent_dtilm_vs_rf": {
+    "status": "done",
+    "a_name": "DTI-LM",
+    "b_name": "RF",
+    "observed_seed_deltas": [
+      0.07433766468919567,
+      0.05752664855873724,
+      0.06900167691939718
+    ],
+    "observed_mean_delta": 0.0669553300557767,
+    "ci95": [
+      0.05635793996553595,
+      0.07635549120931609
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "kd_unseen_target_base_vs_rf": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RF",
+    "observed_seed_deltas": [
+      0.017380795943064298,
+      -0.021401176976204028,
+      -0.008512008074157473
+    ],
+    "observed_mean_delta": -0.004177463035765734,
+    "ci95": [
+      -0.017491805589436915,
+      0.008367520301947136
+    ],
+    "prob_delta_gt_0": 0.2505,
+    "num_bootstrap": 2000
+  }
+}
