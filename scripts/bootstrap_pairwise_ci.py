@@ -137,6 +137,34 @@ COMPARISONS = {
             "results/recent_hyperpcm_patent_multiseed/BindingDB_patent_patent_temporal_hyperpcm_seed2.json",
         ],
     },
+    "nonpatent_base_vs_dtilm": {
+        "a_name": "base",
+        "b_name": "DTI-LM",
+        "a_paths": [
+            "results/full_bindingdb_nonpatent_temporal_base/BindingDB_nonpatent_Kd_nonpatent_temporal_base_seed0.json",
+            "results/full_bindingdb_nonpatent_temporal_base/BindingDB_nonpatent_Kd_nonpatent_temporal_base_seed1.json",
+            "results/full_bindingdb_nonpatent_temporal_base/BindingDB_nonpatent_Kd_nonpatent_temporal_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/recent_bindingdb_nonpatent_temporal_dtilm/BindingDB_nonpatent_Kd_nonpatent_temporal_dtilm_seed0.json",
+            "results/recent_bindingdb_nonpatent_temporal_dtilm/BindingDB_nonpatent_Kd_nonpatent_temporal_dtilm_seed1.json",
+            "results/recent_bindingdb_nonpatent_temporal_dtilm/BindingDB_nonpatent_Kd_nonpatent_temporal_dtilm_seed2.json",
+        ],
+    },
+    "scaffold_drug_base_vs_hyperpcm": {
+        "a_name": "base",
+        "b_name": "HyperPCM",
+        "a_paths": [
+            "results/full_bindingdb_kd_scaffold_base/BindingDB_Kd_scaffold_drug_base_seed0.json",
+            "results/full_bindingdb_kd_scaffold_base/BindingDB_Kd_scaffold_drug_base_seed1.json",
+            "results/full_bindingdb_kd_scaffold_base/BindingDB_Kd_scaffold_drug_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/recent_bindingdb_kd_scaffold_hyperpcm/BindingDB_Kd_scaffold_drug_hyperpcm_seed0.json",
+            "results/recent_bindingdb_kd_scaffold_hyperpcm/BindingDB_Kd_scaffold_drug_hyperpcm_seed1.json",
+            "results/recent_bindingdb_kd_scaffold_hyperpcm/BindingDB_Kd_scaffold_drug_hyperpcm_seed2.json",
+        ],
+    },
     "kd_unseen_target_base_vs_ftm": {
         "a_name": "base",
         "b_name": "FTM",

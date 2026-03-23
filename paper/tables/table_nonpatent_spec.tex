@@ -1,0 +1,26 @@
+\begin{table}[t]
+  \centering
+  \scriptsize
+  \caption{Explicit specification of the non-patent temporal probe. This benchmark is built from the official BindingDB TSV after filtering to non-patent, positive-\(K_d\), single-chain rows with a valid publication year. The partition is fixed by publication year; the random seed changes model stochasticity, not the split.}
+  \label{tab:nonpatent-spec}
+  \setlength{\tabcolsep}{3.5pt}
+  \resizebox{\linewidth}{!}{
+  \begin{tabular}{@{}ll@{}}
+    \toprule
+    Aspect & \texttt{nonpatent\_temporal} \\
+    \midrule
+    Source file & official \texttt{BindingDB\_All\_202603\_tsv.zip}, filtered to empty \texttt{Patent Number} \\
+    Date field & publication year from \texttt{Date of publication} \\
+    Train years & 1977--2018 \\
+    Validation year & 2019 \\
+    Test years & 2020--2023 \\
+    Rows (train / valid / test) & 35,755 / 3,006 / 7,174 \\
+    Pos. rate (train / valid / test) & 0.341 / 0.445 / 0.426 \\
+    Label transform & raw \(K_d\) in nM with \( \mathrm{p}K_d = -\log_{10}(Y / 10^9)\); positive label if \( \mathrm{p}K_d \ge 7.0 \) \\
+    Overlap policy & no cold-entity filtering; \texttt{drug\_overlap}, \texttt{target\_overlap}, and \texttt{overlap\_score} are exported for diagnosis \\
+    Duplicate policy & exact duplicate rows are removed before partitioning; no exact duplicates remain in the released split files \\
+    Seed semantics & partition is fixed across seeds; seed affects training / initialization only \\
+    OOD interpretation & non-patent temporal shift; cleaner than patent provenance, but still not a pure time-only intervention \\
+    \bottomrule
+  \end{tabular}}
+\end{table}

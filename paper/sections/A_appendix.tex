@@ -6,6 +6,12 @@ Because the main paper depends on \texttt{BindingDB\_patent / patent\_temporal},
 
 \input{tables/table_patent_spec}
 
+\subsection{Non-patent temporal probe specification}
+
+Because the main revision also relies on \texttt{BindingDB\_nonpatent\_Kd / nonpatent\_temporal} to separate temporal drift from patent provenance, we make that construction explicit as well. Table~\ref{tab:nonpatent-spec} lists the source file, year cutoffs, label transform, prevalence, duplicate policy, and seed semantics for the released non-patent temporal split.
+
+\input{tables/table_nonpatent_spec}
+
 \subsection{Reference-model specification}
 
 Because every ranking claim is anchored against \texttt{base}, we make that system explicit rather than treating it as an unnamed baseline. Table~\ref{tab:base-spec} specifies the exact input features, network structure, parameter count, optimization recipe, and implementation path used in every experiment.

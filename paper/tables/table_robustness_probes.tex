@@ -5,18 +5,20 @@
   \label{tab:robustness-probes}
   \setlength{\tabcolsep}{4pt}
   \resizebox{\linewidth}{!}{
-  \begin{tabular}{@{}lllc@{}}
+  \begin{tabular}{@{}lllll@{}}
     \toprule
-    Benchmark & Systems & Mean \AUPRC{} / \AUROC{} & Read \\
+    Benchmark & Systems & Mean \AUPRC{} / \AUROC{} & Paired \AUPRC{} CI & Read \\
     \midrule
     \texttt{BindingDB\_nonpatent\_Kd / nonpatent\_temporal} &
     \texttt{base} vs \texttt{DTI-LM} &
     \texttt{base}: 0.6369 $\pm$ 0.0173 / 0.7333 $\pm$ 0.0081; \texttt{DTI-LM}: \textbf{0.6531 $\pm$ 0.0066 / 0.7644 $\pm$ 0.0041} &
+    $+0.0163$ [$+0.0064$, $+0.0265$] &
     temporal ranking reversal survives without patent provenance \\
     \texttt{BindingDB\_Kd / scaffold\_drug} &
     \texttt{base} vs \texttt{HyperPCM} &
     \texttt{base}: \textbf{0.6069 $\pm$ 0.0161 / 0.8351 $\pm$ 0.0037}; \texttt{HyperPCM}: 0.5983 $\pm$ 0.0368 / 0.8155 $\pm$ 0.0204 &
-    stricter scaffold holdout removes the original \texttt{HyperPCM} edge \\
+    $-0.0086$ [$-0.0203$, $+0.0025$] &
+    stricter scaffold holdout does not preserve the original \texttt{HyperPCM} edge \\
     \bottomrule
   \end{tabular}}
 \end{table}

@@ -1,0 +1,36 @@
+{
+  "nonpatent_base_vs_dtilm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      -0.00829964755169521,
+      0.021327916420972315,
+      0.03574249502228877
+    ],
+    "observed_mean_delta": 0.016256921297188625,
+    "ci95": [
+      0.006366378862834094,
+      0.0264549592689848
+    ],
+    "prob_delta_gt_0": 0.999,
+    "num_bootstrap": 2000
+  },
+  "scaffold_drug_base_vs_hyperpcm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "HyperPCM",
+    "observed_seed_deltas": [
+      0.020363106833849676,
+      -0.03280571675180288,
+      -0.013387132812472391
+    ],
+    "observed_mean_delta": -0.0086099142434752,
+    "ci95": [
+      -0.020343921096622718,
+      0.00247815708603171
+    ],
+    "prob_delta_gt_0": 0.0595,
+    "num_bootstrap": 2000
+  }
+}

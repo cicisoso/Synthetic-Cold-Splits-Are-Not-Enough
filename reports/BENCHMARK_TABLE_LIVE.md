@@ -23,7 +23,7 @@ Generated from local result JSON files.
 | Benchmark | Seeds | DTI-LM AUPRC / AUROC | HyperPCM AUPRC / AUROC | Note |
 |-----------|-------|----------------------|------------------------|------|
 | `BindingDB_patent / patent_temporal` | `3 / 3` | `0.7825 ± 0.0078 / 0.7362 ± 0.0083` | `0.7753 ± 0.0050 / 0.7368 ± 0.0090` | `DTI-LM` remains the strongest recent baseline by mean AUPRC; `HyperPCM` is close on AUROC |
-| `BindingDB_Kd / blind_start` | `3 / 3` | `0.3636 ± 0.0693 / 0.6490 ± 0.0642` | `0.3828 ± 0.1024 / 0.6807 ± 0.0824` | `HyperPCM` is highly unstable and still does not beat `RAICD` on mean AUPRC |
+| `BindingDB_Kd / blind_start` | `3 / 3` | `0.3636 ± 0.0693 / 0.6490 ± 0.0642` | `0.3828 ± 0.1024 / 0.6807 ± 0.0824` | `HyperPCM` has the highest mean AUPRC, but `HyperPCM - base` crosses zero under paired bootstrap, so this panel has no reliable external winner |
 | `BindingDB_Kd / unseen_target` | `3 / 3` | `0.5136 ± 0.0730 / 0.7970 ± 0.0159` | `0.4955 ± 0.0793 / 0.7810 ± 0.0191` | neither recent pooled-LM baseline beats `FTM` on mean AUPRC |
 
 ## Recent-Baseline Support Screens
@@ -45,4 +45,4 @@ Generated from local result JSON files.
 | Benchmark | Seeds | Base AUPRC / AUROC | DTI-LM AUPRC / AUROC | HyperPCM AUPRC / AUROC | Note |
 |-----------|-------|--------------------|----------------------|------------------------|------|
 | `BindingDB_nonpatent_Kd / nonpatent_temporal` | `3 / 3` | `0.6369 ± 0.0173 / 0.7333 ± 0.0081` | `0.6531 ± 0.0066 / 0.7644 ± 0.0041` | `n/a` | non-patent temporal probe preserves `DTI-LM > base`, reducing the concern that patent ranking is driven only by patent provenance |
-| `BindingDB_Kd / scaffold_drug` | `3 / 3` | `0.6069 ± 0.0161 / 0.8351 ± 0.0037` | `seed0: 0.5554 / 0.7784` | `0.5983 ± 0.0368 / 0.8155 ± 0.0204` | stricter scaffold holdout removes the original `HyperPCM > base` ordering seen on synthetic `unseen_drug` |
+| `BindingDB_Kd / scaffold_drug` | `3 / 3` | `0.6069 ± 0.0161 / 0.8351 ± 0.0037` | `seed0: 0.5554 / 0.7784` | `0.5983 ± 0.0368 / 0.8155 ± 0.0204` | stricter scaffold holdout eliminates support for the original `HyperPCM > base` ordering; paired CI for `HyperPCM - base` is `[-0.0203, +0.0025]` |
