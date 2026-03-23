@@ -1,0 +1,23 @@
+\begin{table}[t]
+  \centering
+  \scriptsize
+  \caption{Specification of the \texttt{base} reference model used throughout the benchmark. This table is included to make the anchor system reproducible rather than treating it as an informal baseline label.}
+  \label{tab:base-spec}
+  \setlength{\tabcolsep}{3.5pt}
+  \resizebox{\linewidth}{!}{
+  \begin{tabular}{@{}lp{10.6cm}@{}}
+    \toprule
+    Component & Specification \\
+    \midrule
+    Drug input & RDKit Morgan fingerprint, radius $2$, $2048$ bits, generated from canonical SMILES in \texttt{src/raicd/featurizers.py}. \\
+    Target input & L2-normalized hashed amino-acid $1$/$2$/$3$-mer count vector, $2048$ dimensions, generated in \texttt{src/raicd/featurizers.py}. \\
+    Drug encoder & Two-layer MLP: $\mathrm{Linear}(2048,512)$, GELU, dropout $0.1$, $\mathrm{Linear}(512,256)$, followed by L2 normalization. \\
+    Target encoder & Same architecture as the drug encoder, with independent parameters. \\
+    Pair head & Concatenate $[d,\; t,\; d \odot t,\; |d-t|] \in \mathbb{R}^{1024}$, then $\mathrm{Linear}(1024,512)$, GELU, dropout $0.1$, $\mathrm{Linear}(512,1)$. \\
+    Trainable parameters & $2{,}886{,}145$ parameters in total. \\
+    Optimization & BCE-with-logits objective, Adam with learning rate $10^{-3}$ and weight decay $10^{-4}$, $8$ epochs, batch size $256$. \\
+    Labeling & Binary label derived from a \texttt{pKd} threshold of $7.0$ (or patent-specific log-nM conversion for \texttt{BindingDB\_patent}; see Table~\ref{tab:patent-spec}). \\
+    Code path & Model implementation in \texttt{src/raicd/model.py}; training entry point in \texttt{scripts/train\_raicd.py}. \\
+    \bottomrule
+  \end{tabular}}
+\end{table}

@@ -11,6 +11,8 @@ from typing import Dict, Iterable, List, Tuple
 import numpy as np
 import pandas as pd
 import torch
+from rdkit import Chem
+from rdkit.Chem.Scaffolds import MurckoScaffold
 from sklearn.cluster import MiniBatchKMeans
 from torch.utils.data import Dataset
 from tqdm import tqdm
@@ -37,10 +39,10 @@ def affinity_to_pkd(dataset: str, y: np.ndarray) -> np.ndarray:
     return y_to_pkd(y)
 
 
-def parse_patent_temporal_split(split: str, available_valid_years: list[int]) -> int:
-    if split == "patent_temporal":
+def parse_local_temporal_split(split: str, default_split: str, available_valid_years: list[int]) -> int:
+    if split == default_split:
         return max(available_valid_years)
-    prefix = "patent_temporal_v"
+    prefix = f"{default_split}_v"
     if split.startswith(prefix):
         valid_year = int(split[len(prefix):])
         if valid_year not in available_valid_years:
@@ -50,15 +52,20 @@ def parse_patent_temporal_split(split: str, available_valid_years: list[int]) ->
 
 
 def load_local_benchmark_split(dataset: str, split: str) -> Dict[str, pd.DataFrame]:
-    if dataset != "BindingDB_patent":
+    if dataset == "BindingDB_patent":
+        base_dir = LOCAL_BENCHMARK_DIR / "bindingdb_patent"
+        default_split = "patent_temporal"
+    elif dataset == "BindingDB_nonpatent_Kd":
+        base_dir = LOCAL_BENCHMARK_DIR / "bindingdb_nonpatent_kd"
+        default_split = "nonpatent_temporal"
+    else:
         raise ValueError(f"Unsupported local benchmark dataset/split: {dataset} / {split}")
-    base_dir = LOCAL_BENCHMARK_DIR / "bindingdb_patent"
     train_val = pd.read_csv(base_dir / "train_val.csv")
     test = pd.read_csv(base_dir / "test.csv")
     train_val["Year"] = train_val["Year"].astype(int)
     test["Year"] = test["Year"].astype(int)
     available_valid_years = sorted(train_val["Year"].unique().tolist())
-    valid_year = parse_patent_temporal_split(split, available_valid_years)
+    valid_year = parse_local_temporal_split(split, default_split, available_valid_years)
     full_frame = pd.concat([train_val, test], axis=0, ignore_index=True)
     train = full_frame[full_frame["Year"] < valid_year].reset_index(drop=True)
     valid = full_frame[full_frame["Year"] == valid_year].reset_index(drop=True)
@@ -69,10 +76,12 @@ def load_local_benchmark_split(dataset: str, split: str) -> Dict[str, pd.DataFra
 
 
 def split_dataframe(dataset: str, split: str, seed: int, frac: Iterable[float]) -> Dict[str, pd.DataFrame]:
-    if dataset == "BindingDB_patent":
+    if dataset in {"BindingDB_patent", "BindingDB_nonpatent_Kd"}:
         return load_local_benchmark_split(dataset, split)
 
     data = DTI(name=dataset)
+    if split == "scaffold_drug":
+        return scaffold_split(data.get_data(), seed=seed, frac=list(frac))
     if split == "warm":
         result = data.get_split(method="random", seed=seed, frac=list(frac))
     elif split == "unseen_drug":
@@ -84,6 +93,61 @@ def split_dataframe(dataset: str, split: str, seed: int, frac: Iterable[float]) 
     else:
         raise ValueError(f"Unknown split: {split}")
     return result
+
+
+def _murcko_scaffold(smiles: str) -> str:
+    mol = Chem.MolFromSmiles(smiles)
+    if mol is None:
+        return f"invalid::{smiles}"
+    scaffold = MurckoScaffold.MurckoScaffoldSmiles(mol=mol)
+    return scaffold if scaffold else f"noscaffold::{smiles}"
+
+
+def scaffold_split(frame: pd.DataFrame, seed: int, frac: list[float]) -> Dict[str, pd.DataFrame]:
+    if len(frac) != 3:
+        raise ValueError("frac must have length 3")
+    frame = frame.copy().reset_index(drop=True)
+    drug_frame = frame[["Drug_ID", "Drug"]].drop_duplicates("Drug_ID").reset_index(drop=True)
+    drug_frame["scaffold"] = drug_frame["Drug"].astype(str).map(_murcko_scaffold)
+    row_counts = frame["Drug_ID"].value_counts().to_dict()
+    scaffold_to_drugs = drug_frame.groupby("scaffold")["Drug_ID"].apply(list).to_dict()
+    scaffold_items = []
+    for scaffold, drug_ids in scaffold_to_drugs.items():
+        weight = int(sum(int(row_counts.get(drug_id, 0)) for drug_id in drug_ids))
+        scaffold_items.append((scaffold, drug_ids, weight))
+
+    rng = np.random.default_rng(seed)
+    rng.shuffle(scaffold_items)
+
+    total_rows = len(frame)
+    target_rows = {
+        "train": float(total_rows * frac[0]),
+        "valid": float(total_rows * frac[1]),
+        "test": float(total_rows * frac[2]),
+    }
+    assigned_rows = {"train": 0, "valid": 0, "test": 0}
+    split_drugs = {"train": set(), "valid": set(), "test": set()}
+
+    for _, drug_ids, weight in scaffold_items:
+        best_split = None
+        best_key = None
+        for split_name in ["train", "valid", "test"]:
+            new_rows = assigned_rows[split_name] + weight
+            change = abs(new_rows - target_rows[split_name]) - abs(assigned_rows[split_name] - target_rows[split_name])
+            fill_ratio = assigned_rows[split_name] / max(target_rows[split_name], 1.0)
+            key = (change, fill_ratio, assigned_rows[split_name])
+            if best_key is None or key < best_key:
+                best_key = key
+                best_split = split_name
+        split_drugs[best_split].update(drug_ids)
+        assigned_rows[best_split] += weight
+
+    partitions = {}
+    for split_name in ["train", "valid", "test"]:
+        partitions[split_name] = frame[frame["Drug_ID"].isin(split_drugs[split_name])].reset_index(drop=True)
+        if len(partitions[split_name]) == 0:
+            raise ValueError(f"scaffold split produced empty {split_name} partition")
+    return partitions
 
 
 def maybe_subsample(df: pd.DataFrame, max_rows: int | None, seed: int) -> pd.DataFrame:

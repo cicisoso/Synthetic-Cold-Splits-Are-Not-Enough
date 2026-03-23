@@ -11,6 +11,11 @@ from pathlib import Path
 
 from sklearn.metrics import average_precision_score, roc_auc_score
 
+YEAR_GROUPS = [
+    ("2019", [2019]),
+    ("2020-2021", [2020, 2021]),
+]
+
 
 PANELS = {
     "internal": {
@@ -125,14 +130,19 @@ def overall_summary(existing: dict[str, list[Path]]) -> dict[str, dict[str, list
     return summary
 
 
-def year_summary(existing: dict[str, list[Path]], years: list[int]) -> dict[int, dict[str, dict[str, list[float | None]]]]:
+def year_summary(existing: dict[str, list[Path]], years: list[int]) -> dict[str, dict[str, dict[str, list[float | None]]]]:
     year_to_indices: dict[int, list[int]] = defaultdict(list)
     for idx, year in enumerate(years):
         year_to_indices[year].append(idx)
 
-    out: dict[int, dict[str, dict[str, list[float | None]]]] = {}
-    for year, indices in sorted(year_to_indices.items()):
-        out[year] = {}
+    out: dict[str, dict[str, dict[str, list[float | None]]]] = {}
+    for label, grouped_years in YEAR_GROUPS:
+        indices: list[int] = []
+        for year in grouped_years:
+            indices.extend(year_to_indices.get(year, []))
+        if not indices:
+            continue
+        out[label] = {}
         for system, paths in existing.items():
             auprc_values: list[float] = []
             auroc_values: list[float | None] = []
@@ -145,7 +155,7 @@ def year_summary(existing: dict[str, list[Path]], years: list[int]) -> dict[int,
                 auprc, auroc = compute_metrics(year_labels, year_probs)
                 auprc_values.append(auprc)
                 auroc_values.append(auroc)
-            out[year][system] = {"auprc": auprc_values, "auroc": auroc_values}
+            out[label][system] = {"auprc": auprc_values, "auroc": auroc_values}
     return out
 
 
@@ -226,10 +236,14 @@ def build_markdown(existing: dict[str, list[Path]], years: list[int], title: str
     )
     year_counts = defaultdict(int)
     for year in years:
-        year_counts[year] += 1
-    for year, systems in year_stats.items():
+        year_counts[str(year)] += 1
+    grouped_counts = {
+        "2019": year_counts["2019"],
+        "2020-2021": year_counts["2020"] + year_counts["2021"],
+    }
+    for label, systems in year_stats.items():
         values = [f"`{format_pair(systems[system]['auprc'], systems[system]['auroc'])}`" for system in ordered_systems]
-        lines.append(f"| `{year}` | {year_counts[year]} | " + " | ".join(values) + " |")
+        lines.append(f"| `{label}` | {grouped_counts.get(label, 0)} | " + " | ".join(values) + " |")
 
     lines.extend(
         [

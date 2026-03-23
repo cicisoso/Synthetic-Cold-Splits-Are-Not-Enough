@@ -1,7 +1,7 @@
 \begin{table}[t]
   \centering
   \scriptsize
-  \caption{Compact \AUPRC{} summary behind the patent diagnosis under the external replacement panel. The promoted temporal benchmark favors different models in different strata, which helps explain why aggregate temporal OOD does not reduce to a single scalar difficulty.}
+  \caption{Compact \AUPRC{} summary behind the patent diagnosis under the external replacement panel. Values are mean $\pm$ seed std over the matched 3-seed runs. The tiny 2021 slice is pooled into the \texttt{2020--2021} stratum to avoid over-interpreting a 72-example cell.}
   \label{tab:patent-diagnosis-compact}
   \setlength{\tabcolsep}{3.5pt}
   \resizebox{\linewidth}{!}{
@@ -9,12 +9,11 @@
     \toprule
     Slice type & Slice & Count & base & DTI-LM & HyperPCM \\
     \midrule
-    Year & 2019 & 42,009 & 0.7626 & \textbf{0.7734} & 0.7637 \\
-    Year & 2020 & 6,947 & \textbf{0.8715} & 0.8545 & 0.8526 \\
-    Year & 2021 & 72 & \textbf{0.9529} & 0.7511 & 0.6953 \\
-    Overlap bucket & 0 ($0.000$--$0.531$) & 16,341 & 0.5551 & \textbf{0.6353} & 0.6147 \\
-    Overlap bucket & 1 ($0.531$--$0.710$) & 16,342 & 0.7218 & 0.7489 & \textbf{0.7513} \\
-    Overlap bucket & 2 ($0.710$--$0.989$) & 16,345 & \textbf{0.9237} & 0.8866 & 0.8767 \\
+    Year & 2019 & 42,009 & 0.7626 $\pm$ 0.0098 & \textbf{0.7734 $\pm$ 0.0071} & 0.7637 $\pm$ 0.0049 \\
+    Year & 2020--2021 & 7,019 & \textbf{0.8716 $\pm$ 0.0121} & 0.8533 $\pm$ 0.0100 & 0.8516 $\pm$ 0.0139 \\
+    Overlap bucket & 0 ($0.000$--$0.531$) & 16,341 & 0.5551 $\pm$ 0.0190 & \textbf{0.6353 $\pm$ 0.0175} & 0.6147 $\pm$ 0.0208 \\
+    Overlap bucket & 1 ($0.531$--$0.710$) & 16,342 & 0.7218 $\pm$ 0.0167 & 0.7489 $\pm$ 0.0094 & \textbf{0.7513 $\pm$ 0.0060} \\
+    Overlap bucket & 2 ($0.710$--$0.989$) & 16,345 & \textbf{0.9237 $\pm$ 0.0030} & 0.8866 $\pm$ 0.0097 & 0.8767 $\pm$ 0.0042 \\
     \bottomrule
   \end{tabular}}
 \end{table}

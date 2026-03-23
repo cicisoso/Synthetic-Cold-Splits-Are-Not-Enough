@@ -1,7 +1,7 @@
 \begin{table}[t]
   \centering
   \scriptsize
-  \caption{Synthetic reference panel and promoted real-OOD benchmark under the external replacement panel. Values are mean $\pm$ std over seeds. Best mean \AUPRC{} in each row is bold.}
+  \caption{Synthetic reference panel and promoted real-OOD benchmark under the external replacement panel. Values are mean $\pm$ std over seeds. Best mean \AUPRC{} in each row is bold. The patent delta is statistically supported but small in absolute magnitude, so row-wise winner labels should be read as within-panel ordering rather than deployment-sized gaps.}
   \label{tab:main-results}
   \setlength{\tabcolsep}{3.5pt}
   \resizebox{\linewidth}{!}{
@@ -31,7 +31,7 @@
     0.7772 $\pm$ 0.0086 / 0.7223 $\pm$ 0.0109 &
     \textbf{0.7825 $\pm$ 0.0078 / 0.7362 $\pm$ 0.0083} &
     0.7753 $\pm$ 0.0050 / 0.7368 $\pm$ 0.0090 &
-    promoted temporal real-OOD favors \texttt{DTI-LM} &
+    promoted temporal/provenance benchmark gives a small but consistent \texttt{DTI-LM} edge &
     DTI-LM \\
     \bottomrule
   \end{tabular}}

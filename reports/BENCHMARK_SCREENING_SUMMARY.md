@@ -44,6 +44,7 @@
 5. **The patent conclusion is now supported statistically and by an alternative cutoff.** `DTI-LM - base` on the main patent split has 95% paired bootstrap CI `[+0.0028, +0.0079]`, and the earlier-cutoff `patent_temporal_v2017` matched 3-seed panel also preserves the same ranking direction (`+0.0091 / +0.0131` mean delta).
 6. **The synthetic and supporting panels now have uncertainty support for their headline claims as well.** `FTM - base` on synthetic `BindingDB_Kd / unseen_target` has CI `[+0.0143, +0.0286]`, while `RAICD/FTM` remain strictly below `base` on `BindingDB_Ki` and `DAVIS` under paired bootstrap.
 7. **`BindingDB_patent / patent_temporal` remains the strongest main benchmark.** It carries the clearest synthetic-vs-real ranking reversal and now supports a broader recent-baseline comparison.
+8. **The review-driven robustness probes strengthen both main pressure points.** `BindingDB_nonpatent_Kd / nonpatent_temporal` preserves `DTI-LM > base` over 3 seeds (`0.6531 ± 0.0066` vs. `0.6369 ± 0.0173`), while `BindingDB_Kd / scaffold_drug` reverses the original synthetic `unseen_drug` ordering and puts `base` slightly ahead of `HyperPCM` (`0.6069 ± 0.0161` vs. `0.5983 ± 0.0368`).
 
 ## Suggested Next Experiments
 

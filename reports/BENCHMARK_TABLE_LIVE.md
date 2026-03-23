@@ -39,3 +39,10 @@ Generated from local result JSON files.
 |-----------|-------|--------------------|----------------------|---------------|------|
 | `BindingDB_patent / patent_temporal` | `3 / 3` | `0.7772 ± 0.0086 / 0.7223 ± 0.0109` | `0.7825 ± 0.0078 / 0.7362 ± 0.0083` | `+0.0054 / +0.0139` | paired bootstrap CI for AUPRC delta is `[+0.0028, +0.0079]` |
 | `BindingDB_patent / patent_temporal_v2017` | `3 / 3` | `0.7044 ± 0.0058 / 0.6624 ± 0.0079` | `0.7134 ± 0.0027 / 0.6754 ± 0.0039` | `+0.0091 / +0.0131` | earlier-cutoff matched 3-seed probe preserves the same winner direction |
+
+## Review-Driven Robustness Probes
+
+| Benchmark | Seeds | Base AUPRC / AUROC | DTI-LM AUPRC / AUROC | HyperPCM AUPRC / AUROC | Note |
+|-----------|-------|--------------------|----------------------|------------------------|------|
+| `BindingDB_nonpatent_Kd / nonpatent_temporal` | `3 / 3` | `0.6369 ± 0.0173 / 0.7333 ± 0.0081` | `0.6531 ± 0.0066 / 0.7644 ± 0.0041` | `n/a` | non-patent temporal probe preserves `DTI-LM > base`, reducing the concern that patent ranking is driven only by patent provenance |
+| `BindingDB_Kd / scaffold_drug` | `3 / 3` | `0.6069 ± 0.0161 / 0.8351 ± 0.0037` | `seed0: 0.5554 / 0.7784` | `0.5983 ± 0.0368 / 0.8155 ± 0.0204` | stricter scaffold holdout removes the original `HyperPCM > base` ordering seen on synthetic `unseen_drug` |
