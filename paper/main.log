@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.3.18)  22 MAR 2026 09:13
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.3.18)  22 MAR 2026 12:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -533,38 +533,44 @@ Package microtype Info: Loading generic protrusion settings for font family
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./sections/2_related_wor
 k.tex [2]) (./sections/3_setup.tex
 (./tables/table_taxonomy.tex) [3]) (./sections/4_results.tex
-(./tables/table_main_results.tex) [4]
-<figures/benchmark_delta_summary.pdf, id=150, 430.67902pt x 215.66968pt>
+(./tables/table_main_results.tex)
+<figures/benchmark_delta_summary.pdf, id=143, 430.67902pt x 215.66968pt>
 File: figures/benchmark_delta_summary.pdf Graphic file (type pdf)
 <use figures/benchmark_delta_summary.pdf>
 Package pdftex.def Info: figures/benchmark_delta_summary.pdf  used on input lin
 e 17.
 (pdftex.def)             Requested size: 469.75502pt x 235.24638pt.
- [5 <./figures/benchmark_delta_summary.pdf>] (./tables/table_patent_diagnosis_c
-ompact.tex)
-<figures/patent_shift_diagnosis.pdf, id=168, 501.69017pt x 208.3652pt>
+ [4]
+(./tables/table_patent_diagnosis_compact.tex)
+<figures/patent_shift_diagnosis.pdf, id=155, 501.69017pt x 208.3652pt>
 File: figures/patent_shift_diagnosis.pdf Graphic file (type pdf)
 <use figures/patent_shift_diagnosis.pdf>
 Package pdftex.def Info: figures/patent_shift_diagnosis.pdf  used on input line
  34.
 (pdftex.def)             Requested size: 469.75502pt x 195.10025pt.
-) (./sections/5_discussion.tex
-[6]) (./sections/6_conclusion.tex) [7 <./figures/patent_shift_diagnosis.pdf>]
-(./main.bbl [8]) (./sections/A_appendix.tex (./tables/table_patent_spec.tex)
-(./tables/table_support_benchmarks.tex) [9]
+ [5 <./figures/benchmark_delta_summary.pdf>]) (./sections/5_discussion.tex [6 <
+./figures/patent_shift_diagnosis.pdf>]) (./sections/6_conclusion.tex) (./main.b
+bl [7]) (./sections/A_appendix.tex (./tables/table_patent_spec.tex) [8] (./tabl
+es/table_support_benchmarks.tex)
+Overfull \hbox (2.05556pt too wide) in paragraph at lines 15--16
+[]\T1/ptm/m/n/10.95 (-20) On \T1/pcr/m/n/10.95 BindingDB_Ki / unseen_target\T1/
+ptm/m/n/10.95 (-20) , Ta-ble []A2[] shows that \T1/pcr/m/n/10.95 base \T1/ptm/m
+/n/10.95 (-20) re-mains ahead of both \T1/pcr/m/n/10.95 DTI-LM
+ []
+
 (./tables/table_bootstrap_summary.tex) (./tables/table_recent_screening.tex)
-[10] (./tables/table_resource_release.tex)) [11] (./main.aux)
+[9] (./tables/table_resource_release.tex)) [10] [11] (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 245412549F33534588F9AB91EC723F82;3719.
+(rerunfilecheck)             Checksum: 3E3C2C0A7AC898C0AC963F1D1FA04F20;3514.
  ) 
 Here is how much of TeX's memory you used:
- 14464 strings out of 478287
- 231998 string characters out of 5849289
- 554095 words of memory out of 5000000
+ 14468 strings out of 478287
+ 232025 string characters out of 5849289
+ 558116 words of memory out of 5000000
  32080 multiletter control sequences out of 15000+600000
- 522674 words of font info for 260 fonts, out of 8000000 for 9000
+ 522802 words of font info for 262 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,11n,63p,2065b,472s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,11n,63p,1826b,460s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/
@@ -576,10 +582,10 @@ cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb>
 </usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist
 /fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (11 pages, 198138 bytes).
+Output written on main.pdf (11 pages, 195722 bytes).
 PDF statistics:
- 301 PDF objects out of 1000 (max. 8388607)
- 249 compressed objects within 3 object streams
+ 302 PDF objects out of 1000 (max. 8388607)
+ 250 compressed objects within 3 object streams
  55 named destinations out of 1000 (max. 500000)
  52371 words of extra memory for PDF output out of 61914 (max. 10000000)
 

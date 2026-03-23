@@ -1,0 +1,342 @@
+{
+  "unseen_drug_base_vs_dtilm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      -0.1546197670785615,
+      0.10927759950831956,
+      -0.10626523827201761
+    ],
+    "observed_mean_delta": -0.050535801947419856,
+    "ci95": [
+      -0.06140710047011874,
+      -0.03985308096548652
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 2000
+  },
+  "unseen_drug_base_vs_hyperpcm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "HyperPCM",
+    "observed_seed_deltas": [
+      -0.026229836280253993,
+      0.19642139851247337,
+      -0.1146321325609787
+    ],
+    "observed_mean_delta": 0.018519809890413557,
+    "ci95": [
+      0.008223088743230297,
+      0.02790228581197818
+    ],
+    "prob_delta_gt_0": 0.9995,
+    "num_bootstrap": 2000
+  },
+  "blind_start_base_vs_dtilm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      0.03506254261499747,
+      0.02886117464330018,
+      -0.09394344246932168
+    ],
+    "observed_mean_delta": -0.010006575070341342,
+    "ci95": [
+      -0.03035428358627416,
+      0.013180774157254903
+    ],
+    "prob_delta_gt_0": 0.2085,
+    "num_bootstrap": 2000
+  },
+  "blind_start_base_vs_hyperpcm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "HyperPCM",
+    "observed_seed_deltas": [
+      0.03739753360674064,
+      0.0992671588636822,
+      -0.10921132821607982
+    ],
+    "observed_mean_delta": 0.009151121418114342,
+    "ci95": [
+      -0.013404830324109744,
+      0.0317385634864536
+    ],
+    "prob_delta_gt_0": 0.801,
+    "num_bootstrap": 2000
+  },
+  "blind_start_raicd_vs_base": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RAICD",
+    "observed_seed_deltas": [
+      0.05465779861697917,
+      0.056970367184494664,
+      -0.025250487254783627
+    ],
+    "observed_mean_delta": 0.028792559515563403,
+    "ci95": [
+      0.014516694793847757,
+      0.04310701051234214
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "patent_base_vs_raicd": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RAICD",
+    "observed_seed_deltas": [
+      -0.0055261242184851955,
+      0.003211570274261555,
+      -0.021686297174311475
+    ],
+    "observed_mean_delta": -0.008000283706178371,
+    "ci95": [
+      -0.010090775735144804,
+      -0.0058842131595537835
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 2000
+  },
+  "patent_base_vs_ftm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "FTM",
+    "observed_seed_deltas": [
+      0.0013791247299406173,
+      0.0023329994556584577,
+      -0.018816051274032408
+    ],
+    "observed_mean_delta": -0.005034642362811111,
+    "ci95": [
+      -0.00721494696020662,
+      -0.002864334861826628
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 2000
+  },
+  "patent_base_vs_dtilm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      0.015391586712217964,
+      0.017848261496011153,
+      -0.01711726997632168
+    ],
+    "observed_mean_delta": 0.005374192743969146,
+    "ci95": [
+      0.0028283843086350006,
+      0.007935433849606701
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "patent_base_vs_hyperpcm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "HyperPCM",
+    "observed_seed_deltas": [
+      -0.005659236811712431,
+      0.01238147019599889,
+      -0.012275259937123972
+    ],
+    "observed_mean_delta": -0.0018510088509458382,
+    "ci95": [
+      -0.004468952931604158,
+      0.0009371508986964396
+    ],
+    "prob_delta_gt_0": 0.082,
+    "num_bootstrap": 2000
+  },
+  "kd_unseen_target_base_vs_ftm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "FTM",
+    "observed_seed_deltas": [
+      0.04174149026896634,
+      0.02972155582708269,
+      -0.00718471391383646
+    ],
+    "observed_mean_delta": 0.02142611072740419,
+    "ci95": [
+      0.014260947235351824,
+      0.028767060171978023
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "kd_unseen_target_base_vs_dtilm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      -0.013611363945743471,
+      0.010564678801629701,
+      -0.02335676410484694
+    ],
+    "observed_mean_delta": -0.00880114974965357,
+    "ci95": [
+      -0.02062703950407079,
+      0.0021051564265849153
+    ],
+    "prob_delta_gt_0": 0.0595,
+    "num_bootstrap": 2000
+  },
+  "kd_unseen_target_base_vs_hyperpcm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "HyperPCM",
+    "observed_seed_deltas": [
+      -0.015025101574060451,
+      -0.011593720030131038,
+      -0.05421483878165351
+    ],
+    "observed_mean_delta": -0.026944553461948333,
+    "ci95": [
+      -0.038966254140319095,
+      -0.015075799864739928
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 2000
+  },
+  "ki_base_vs_raicd": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RAICD",
+    "observed_seed_deltas": [
+      -0.020004982057598708,
+      -0.027853377945349256,
+      -0.02687770339236717
+    ],
+    "observed_mean_delta": -0.02491202113177171,
+    "ci95": [
+      -0.02708744504836992,
+      -0.022626329138439878
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 2000
+  },
+  "ki_base_vs_ftm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "FTM",
+    "observed_seed_deltas": [
+      -0.02793247304349733,
+      -0.0013984845319675587,
+      -0.022824588394226186
+    ],
+    "observed_mean_delta": -0.017385181989897025,
+    "ci95": [
+      -0.01961495549091971,
+      -0.015081833641507588
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 2000
+  },
+  "ki_base_vs_dtilm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      -0.016481282746666714,
+      -0.036688862065749506,
+      -0.03264404693856826
+    ],
+    "observed_mean_delta": -0.028604730583661492,
+    "ci95": [
+      -0.031394561022432245,
+      -0.025854293104819414
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 2000
+  },
+  "ki_base_vs_hyperpcm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "HyperPCM",
+    "observed_seed_deltas": [
+      -0.025254757639178838,
+      -0.07861352048518666,
+      -0.021917829844815828
+    ],
+    "observed_mean_delta": -0.04192870265639378,
+    "ci95": [
+      -0.044816627207728735,
+      -0.03911670860651979
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 2000
+  },
+  "davis_base_vs_raicd": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RAICD",
+    "observed_seed_deltas": [
+      -0.029166095782072243,
+      -0.044406899284590406,
+      -0.004031964979841152
+    ],
+    "observed_mean_delta": -0.025868320015501267,
+    "ci95": [
+      -0.03783506458266545,
+      -0.012450861640661245
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 2000
+  },
+  "davis_base_vs_dtilm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      -0.05303987634323043,
+      0.038081210789205455,
+      0.012767287936130023
+    ],
+    "observed_mean_delta": -0.0007304592059649839,
+    "ci95": [
+      -0.021061685860938643,
+      0.020445621997766453
+    ],
+    "prob_delta_gt_0": 0.4855,
+    "num_bootstrap": 2000
+  },
+  "davis_base_vs_hyperpcm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "HyperPCM",
+    "observed_seed_deltas": [
+      -0.018905780021910845,
+      -0.029172084496938644,
+      -0.029219443767252884
+    ],
+    "observed_mean_delta": -0.02576576942870079,
+    "ci95": [
+      -0.047899997917683824,
+      -0.0027762971757749194
+    ],
+    "prob_delta_gt_0": 0.013,
+    "num_bootstrap": 2000
+  },
+  "davis_base_vs_ftm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "FTM",
+    "observed_seed_deltas": [
+      -0.06326488959221821,
+      -0.03398459018267408,
+      0.004197920322506932
+    ],
+    "observed_mean_delta": -0.03101718648412845,
+    "ci95": [
+      -0.04384977249534197,
+      -0.017300586442344525
+    ],
+    "prob_delta_gt_0": 0.0,
+    "num_bootstrap": 2000
+  }
+}

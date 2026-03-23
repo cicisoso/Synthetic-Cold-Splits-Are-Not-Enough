@@ -25,8 +25,8 @@ plt.rcParams.update(
 
 COLORS = {
     "base": "#4C566A",
-    "raicd": "#2A7FFF",
-    "ftm": "#D97706",
+    "dtilm": "#2A7FFF",
+    "hyperpcm": "#D97706",
 }
 
 
@@ -41,58 +41,57 @@ def plot_delta_summary() -> None:
     x = np.arange(len(benchmarks))
     width = 0.28
 
-    raicd = np.array([-0.0281, 0.0288, np.nan, -0.0080])
-    ftm = np.array([np.nan, np.nan, 0.0214, -0.0050])
+    dtilm = np.array([-0.0505, -0.0100, -0.0088, 0.0054])
+    hyperpcm = np.array([0.0185, 0.0092, -0.0269, -0.0019])
 
-    raicd_ci = {
-        1: (0.0145, 0.0431),
-        3: (-0.0101, -0.0059),
+    dtilm_ci = {
+        0: (-0.0614, -0.0399),
+        1: (-0.0304, 0.0132),
+        2: (-0.0206, 0.0021),
+        3: (0.0028, 0.0079),
     }
-    ftm_ci = {
-        3: (-0.0072, -0.0029),
+    hyperpcm_ci = {
+        0: (0.0082, 0.0279),
+        1: (-0.0134, 0.0317),
+        2: (-0.0390, -0.0151),
+        3: (-0.0045, 0.0009),
     }
 
     fig, ax = plt.subplots(figsize=(6.2, 3.2))
     ax.axhline(0.0, color="black", linewidth=0.9, linestyle="--", alpha=0.7)
 
-    for idx, value in enumerate(raicd):
-        if np.isnan(value):
-            continue
+    for idx, value in enumerate(dtilm):
         xpos = x[idx] - width / 2
-        ax.bar(xpos, value, width=width, color=COLORS["raicd"], label="RAICD" if idx == 0 else None)
-        if idx in raicd_ci:
-            lo, hi = raicd_ci[idx]
-            ax.errorbar(
-                xpos,
-                value,
-                yerr=[[value - lo], [hi - value]],
-                fmt="none",
-                ecolor="black",
-                capsize=3,
-                linewidth=0.9,
-            )
+        ax.bar(xpos, value, width=width, color=COLORS["dtilm"], label="DTI-LM" if idx == 0 else None)
+        lo, hi = dtilm_ci[idx]
+        ax.errorbar(
+            xpos,
+            value,
+            yerr=[[value - lo], [hi - value]],
+            fmt="none",
+            ecolor="black",
+            capsize=3,
+            linewidth=0.9,
+        )
 
-    for idx, value in enumerate(ftm):
-        if np.isnan(value):
-            continue
+    for idx, value in enumerate(hyperpcm):
         xpos = x[idx] + width / 2
-        ax.bar(xpos, value, width=width, color=COLORS["ftm"], label="FTM sparse" if idx == 2 else None)
-        if idx in ftm_ci:
-            lo, hi = ftm_ci[idx]
-            ax.errorbar(
-                xpos,
-                value,
-                yerr=[[value - lo], [hi - value]],
-                fmt="none",
-                ecolor="black",
-                capsize=3,
-                linewidth=0.9,
-            )
+        ax.bar(xpos, value, width=width, color=COLORS["hyperpcm"], label="HyperPCM" if idx == 0 else None)
+        lo, hi = hyperpcm_ci[idx]
+        ax.errorbar(
+            xpos,
+            value,
+            yerr=[[value - lo], [hi - value]],
+            fmt="none",
+            ecolor="black",
+            capsize=3,
+            linewidth=0.9,
+        )
 
     ax.set_xticks(x)
     ax.set_xticklabels(benchmarks)
     ax.set_ylabel("Mean AUPRC delta vs base")
-    ax.set_ylim(-0.04, 0.05)
+    ax.set_ylim(-0.07, 0.04)
     ax.legend(frameon=False, loc="upper right", ncol=2)
     save(fig, "benchmark_delta_summary.pdf")
 
@@ -105,18 +104,18 @@ def plot_patent_diagnosis() -> None:
 
     year_stats = {
         "base": ([0.7626, 0.8715, 0.9529], [0.0098, 0.0122, 0.0340]),
-        "raicd": ([0.7583, 0.8395, 0.9211], [0.0026, 0.0021, 0.0104]),
-        "ftm": ([0.7624, 0.8358, 0.9469], [0.0024, 0.0034, 0.0360]),
+        "dtilm": ([0.7734, 0.8545, 0.7511], [0.0071, 0.0100, 0.0485]),
+        "hyperpcm": ([0.7637, 0.8526, 0.6953], [0.0049, 0.0139, 0.0151]),
     }
     overlap_stats = {
         "base": ([0.5551, 0.7218, 0.9237], [0.0190, 0.0167, 0.0030]),
-        "raicd": ([0.5505, 0.7274, 0.9085], [0.0071, 0.0076, 0.0090]),
-        "ftm": ([0.5537, 0.7297, 0.9113], [0.0063, 0.0033, 0.0137]),
+        "dtilm": ([0.6353, 0.7489, 0.8866], [0.0175, 0.0094, 0.0097]),
+        "hyperpcm": ([0.6147, 0.7513, 0.8767], [0.0208, 0.0060, 0.0042]),
     }
 
     fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.1), sharey=False)
 
-    for key, label in [("base", "base"), ("raicd", "RAICD"), ("ftm", "FTM sparse")]:
+    for key, label in [("base", "base"), ("dtilm", "DTI-LM"), ("hyperpcm", "HyperPCM")]:
         y, err = year_stats[key]
         axes[0].errorbar(
             x_year,
@@ -134,7 +133,7 @@ def plot_patent_diagnosis() -> None:
     axes[0].set_title("Patent year bands")
     axes[0].set_ylim(0.72, 0.99)
 
-    for key, label in [("base", "base"), ("raicd", "RAICD"), ("ftm", "FTM sparse")]:
+    for key, label in [("base", "base"), ("dtilm", "DTI-LM"), ("hyperpcm", "HyperPCM")]:
         y, err = overlap_stats[key]
         axes[1].errorbar(
             x_overlap,

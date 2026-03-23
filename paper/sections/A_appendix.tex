@@ -12,11 +12,11 @@ The main paper focuses on the strongest evidence chain: the synthetic \texttt{Bi
 
 \input{tables/table_support_benchmarks}
 
-On \texttt{BindingDB\_Ki / unseen\_target}, \texttt{base} remains the strongest internal model at $0.6934 \pm 0.0257 / 0.7192 \pm 0.0068$, ahead of both \texttt{RAICD} and \texttt{FTM sparse}. On \texttt{DAVIS / unseen\_target}, the same ordering remains: \texttt{base} reaches $0.4097 \pm 0.0275 / 0.8613 \pm 0.0153$, while \texttt{RAICD} and \texttt{FTM sparse} are both lower. Seed0 support screens for the strongest recent baseline \texttt{DTI-LM} are also negative on both datasets, so the synthetic \texttt{unseen\_target} gain does not reliably transfer even after expanding the model family.
+On \texttt{BindingDB\_Ki / unseen\_target}, Table~\ref{tab:support} shows that \texttt{base} remains ahead of both \texttt{DTI-LM} and \texttt{HyperPCM}. On \texttt{DAVIS / unseen\_target}, \texttt{base} and \texttt{DTI-LM} are nearly tied on mean \AUPRC{}, but \texttt{base} keeps the slightly stronger mean \AUPRC{} and therefore remains the nominal winner for the paper's primary ranking metric. Together, these support panels reinforce the main paper's message that strong recent baselines do not transfer uniformly across OOD definitions.
 
 \subsection{Paired uncertainty support}
 
-Table~\ref{tab:bootstrap-summary} summarizes the paired bootstrap intervals for every comparison used in a headline ranking claim. The main synthetic gain (\texttt{RAICD} on \texttt{blind\_start}), the synthetic target-cold gain (\texttt{FTM} on \texttt{unseen\_target}), and the real-OOD losses on \texttt{BindingDB\_Ki} and \texttt{DAVIS} all keep their sign under paired resampling. This makes the paper's wording more disciplined: the main and support claims are no longer based only on seed-mean ordering.
+Table~\ref{tab:bootstrap-summary} summarizes the paired bootstrap intervals for the main external-panel comparisons against \texttt{base}. The most important headline claims keep the same sign under paired resampling: \texttt{HyperPCM} is reliably stronger than \texttt{base} on synthetic \texttt{unseen\_drug}, and \texttt{DTI-LM} is reliably stronger than \texttt{base} on the promoted patent temporal benchmark. The remaining main-panel comparisons either stay negative or cross zero, which is exactly why the paper frames them as split-specific rather than universal advantages.
 
 \input{tables/table_bootstrap_summary}
 

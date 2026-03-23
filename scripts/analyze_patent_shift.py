@@ -12,22 +12,47 @@ from pathlib import Path
 from sklearn.metrics import average_precision_score, roc_auc_score
 
 
-PATENT_SYSTEMS = {
-    "base": [
-        "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed0.json",
-        "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed1.json",
-        "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed2.json",
-    ],
-    "RAICD": [
-        "results/full_bindingdb_patent_raicd/BindingDB_patent_patent_temporal_raicd_seed0_both.json",
-        "results/full_bindingdb_patent_raicd/BindingDB_patent_patent_temporal_raicd_seed1_both.json",
-        "results/full_bindingdb_patent_raicd/BindingDB_patent_patent_temporal_raicd_seed2_both.json",
-    ],
-    "FTM": [
-        "results/full_bindingdb_patent_ftm/BindingDB_patent_patent_temporal_ftm_seed0_chem32_top4_shr8p0.json",
-        "results/full_bindingdb_patent_ftm/BindingDB_patent_patent_temporal_ftm_seed1_chem32_top4_shr8p0.json",
-        "results/full_bindingdb_patent_ftm/BindingDB_patent_patent_temporal_ftm_seed2_chem32_top4_shr8p0.json",
-    ],
+PANELS = {
+    "internal": {
+        "title": "Patent Shift Diagnosis",
+        "systems": {
+            "base": [
+                "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed0.json",
+                "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed1.json",
+                "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed2.json",
+            ],
+            "RAICD": [
+                "results/full_bindingdb_patent_raicd/BindingDB_patent_patent_temporal_raicd_seed0_both.json",
+                "results/full_bindingdb_patent_raicd/BindingDB_patent_patent_temporal_raicd_seed1_both.json",
+                "results/full_bindingdb_patent_raicd/BindingDB_patent_patent_temporal_raicd_seed2_both.json",
+            ],
+            "FTM": [
+                "results/full_bindingdb_patent_ftm/BindingDB_patent_patent_temporal_ftm_seed0_chem32_top4_shr8p0.json",
+                "results/full_bindingdb_patent_ftm/BindingDB_patent_patent_temporal_ftm_seed1_chem32_top4_shr8p0.json",
+                "results/full_bindingdb_patent_ftm/BindingDB_patent_patent_temporal_ftm_seed2_chem32_top4_shr8p0.json",
+            ],
+        },
+    },
+    "external": {
+        "title": "Patent Shift Diagnosis (External Panel)",
+        "systems": {
+            "base": [
+                "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed0.json",
+                "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed1.json",
+                "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed2.json",
+            ],
+            "DTI-LM": [
+                "results/recent_panel_stage1/BindingDB_patent_patent_temporal_dtilm_seed0.json",
+                "results/recent_dtilm_patent_multiseed/BindingDB_patent_patent_temporal_dtilm_seed1.json",
+                "results/recent_dtilm_patent_multiseed/BindingDB_patent_patent_temporal_dtilm_seed2.json",
+            ],
+            "HyperPCM": [
+                "results/recent_panel_stage1/BindingDB_patent_patent_temporal_hyperpcm_seed0.json",
+                "results/recent_hyperpcm_patent_multiseed/BindingDB_patent_patent_temporal_hyperpcm_seed1.json",
+                "results/recent_hyperpcm_patent_multiseed/BindingDB_patent_patent_temporal_hyperpcm_seed2.json",
+            ],
+        },
+    },
 }
 
 
@@ -80,9 +105,9 @@ def load_test_years() -> list[int]:
     return years
 
 
-def collect_existing_paths() -> dict[str, list[Path]]:
+def collect_existing_paths(panel: dict[str, object]) -> dict[str, list[Path]]:
     existing: dict[str, list[Path]] = {}
-    for system, paths in PATENT_SYSTEMS.items():
+    for system, paths in panel["systems"].items():
         existing[system] = [Path(path) for path in paths if Path(path).exists()]
     return existing
 
@@ -162,16 +187,14 @@ def winner_by_auprc(overall: dict[str, dict[str, list[float | None]]]) -> str:
     return best_system or "n/a"
 
 
-def build_markdown(existing: dict[str, list[Path]], years: list[int]) -> str:
+def build_markdown(existing: dict[str, list[Path]], years: list[int], title: str, ordered_systems: list[str]) -> str:
     overall = overall_summary(existing)
     year_stats = year_summary(existing, years)
     overlap_stats = overlap_summary(existing)
     base_auprc_mean, _ = mean_std(overall["base"]["auprc"])
-    raicd_auprc_mean, _ = mean_std(overall["RAICD"]["auprc"])
-    ftm_auprc_mean, _ = mean_std(overall["FTM"]["auprc"])
 
     lines = [
-        "# Patent Shift Diagnosis",
+        f"# {title}",
         "",
         "Generated from `BindingDB_patent / patent_temporal` result JSON files and the local patent test split.",
         "",
@@ -180,7 +203,7 @@ def build_markdown(existing: dict[str, list[Path]], years: list[int]) -> str:
         "| System | Seeds | Test AUPRC / AUROC | Delta vs Base AUPRC / AUROC |",
         "|--------|-------|--------------------|------------------------------|",
     ]
-    for system in ["base", "RAICD", "FTM"]:
+    for system in ordered_systems:
         seed_count = len(existing[system])
         pair = format_pair(overall[system]["auprc"], overall[system]["auroc"])
         if system == "base":
@@ -197,49 +220,50 @@ def build_markdown(existing: dict[str, list[Path]], years: list[int]) -> str:
             "",
             "## Year-Band Summary",
             "",
-            "| Year | Count | Base AUPRC / AUROC | RAICD AUPRC / AUROC | FTM AUPRC / AUROC |",
-            "|------|-------|--------------------|---------------------|-------------------|",
+            "| Year | Count | " + " | ".join(f"{system} AUPRC / AUROC" for system in ordered_systems) + " |",
+            "|" + "|".join(["------", "-------"] + ["--------------------"] * len(ordered_systems)) + "|",
         ]
     )
     year_counts = defaultdict(int)
     for year in years:
         year_counts[year] += 1
     for year, systems in year_stats.items():
-        lines.append(
-            f"| `{year}` | {year_counts[year]} | "
-            f"`{format_pair(systems['base']['auprc'], systems['base']['auroc'])}` | "
-            f"`{format_pair(systems['RAICD']['auprc'], systems['RAICD']['auroc'])}` | "
-            f"`{format_pair(systems['FTM']['auprc'], systems['FTM']['auroc'])}` |"
-        )
+        values = [f"`{format_pair(systems[system]['auprc'], systems[system]['auroc'])}`" for system in ordered_systems]
+        lines.append(f"| `{year}` | {year_counts[year]} | " + " | ".join(values) + " |")
 
     lines.extend(
         [
             "",
             "## Overlap-Bucket Summary",
             "",
-            "| Bucket | Overlap Range | Count | Base AUPRC / AUROC | RAICD AUPRC / AUROC | FTM AUPRC / AUROC |",
-            "|--------|---------------|-------|--------------------|---------------------|-------------------|",
+            "| Bucket | Overlap Range | Count | " + " | ".join(f"{system} AUPRC / AUROC" for system in ordered_systems) + " |",
+            "|" + "|".join(["--------", "---------------", "-------"] + ["--------------------"] * len(ordered_systems)) + "|",
         ]
     )
     for bucket_id, systems in overlap_stats.items():
         ref = systems["base"]
         low, high = ref["range"]
         count = ref["count"]
-        lines.append(
-            f"| `{bucket_id}` | `{low:.3f} - {high:.3f}` | {count} | "
-            f"`{format_pair(systems['base']['auprc'], systems['base']['auroc'])}` | "
-            f"`{format_pair(systems['RAICD']['auprc'], systems['RAICD']['auroc'])}` | "
-            f"`{format_pair(systems['FTM']['auprc'], systems['FTM']['auroc'])}` |"
-        )
+        values = [f"`{format_pair(systems[system]['auprc'], systems[system]['auroc'])}`" for system in ordered_systems]
+        lines.append(f"| `{bucket_id}` | `{low:.3f} - {high:.3f}` | {count} | " + " | ".join(values) + " |")
+
+    ordered_non_base = [system for system in ordered_systems if system != "base"]
+    ranked = []
+    for system in ordered_systems:
+        mean_auprc, _ = mean_std([value for value in overall[system]["auprc"] if value is not None])
+        ranked.append((system, mean_auprc))
+    ranked.sort(key=lambda item: item[1], reverse=True)
 
     lines.extend(
         [
             "",
             "## Key Findings",
             "",
-            f"1. `base` is the overall winner on patent temporal shift by 3-seed mean AUPRC (`{base_auprc_mean:.4f}`) over `FTM` (`{ftm_auprc_mean:.4f}`) and `RAICD` (`{raicd_auprc_mean:.4f}`).",
-            "2. `RAICD` is consistently below `base` in the global 3-seed summary and remains the clearest synthetic-vs-real ranking reversal relative to `BindingDB_Kd / blind_start`.",
-            "3. `FTM` narrows the gap relative to `RAICD`, but it still trails `base` on both overall AUPRC and AUROC under patent temporal shift.",
+            f"1. `{ranked[0][0]}` is the overall winner on patent temporal shift by 3-seed mean AUPRC (`{ranked[0][1]:.4f}`).",
+            f"2. `base` reaches `{base_auprc_mean:.4f}` mean AUPRC and is ranked "
+            + ", ".join(f"`{system}` ({score:.4f})" for system, score in ranked if system != "base")
+            + ".",
+            f"3. The year-band and overlap-bucket views remain non-uniform, so aggregate temporal OOD cannot be reduced to a single scalar difficulty even within the {title.lower()}.",
             "",
         ]
     )
@@ -248,12 +272,14 @@ def build_markdown(existing: dict[str, list[Path]], years: list[int]) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
+    parser.add_argument("--panel", choices=sorted(PANELS.keys()), default="internal")
     parser.add_argument("--output", type=Path, default=None)
     args = parser.parse_args()
 
-    existing = collect_existing_paths()
+    panel = PANELS[args.panel]
+    existing = collect_existing_paths(panel)
     years = load_test_years()
-    markdown = build_markdown(existing, years)
+    markdown = build_markdown(existing, years, title=panel["title"], ordered_systems=list(panel["systems"].keys()))
     if args.output is not None:
         args.output.write_text(markdown + "\n")
     else:

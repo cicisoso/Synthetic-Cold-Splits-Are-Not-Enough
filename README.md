@@ -21,7 +21,8 @@ The current thesis is benchmark-first rather than method-first:
 - Stage 1 report in [reports/IDEA_REPORT.md](/root/exp/dti_codex/reports/IDEA_REPORT.md)
 - implementation history in [reports/IMPLEMENTATION_PLAN.md](/root/exp/dti_codex/reports/IMPLEMENTATION_PLAN.md)
 - PyTorch implementations of:
-  - compact internal DTI panel: `base`, `RAICD`, `FTM sparse`
+  - benchmark reference encoder: `base`
+  - recent external literature baselines: `DTI-LM`, `HyperPCM`
   - hashed protein featurization
   - RDKit Morgan drug featurization
   - train-only retrieval banks
@@ -36,13 +37,13 @@ The current thesis is benchmark-first rather than method-first:
 
 ## Current benchmark snapshot
 
-The current paper-ready topline results are summarized in [reports/BENCHMARK_TABLE_LIVE.md](/root/exp/dti_codex/reports/BENCHMARK_TABLE_LIVE.md). The high-level read is:
+The current paper-ready topline results are summarized in [reports/EXTERNAL_PANEL_LIVE.md](/root/exp/dti_codex/reports/EXTERNAL_PANEL_LIVE.md). The high-level read is:
 
-- `BindingDB_Kd / blind_start`: retrieval (`RAICD`) wins over `base`
-- `BindingDB_Kd / unseen_drug`: retrieval loses to `base`
-- `BindingDB_Kd / unseen_target`: `FTM sparse` wins over `base`
-- `BindingDB_patent / patent_temporal`: `DTI-LM` is the strongest recent baseline, while the internal-panel ordering reverses relative to synthetic `blind_start`
-- `BindingDB_Ki` and `DAVIS` support the claim that synthetic target-cold gains do not reliably transfer
+- `BindingDB_Kd / unseen_drug`: `HyperPCM` is currently strongest by mean AUPRC
+- `BindingDB_Kd / blind_start`: `HyperPCM` also has the highest mean AUPRC, but with larger variance
+- `BindingDB_Kd / unseen_target`: `base` remains strongest by mean AUPRC
+- `BindingDB_patent / patent_temporal`: `DTI-LM` is the strongest model by mean AUPRC and remains above `base` under the alternative `v2017` cutoff
+- shifted target-cold support panels are being refreshed with the same external-baseline panel so the manuscript no longer depends on internal probe models
 
 ## Environment
 
@@ -120,7 +121,7 @@ The current recent-baseline panel exposes:
 - `dtilm`: pooled ChemBERTa + ESM2 MLP adapter aligned to the DTI-LM setup
 - `hyperpcm`: task-conditioned pooled-LM adapter aligned to recent HyperPCM-style target-conditioned modeling
 
-These adapters are intentionally run on the same exported split resources and evaluator as the in-repo models.
+These adapters are intentionally run on the same exported split resources and evaluator as the in-repo models, and they are now the main comparison panel used by the paper.
 
 ## Notes
 

@@ -21,39 +21,39 @@
 \citation{ektefaie2024generalizability,shen2025ddiben,delafuente2025inductive}
 \citation{ahmed2024dtilm,luo2024druglamp,ouyang2024pmmr,liu2025spdti,yu2025gsdti,zhao2025coldstartcpi}
 \citation{luo2024druglamp,ouyang2024pmmr,liu2025spdti,yu2025gsdti,zhao2025coldstartcpi}
+\citation{ektefaie2024generalizability,shen2025ddiben,delafuente2025inductive}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Synthetic cold-start evaluation in DTI.}{2}{section*.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Retrieval, inductive, and memory-based DTI models.}{2}{section*.2}\protected@file@percent }
-\citation{ektefaie2024generalizability,shen2025ddiben,delafuente2025inductive}
+\@writefile{toc}{\contentsline {paragraph}{Distribution shift and benchmark design.}{2}{section*.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Benchmark taxonomy and seed0 split statistics. Test prevalence differs substantially across benchmark families, so AUPRC{} should be compared within benchmark rather than across rows.\relax }}{3}{table.caption.5}\protected@file@percent }
 \providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
 \newlabel{tab:taxonomy}{{1}{3}{Benchmark taxonomy and seed0 split statistics. Test prevalence differs substantially across benchmark families, so \AUPRC {} should be compared within benchmark rather than across rows.\relax }{table.caption.5}{}}
-\@writefile{toc}{\contentsline {paragraph}{Distribution shift and benchmark design.}{3}{section*.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Positioning.}{3}{section*.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Benchmark Setup}{3}{section.3}\protected@file@percent }
 \citation{liu2007bindingdb}
 \citation{davis2011kinase}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Synthetic reference panel and promoted real-OOD benchmark under the external replacement panel. Values are mean $\pm $ std over seeds. Best mean AUPRC{} in each row is bold.\relax }}{4}{table.caption.6}\protected@file@percent }
+\newlabel{tab:main-results}{{2}{4}{Synthetic reference panel and promoted real-OOD benchmark under the external replacement panel. Values are mean $\pm $ std over seeds. Best mean \AUPRC {} in each row is bold.\relax }{table.caption.6}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4}Results}{4}{section.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Synthetic cold splits are already regime-dependent}{4}{subsection.4.1}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Synthetic reference panel and promoted real-OOD benchmark. Values are mean $\pm $ std over seeds. Best mean AUPRC{} in each row is bold. The promoted pooled-LM baseline \texttt  {DTI-LM} is included where matched 3-seed results are available.\relax }}{5}{table.caption.6}\protected@file@percent }
-\newlabel{tab:main-results}{{2}{5}{Synthetic reference panel and promoted real-OOD benchmark. Values are mean $\pm $ std over seeds. Best mean \AUPRC {} in each row is bold. The promoted pooled-LM baseline \texttt {DTI-LM} is included where matched 3-seed results are available.\relax }{table.caption.6}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Mean AUPRC{} delta relative to \texttt  {base} within each benchmark. Error bars show paired bootstrap 95\% intervals where available. Synthetic \texttt  {blind\_start} favors retrieval, but the promoted patent temporal benchmark reverses that conclusion.\relax }}{5}{figure.caption.7}\protected@file@percent }
-\newlabel{fig:delta-summary}{{1}{5}{Mean \AUPRC {} delta relative to \texttt {base} within each benchmark. Error bars show paired bootstrap 95\% intervals where available. Synthetic \texttt {blind\_start} favors retrieval, but the promoted patent temporal benchmark reverses that conclusion.\relax }{figure.caption.7}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Real temporal shift reverses the retrieval conclusion and favors a different strong baseline}{5}{subsection.4.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Compact AUPRC{} summary behind the patent diagnosis. The same benchmark is favorable to different models in different strata, which explains why aggregate temporal OOD is not a single scalar difficulty.\relax }}{6}{table.caption.8}\protected@file@percent }
-\newlabel{tab:patent-diagnosis-compact}{{3}{6}{Compact \AUPRC {} summary behind the patent diagnosis. The same benchmark is favorable to different models in different strata, which explains why aggregate temporal OOD is not a single scalar difficulty.\relax }{table.caption.8}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Temporal shift is structured across year bands and overlap levels}{6}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Supporting target-cold OOD benchmarks still favor the plain base model}{6}{subsection.4.4}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Patent temporal diagnosis in terms of mean AUPRC{}. Left: year-band slices. Right: test-set overlap buckets computed from the saved overlap score. The strongest degradation appears in the 2020 slice, while the middle-overlap bucket is the only regime where \texttt  {RAICD} or \texttt  {FTM} gain a small AUPRC{} edge over \texttt  {base}.\relax }}{7}{figure.caption.9}\protected@file@percent }
-\newlabel{fig:patent-diagnosis}{{2}{7}{Patent temporal diagnosis in terms of mean \AUPRC {}. Left: year-band slices. Right: test-set overlap buckets computed from the saved overlap score. The strongest degradation appears in the 2020 slice, while the middle-overlap bucket is the only regime where \texttt {RAICD} or \texttt {FTM} gain a small \AUPRC {} edge over \texttt {base}.\relax }{figure.caption.9}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{7}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{7}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Real temporal shift favors a different strong baseline}{4}{subsection.4.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Mean AUPRC{} delta relative to \texttt  {base} within each benchmark under the external replacement panel. Error bars show paired bootstrap 95\% intervals where available. The synthetic axes and the promoted patent benchmark favor different systems.\relax }}{5}{figure.caption.7}\protected@file@percent }
+\newlabel{fig:delta-summary}{{1}{5}{Mean \AUPRC {} delta relative to \texttt {base} within each benchmark under the external replacement panel. Error bars show paired bootstrap 95\% intervals where available. The synthetic axes and the promoted patent benchmark favor different systems.\relax }{figure.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Temporal shift is structured across year bands and overlap levels}{5}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Supporting target-cold OOD benchmarks still favor the plain base model}{5}{subsection.4.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Compact AUPRC{} summary behind the patent diagnosis under the external replacement panel. The promoted temporal benchmark favors different models in different strata, which helps explain why aggregate temporal OOD does not reduce to a single scalar difficulty.\relax }}{6}{table.caption.8}\protected@file@percent }
+\newlabel{tab:patent-diagnosis-compact}{{3}{6}{Compact \AUPRC {} summary behind the patent diagnosis under the external replacement panel. The promoted temporal benchmark favors different models in different strata, which helps explain why aggregate temporal OOD does not reduce to a single scalar difficulty.\relax }{table.caption.8}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Patent temporal diagnosis in terms of mean AUPRC{} under the external replacement panel. Left: year-band slices. Right: test-set overlap buckets computed from the saved overlap score. The aggregate \texttt  {DTI-LM} advantage is concentrated in the 2019 and lower-overlap strata, while \texttt  {base} dominates the 2020 and highest-overlap slices.\relax }}{6}{figure.caption.9}\protected@file@percent }
+\newlabel{fig:patent-diagnosis}{{2}{6}{Patent temporal diagnosis in terms of mean \AUPRC {} under the external replacement panel. Left: year-band slices. Right: test-set overlap buckets computed from the saved overlap score. The aggregate \texttt {DTI-LM} advantage is concentrated in the 2019 and lower-overlap strata, while \texttt {base} dominates the 2020 and highest-overlap slices.\relax }{figure.caption.9}{}}
 \bibstyle{unsrtnat}
 \bibdata{references}
 \bibcite{liu2007bindingdb}{{1}{2007}{{Liu et~al.}}{{Liu, Lin, Wen, Jorissen, and Gilson}}}
 \bibcite{davis2011kinase}{{2}{2011}{{Davis et~al.}}{{Davis, Hunt, Herrgard, Ciceri, Wodicka, Pallares, Hocker, Treiber, and Zarrinkar}}}
 \bibcite{ahmed2024dtilm}{{3}{2024}{{Ahmed et~al.}}{{Ahmed, Ansari, and Zhang}}}
 \bibcite{luo2024druglamp}{{4}{2024}{{Luo et~al.}}{{Luo, Wu, Sun, and Wang}}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{7}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{7}{section.6}\protected@file@percent }
 \bibcite{ouyang2024pmmr}{{5}{2024}{{Ouyang et~al.}}{{Ouyang, Feng, Cui, Li, Zhang, and Wang}}}
 \bibcite{liu2025spdti}{{6}{2025}{{Liu et~al.}}{{Liu, Liu, Xu, Xia, and Li}}}
 \bibcite{yu2025gsdti}{{7}{2025}{{Yu et~al.}}{{Yu, Zhou, Jiang, Shi, and Li}}}
@@ -61,21 +61,21 @@
 \bibcite{ektefaie2024generalizability}{{9}{2024}{{Ektefaie et~al.}}{{Ektefaie, Shen, Bykova, Marin, Zitnik, and Farhat}}}
 \bibcite{shen2025ddiben}{{10}{2025}{{Shen et~al.}}{{Shen, Zhou, Zhang, and Yao}}}
 \bibcite{delafuente2025inductive}{{11}{2025}{{de~la Fuente et~al.}}{{de~la Fuente, Serrano, Veleiro, Casals, Vera, Pizurica, G\'omez-Cebri\'an, Puchades-Carrasco, Pineda-Lucena, Ochoa, Vicent, Gevaert, and Hernaez}}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Appendix}{8}{appendix.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Patent benchmark specification}{8}{subsection.A.1}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {A1}{\ignorespaces Explicit specification of the promoted patent benchmarks. The temporal partition is fixed by year; the random seed changes model stochasticity, not the partition itself.\relax }}{9}{table.caption.11}\protected@file@percent }
 \newlabel{tab:patent-spec}{{A1}{9}{Explicit specification of the promoted patent benchmarks. The temporal partition is fixed by year; the random seed changes model stochasticity, not the partition itself.\relax }{table.caption.11}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {A2}{\ignorespaces Secondary real-OOD support benchmarks. These panels now use matched 3-seed evaluation, but remain supporting counterexamples rather than headline evidence because they reinforce rather than replace the patent temporal benchmark.\relax }}{9}{table.caption.12}\protected@file@percent }
-\newlabel{tab:support}{{A2}{9}{Secondary real-OOD support benchmarks. These panels now use matched 3-seed evaluation, but remain supporting counterexamples rather than headline evidence because they reinforce rather than replace the patent temporal benchmark.\relax }{table.caption.12}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Appendix}{9}{appendix.A}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Patent benchmark specification}{9}{subsection.A.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {A2}{\ignorespaces Secondary real-OOD support benchmarks under the external replacement panel. These panels use matched 3-seed evaluation, but remain supporting evidence because they reinforce rather than replace the patent temporal benchmark.\relax }}{9}{table.caption.12}\protected@file@percent }
+\newlabel{tab:support}{{A2}{9}{Secondary real-OOD support benchmarks under the external replacement panel. These panels use matched 3-seed evaluation, but remain supporting evidence because they reinforce rather than replace the patent temporal benchmark.\relax }{table.caption.12}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Additional real-OOD support benchmarks}{9}{subsection.A.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {A3}{\ignorespaces Paired bootstrap support for the comparisons used in headline ranking claims. Positive deltas favor the second model in the comparison; negative deltas favor \texttt  {base}.\relax }}{10}{table.caption.13}\protected@file@percent }
-\newlabel{tab:bootstrap-summary}{{A3}{10}{Paired bootstrap support for the comparisons used in headline ranking claims. Positive deltas favor the second model in the comparison; negative deltas favor \texttt {base}.\relax }{table.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Paired uncertainty support}{9}{subsection.A.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.4}Recent baseline screening and promotion}{9}{subsection.A.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {A3}{\ignorespaces Paired bootstrap support for the main external-panel comparisons against \texttt  {base}. Positive deltas favor the second model in the comparison; negative deltas favor \texttt  {base}.\relax }}{10}{table.caption.13}\protected@file@percent }
+\newlabel{tab:bootstrap-summary}{{A3}{10}{Paired bootstrap support for the main external-panel comparisons against \texttt {base}. Positive deltas favor the second model in the comparison; negative deltas favor \texttt {base}.\relax }{table.caption.13}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {A4}{\ignorespaces Transparent seed0 screening used to decide which recent baselines were promoted to matched three-seed evaluation. The primary promotion criterion was performance on \texttt  {BindingDB\_patent / patent\_temporal}, the main real-OOD benchmark.\relax }}{10}{table.caption.14}\protected@file@percent }
 \newlabel{tab:recent-screening}{{A4}{10}{Transparent seed0 screening used to decide which recent baselines were promoted to matched three-seed evaluation. The primary promotion criterion was performance on \texttt {BindingDB\_patent / patent\_temporal}, the main real-OOD benchmark.\relax }{table.caption.14}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Paired uncertainty support}{10}{subsection.A.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.4}Recent baseline screening and promotion}{10}{subsection.A.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.5}Reusable benchmark resources}{10}{subsection.A.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.6}Method-centric ablations}{10}{subsection.A.6}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {A5}{\ignorespaces Reusable benchmark artifacts released with each split. The release is designed so that external predictions can be scored without re-running the in-repo training code.\relax }}{11}{table.caption.15}\protected@file@percent }
 \newlabel{tab:resource-release}{{A5}{11}{Reusable benchmark artifacts released with each split. The release is designed so that external predictions can be scored without re-running the in-repo training code.\relax }{table.caption.15}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.5}Reusable benchmark resources}{11}{subsection.A.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.6}Method-centric ablations}{11}{subsection.A.6}\protected@file@percent }
 \gdef \@abspage@last{11}
