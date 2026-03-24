@@ -39,16 +39,61 @@ def affinity_to_pkd(dataset: str, y: np.ndarray) -> np.ndarray:
     return y_to_pkd(y)
 
 
-def parse_local_temporal_split(split: str, default_split: str, available_valid_years: list[int]) -> int:
-    if split == default_split:
-        return max(available_valid_years)
-    prefix = f"{default_split}_v"
-    if split.startswith(prefix):
-        valid_year = int(split[len(prefix):])
+def parse_local_temporal_split(split: str, default_split: str, available_valid_years: list[int]) -> tuple[int, list[str]]:
+    if not split.startswith(default_split):
+        raise ValueError(f"Unsupported local benchmark split: {split}")
+
+    valid_year = max(available_valid_years)
+    suffix = split[len(default_split):]
+    modifiers: list[str] = []
+    for modifier in ["_pair_novel", "_drug_novel", "_target_novel"]:
+        if suffix.startswith(modifier):
+            modifiers.append(modifier[1:])
+            suffix = suffix[len(modifier):]
+
+    if suffix == "":
+        return valid_year, modifiers
+    if suffix.startswith("_v"):
+        valid_year = int(suffix[2:])
         if valid_year not in available_valid_years:
             raise ValueError(f"Unsupported patent validation year {valid_year}; available years: {available_valid_years}")
-        return valid_year
+        return valid_year, modifiers
     raise ValueError(f"Unsupported local benchmark split: {split}")
+
+
+def _apply_temporal_novelty_filter(
+    train: pd.DataFrame,
+    valid: pd.DataFrame,
+    test_frame: pd.DataFrame,
+    mode: str,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    train = train.copy().reset_index(drop=True)
+    valid = valid.copy().reset_index(drop=True)
+    test_frame = test_frame.copy().reset_index(drop=True)
+
+    if mode == "pair_novel":
+        train_pairs = set((train["Drug_ID"].astype(str) + "||" + train["Target_ID"].astype(str)).tolist())
+        valid_pairs = set((valid["Drug_ID"].astype(str) + "||" + valid["Target_ID"].astype(str)).tolist())
+        valid_mask = ~(valid["Drug_ID"].astype(str) + "||" + valid["Target_ID"].astype(str)).isin(train_pairs)
+        test_mask = ~(test_frame["Drug_ID"].astype(str) + "||" + test_frame["Target_ID"].astype(str)).isin(train_pairs | valid_pairs)
+    elif mode == "drug_novel":
+        train_drugs = set(train["Drug_ID"].astype(str).tolist())
+        valid_drugs = set(valid["Drug_ID"].astype(str).tolist())
+        valid_mask = ~valid["Drug_ID"].astype(str).isin(train_drugs)
+        test_mask = ~test_frame["Drug_ID"].astype(str).isin(train_drugs | valid_drugs)
+    elif mode == "target_novel":
+        train_targets = set(train["Target_ID"].astype(str).tolist())
+        valid_targets = set(valid["Target_ID"].astype(str).tolist())
+        valid_mask = ~valid["Target_ID"].astype(str).isin(train_targets)
+        test_mask = ~test_frame["Target_ID"].astype(str).isin(train_targets | valid_targets)
+    else:
+        raise ValueError(f"Unknown temporal novelty filter: {mode}")
+
+    valid = valid[valid_mask].reset_index(drop=True)
+    test_frame = test_frame[test_mask].reset_index(drop=True)
+    if len(valid) == 0 or len(test_frame) == 0:
+        raise ValueError(f"Temporal novelty filter {mode} produced empty valid/test partition")
+    return train, valid, test_frame
 
 
 def load_local_benchmark_split(dataset: str, split: str) -> Dict[str, pd.DataFrame]:
@@ -65,11 +110,13 @@ def load_local_benchmark_split(dataset: str, split: str) -> Dict[str, pd.DataFra
     train_val["Year"] = train_val["Year"].astype(int)
     test["Year"] = test["Year"].astype(int)
     available_valid_years = sorted(train_val["Year"].unique().tolist())
-    valid_year = parse_local_temporal_split(split, default_split, available_valid_years)
+    valid_year, modifiers = parse_local_temporal_split(split, default_split, available_valid_years)
     full_frame = pd.concat([train_val, test], axis=0, ignore_index=True)
     train = full_frame[full_frame["Year"] < valid_year].reset_index(drop=True)
     valid = full_frame[full_frame["Year"] == valid_year].reset_index(drop=True)
     test_frame = full_frame[full_frame["Year"] > valid_year].reset_index(drop=True)
+    for modifier in modifiers:
+        train, valid, test_frame = _apply_temporal_novelty_filter(train, valid, test_frame, modifier)
     if len(valid) == 0 or len(test_frame) == 0:
         raise ValueError(f"Patent split {split} produced empty valid/test partition")
     return {"train": train, "valid": valid, "test": test_frame}

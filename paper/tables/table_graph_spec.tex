@@ -1,0 +1,23 @@
+\begin{table}[t]
+  \centering
+  \scriptsize
+  \caption{Specification of the promoted learner-control and graph-family additions. This table mirrors Table~\ref{tab:base-spec} so the new baselines can be reproduced as precisely as the \texttt{base} anchor.}
+  \label{tab:graph-spec}
+  \setlength{\tabcolsep}{3.5pt}
+  \resizebox{\linewidth}{!}{
+  \begin{tabular}{@{}lp{10.6cm}@{}}
+    \toprule
+    Component & Specification \\
+    \midrule
+    GraphDTA-style drug input & RDKit molecular graph built from canonical SMILES. Node features concatenate atom symbol, degree, hydrogen count, valence, formal charge, aromaticity, and hybridization indicators in \texttt{src/raicd/graph\_baselines.py}. \\
+    GraphDTA-style drug encoder & Three-layer GCN: \mbox{$\mathrm{GCNConv}(36,128)$}, \mbox{$\mathrm{GCNConv}(128,128)$}, \mbox{$\mathrm{GCNConv}(128,128)$}, each followed by ReLU and dropout $0.1$. Global mean and global max pooling are concatenated to produce a $256$-dimensional drug embedding. \\
+    GraphDTA-style target input & Amino-acid token sequence with vocabulary size $21$ (20 residues + padding), truncated or zero-padded to length $1000$. \\
+    GraphDTA-style target encoder & Embedding dimension $64$, followed by three 1D convolutions \mbox{$\mathrm{Conv1d}(64,128,k=8)$}, \mbox{$\mathrm{Conv1d}(128,128,k=8)$}, \mbox{$\mathrm{Conv1d}(128,128,k=8)$}, each followed by ReLU and dropout $0.1$. Global max pooling produces a $128$-dimensional target embedding. \\
+    GraphDTA-style pair head & Concatenate the $256$-dimensional drug embedding and $128$-dimensional target embedding, then apply \mbox{$\mathrm{Linear}(384,256)$}, ReLU, dropout $0.1$, \mbox{$\mathrm{Linear}(256,128)$}, ReLU, dropout $0.1$, \mbox{$\mathrm{Linear}(128,1)$}. \\
+    GraphDTA-style trainable parameters & $499{,}009$ parameters in total under the default promoted configuration. \\
+    GraphDTA-style optimization & BCE-with-logits objective with train-split positive-class weighting, AdamW with learning rate $10^{-3}$ and weight decay $10^{-4}$, $8$ epochs, batch size $128$. \\
+    RF core hyperparameters & \texttt{RandomForestClassifier} with \texttt{n\_estimators}$=400$, \texttt{max\_depth}=None, \texttt{min\_samples\_leaf}$=1$, \texttt{max\_features}=\texttt{sqrt}, \texttt{class\_weight}=\texttt{balanced\_subsample}, and seed-specific \texttt{random\_state}. \\
+    Code path & Graph probe implementation in \texttt{src/raicd/graph\_baselines.py} with training in \texttt{scripts/train\_graph\_baseline.py}; learner-control baseline implementation in \texttt{src/raicd/classical\_baselines.py} with training in \texttt{scripts/train\_classical\_baseline.py}. \\
+    \bottomrule
+  \end{tabular}}
+\end{table}

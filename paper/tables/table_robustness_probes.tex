@@ -1,7 +1,7 @@
 \begin{table}[t]
   \centering
   \scriptsize
-  \caption{Targeted robustness probes added after the external review. The non-patent temporal probe tests whether the promoted patent ranking persists when patent provenance is removed. The scaffold probe tests whether the synthetic \texttt{unseen\_drug} ordering survives a stricter chemistry-aware holdout. Values are mean $\pm$ std over three seeds.}
+  \caption{Targeted robustness probes added after the external review. The non-patent temporal probe tests whether the promoted patent ranking persists when patent provenance is removed. The scaffold probe tests whether the synthetic \texttt{unseen\_drug} ordering survives a stricter chemistry-aware holdout. The controlled patent variants reduce recurrent pair and seen-drug overlap to test how much the patent ordering depends on allowable overlap. Values are mean $\pm$ std over three seeds.}
   \label{tab:robustness-probes}
   \setlength{\tabcolsep}{4pt}
   \resizebox{\linewidth}{!}{
@@ -19,6 +19,16 @@
     \texttt{base}: \textbf{0.6069 $\pm$ 0.0161 / 0.8351 $\pm$ 0.0037}; \texttt{HyperPCM}: 0.5983 $\pm$ 0.0368 / 0.8155 $\pm$ 0.0204 &
     $-0.0086$ [$-0.0203$, $+0.0025$] &
     stricter scaffold holdout does not preserve the original \texttt{HyperPCM} edge \\
+    \texttt{BindingDB\_patent / patent\_temporal\_pair\_novel} &
+    \texttt{base}, \texttt{RF}, \texttt{DTI-LM} &
+    \texttt{base}: 0.7378 $\pm$ 0.0107 / 0.6813 $\pm$ 0.0115; \texttt{RF}: 0.7393 $\pm$ 0.0015 / \textbf{0.7114 $\pm$ 0.0024}; \texttt{DTI-LM}: \textbf{0.7491 $\pm$ 0.0076} / 0.7026 $\pm$ 0.0061 &
+    \texttt{DTI-LM - RF}: $+0.0098$ [$+0.0061$, $+0.0134$] &
+    once recurrent train pairs are removed, \texttt{DTI-LM} overtakes \texttt{RF} on \AUPRC{} and \texttt{RF - base} is no longer reliable \\
+    \texttt{BindingDB\_patent / patent\_temporal\_drug\_novel} &
+    \texttt{base}, \texttt{RF}, \texttt{DTI-LM} &
+    \texttt{base}: 0.7255 $\pm$ 0.0117 / 0.6749 $\pm$ 0.0116; \texttt{RF}: 0.7356 $\pm$ 0.0016 / \textbf{0.7116 $\pm$ 0.0022}; \texttt{DTI-LM}: \textbf{0.7402 $\pm$ 0.0077} / 0.6989 $\pm$ 0.0069 &
+    \texttt{DTI-LM - RF}: $+0.0047$ [$+0.0009$, $+0.0083$] &
+    even after removing seen-drug overlap, \texttt{DTI-LM} remains strongest by \AUPRC{} while \texttt{RF} stays above \texttt{base} \\
     \bottomrule
   \end{tabular}}
 \end{table}

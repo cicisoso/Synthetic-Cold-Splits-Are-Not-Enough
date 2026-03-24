@@ -1,0 +1,44 @@
+{
+  "base": {
+    "paths": [
+      "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed0.json",
+      "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed1.json",
+      "results/full_bindingdb_patent_base/BindingDB_patent_patent_temporal_base_seed2.json"
+    ],
+    "summary": {
+      "ef_at_1pct_mean": 1.7062285082398485,
+      "ef_at_5pct_mean": 1.6427754056726405,
+      "per_target_hit_at_10_mean": 0.8940972222222222,
+      "per_target_recall_at_10_mean": 0.3258154683822058,
+      "per_target_macro_auprc_mean": 0.6190941851980685
+    }
+  },
+  "RF": {
+    "paths": [
+      "results/rf_panel_stage1/BindingDB_patent_patent_temporal_rf_seed0.json",
+      "results/rf_patent_multiseed/BindingDB_patent_patent_temporal_rf_seed1.json",
+      "results/rf_patent_multiseed/BindingDB_patent_patent_temporal_rf_seed2.json"
+    ],
+    "summary": {
+      "ef_at_1pct_mean": 1.7286788833482671,
+      "ef_at_5pct_mean": 1.7206197249101889,
+      "per_target_hit_at_10_mean": 0.9166666666666666,
+      "per_target_recall_at_10_mean": 0.34800719817474585,
+      "per_target_macro_auprc_mean": 0.6566960456916116
+    }
+  },
+  "DTI-LM": {
+    "paths": [
+      "results/recent_panel_stage1/BindingDB_patent_patent_temporal_dtilm_seed0.json",
+      "results/recent_dtilm_patent_multiseed/BindingDB_patent_patent_temporal_dtilm_seed1.json",
+      "results/recent_dtilm_patent_multiseed/BindingDB_patent_patent_temporal_dtilm_seed2.json"
+    ],
+    "summary": {
+      "ef_at_1pct_mean": 1.7168628964490995,
+      "ef_at_5pct_mean": 1.5930875423295243,
+      "per_target_hit_at_10_mean": 0.9097222222222222,
+      "per_target_recall_at_10_mean": 0.3190354025341275,
+      "per_target_macro_auprc_mean": 0.6010968847356097
+    }
+  }
+}

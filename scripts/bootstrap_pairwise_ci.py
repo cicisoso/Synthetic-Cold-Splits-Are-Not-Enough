@@ -207,6 +207,90 @@ COMPARISONS = {
             "results/rf_patent_multiseed/BindingDB_patent_patent_temporal_rf_seed2.json",
         ],
     },
+    "patent_pair_novel_base_vs_rf": {
+        "a_name": "base",
+        "b_name": "RF",
+        "a_paths": [
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_pair_novel_base_seed0.json",
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_pair_novel_base_seed1.json",
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_pair_novel_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_pair_novel_rf_seed0.json",
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_pair_novel_rf_seed1.json",
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_pair_novel_rf_seed2.json",
+        ],
+    },
+    "patent_pair_novel_base_vs_dtilm": {
+        "a_name": "base",
+        "b_name": "DTI-LM",
+        "a_paths": [
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_pair_novel_base_seed0.json",
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_pair_novel_base_seed1.json",
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_pair_novel_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_pair_novel_dtilm_seed0.json",
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_pair_novel_dtilm_seed1.json",
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_pair_novel_dtilm_seed2.json",
+        ],
+    },
+    "patent_pair_novel_rf_vs_dtilm": {
+        "a_name": "RF",
+        "b_name": "DTI-LM",
+        "a_paths": [
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_pair_novel_rf_seed0.json",
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_pair_novel_rf_seed1.json",
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_pair_novel_rf_seed2.json",
+        ],
+        "b_paths": [
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_pair_novel_dtilm_seed0.json",
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_pair_novel_dtilm_seed1.json",
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_pair_novel_dtilm_seed2.json",
+        ],
+    },
+    "patent_drug_novel_base_vs_rf": {
+        "a_name": "base",
+        "b_name": "RF",
+        "a_paths": [
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_drug_novel_base_seed0.json",
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_drug_novel_base_seed1.json",
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_drug_novel_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_drug_novel_rf_seed0.json",
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_drug_novel_rf_seed1.json",
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_drug_novel_rf_seed2.json",
+        ],
+    },
+    "patent_drug_novel_base_vs_dtilm": {
+        "a_name": "base",
+        "b_name": "DTI-LM",
+        "a_paths": [
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_drug_novel_base_seed0.json",
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_drug_novel_base_seed1.json",
+            "results/patent_controlled_base/BindingDB_patent_patent_temporal_drug_novel_base_seed2.json",
+        ],
+        "b_paths": [
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_drug_novel_dtilm_seed0.json",
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_drug_novel_dtilm_seed1.json",
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_drug_novel_dtilm_seed2.json",
+        ],
+    },
+    "patent_drug_novel_rf_vs_dtilm": {
+        "a_name": "RF",
+        "b_name": "DTI-LM",
+        "a_paths": [
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_drug_novel_rf_seed0.json",
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_drug_novel_rf_seed1.json",
+            "results/patent_controlled_rf/BindingDB_patent_patent_temporal_drug_novel_rf_seed2.json",
+        ],
+        "b_paths": [
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_drug_novel_dtilm_seed0.json",
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_drug_novel_dtilm_seed1.json",
+            "results/patent_controlled_dtilm/BindingDB_patent_patent_temporal_drug_novel_dtilm_seed2.json",
+        ],
+    },
     "nonpatent_base_vs_dtilm": {
         "a_name": "base",
         "b_name": "DTI-LM",

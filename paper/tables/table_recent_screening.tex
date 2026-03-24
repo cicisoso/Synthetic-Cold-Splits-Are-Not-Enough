@@ -1,22 +1,42 @@
 \begin{table}[t]
   \centering
   \scriptsize
-  \caption{Transparent seed0 screening used to decide which recent baselines were promoted to matched three-seed evaluation. The primary promotion criterion was performance on \texttt{BindingDB\_patent / patent\_temporal}, the main real-OOD benchmark.}
+  \caption{Transparent seed0 screening used to decide which additional baselines were promoted to matched three-seed evaluation. The early external-baseline screen predated the non-patent temporal probe; the later panel-expansion screen added \texttt{RF} and \texttt{GraphDTA-style} under the final five-model design.}
   \label{tab:recent-screening}
-  \setlength{\tabcolsep}{3.5pt}
+  \setlength{\tabcolsep}{3.0pt}
   \resizebox{\linewidth}{!}{
-  \begin{tabular}{@{}lccccp{4.8cm}@{}}
+  \begin{tabular}{@{}lccccccp{5.3cm}@{}}
     \toprule
-    Model & \texttt{patent\_temporal} & \texttt{blind\_start} & \texttt{unseen\_target} & Promotion & Rationale \\
+    Model & \texttt{patent\_temporal} & \texttt{nonpatent\_temporal} & \texttt{unseen\_drug} & \texttt{blind\_start} & \texttt{unseen\_target} & Promotion & Rationale \\
     \midrule
+    \texttt{RF} &
+    0.8249 / 0.7793 &
+    0.7216 / 0.7648 &
+    0.7279 / 0.8912 &
+    0.4488 / 0.7589 &
+    0.5618 / 0.7981 &
+    main 3-seed promotion &
+    strongest seed0 system on every screened temporal and synthetic axis except \texttt{unseen\_target}; therefore promoted across all main axes as the learner-control baseline \\
+    \texttt{GraphDTA-style} &
+    0.7741 / 0.7242 &
+    0.6673 / 0.7444 &
+    0.5386 / 0.8159 &
+    0.4245 / 0.7426 &
+    0.5289 / 0.7776 &
+    targeted 3-seed promotion &
+    architecture-diverse graph-family probe that is competitive enough on the main synthetic and temporal axes to test whether the expanded-panel conclusion depends on fixed-vector models \\
     \texttt{DTI-LM} &
     0.7897 / 0.7435 &
+    -- &
+    -- &
     0.3873 / 0.7130 &
     0.5308 / 0.8011 &
     main 3-seed promotion &
     strongest seed0 recent baseline on the primary real-OOD benchmark; therefore promoted in the main text \\
     \texttt{HyperPCM} &
     0.7686 / 0.7247 &
+    -- &
+    -- &
     0.3896 / 0.7447 &
     0.5294 / 0.7990 &
     secondary 3-seed promotion &

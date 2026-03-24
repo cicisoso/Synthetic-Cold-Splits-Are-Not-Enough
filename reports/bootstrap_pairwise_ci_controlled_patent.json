@@ -1,0 +1,104 @@
+{
+  "patent_pair_novel_base_vs_rf": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RF",
+    "observed_seed_deltas": [
+      0.01064948950317035,
+      0.009605524000740995,
+      -0.015792259750448512
+    ],
+    "observed_mean_delta": 0.0014875845844876112,
+    "ci95": [
+      -0.002166413479117713,
+      0.004885164407658313
+    ],
+    "prob_delta_gt_0": 0.799,
+    "num_bootstrap": 2000
+  },
+  "patent_pair_novel_base_vs_dtilm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      0.030195125502455955,
+      0.01211715046035744,
+      -0.008545342005685463
+    ],
+    "observed_mean_delta": 0.011255644652375977,
+    "ci95": [
+      0.00807587301463639,
+      0.014327369130196888
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "patent_pair_novel_rf_vs_dtilm": {
+    "status": "done",
+    "a_name": "RF",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      0.019545635999285604,
+      0.002511626459616445,
+      0.007246917744763048
+    ],
+    "observed_mean_delta": 0.009768060067888365,
+    "ci95": [
+      0.006049523463772499,
+      0.013426126179446269
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "patent_drug_novel_base_vs_rf": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "RF",
+    "observed_seed_deltas": [
+      0.018790915765777627,
+      0.019925275588633995,
+      -0.008562524069384181
+    ],
+    "observed_mean_delta": 0.01005122242834248,
+    "ci95": [
+      0.006490615561459848,
+      0.013683696249964917
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "patent_drug_novel_base_vs_dtilm": {
+    "status": "done",
+    "a_name": "base",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      0.03390109967762722,
+      0.016819028916006395,
+      -0.0065350661465742865
+    ],
+    "observed_mean_delta": 0.014728354149019776,
+    "ci95": [
+      0.011395466584252398,
+      0.01811474903311446
+    ],
+    "prob_delta_gt_0": 1.0,
+    "num_bootstrap": 2000
+  },
+  "patent_drug_novel_rf_vs_dtilm": {
+    "status": "done",
+    "a_name": "RF",
+    "b_name": "DTI-LM",
+    "observed_seed_deltas": [
+      0.015110183911849595,
+      -0.0031062466726275995,
+      0.0020274579228098943
+    ],
+    "observed_mean_delta": 0.004677131720677297,
+    "ci95": [
+      0.0009033485173760163,
+      0.00832455796340147
+    ],
+    "prob_delta_gt_0": 0.9935,
+    "num_bootstrap": 2000
+  }
+}
