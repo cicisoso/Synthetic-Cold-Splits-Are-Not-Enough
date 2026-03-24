@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.3.18)  24 MAR 2026 02:56
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.3.18)  24 MAR 2026 04:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -644,15 +644,15 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [2]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [3]
 Underfull \hbox (badness 1509) in paragraph at lines 55--56
 []\OT1/cmr/m/n/10 (+20) We pro-vide year-band and overlap-bucket diag-noses, ma
 tched sup-port on
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [3]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4]
@@ -1113,7 +1113,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [9]
-<Fig1.pdf, id=199, 430.67902pt x 215.51003pt>
+<Fig1.pdf, id=195, 430.67902pt x 215.51003pt>
 File: Fig1.pdf Graphic file (type pdf)
 <use Fig1.pdf>
 Package pdftex.def Info: Fig1.pdf  used on input line 166.
@@ -1122,15 +1122,14 @@ Package pdftex.def Info: Fig1.pdf  used on input line 166.
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [10]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [11 <./Fig1.pdf>]
 Overfull \hbox (23.4678pt too wide) in alignment at lines 185--195
 [] [] [] [] [] []
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [11 <./Fig1.pdf>]
-<Fig2.pdf, id=221, 501.93654pt x 208.3652pt>
+<Fig2.pdf, id=217, 501.93654pt x 208.3652pt>
 File: Fig2.pdf Graphic file (type pdf)
 <use Fig2.pdf>
 Package pdftex.def Info: Fig2.pdf  used on input line 200.
@@ -1148,6 +1147,9 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [15]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [16]
 Underfull \hbox (badness 10000) in paragraph at lines 257--257
 []\OT1/cmtt/m/n/9 train[]val.csv +
  []
@@ -1187,7 +1189,7 @@ Overfull \hbox (11.35965pt too wide) in alignment at lines 312--326
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [16
+ [17
 
 ]
 Underfull \hbox (badness 10000) in paragraph at lines 344--345
@@ -1250,9 +1252,14 @@ Overfull \hbox (79.45847pt too wide) in alignment at lines 339--353
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [17]
+ [18]
 Underfull \hbox (badness 10000) in paragraph at lines 368--368
 []\OT1/cmr/m/n/9 (+20) base
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 368--368
+[]\OT1/cmr/m/n/9 (+20) RF
  []
 
 
@@ -1261,8 +1268,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 368--368
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 368--369
+Underfull \hbox (badness 10000) in paragraph at lines 368--368
 []\OT1/cmr/m/n/9 (+20) HyperPCM
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 368--369
+[]\OT1/cmr/m/n/9 (+20) GraphDTA-style
  []
 
 
@@ -1271,91 +1283,56 @@ Underfull \hbox (badness 10000) in paragraph at lines 370--370
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 374--374
-[]\OT1/cmtt/m/n/9 DAVIS /
+Underfull \hbox (badness 1237) in paragraph at lines 372--372
+[]\OT1/cmr/m/n/9 (+20) 0.6328 $\OMS/cmsy/m/n/9 ^^F$ \OT1/cmr/m/n/9 (+20) 0.0465
+ /
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [18]
-Overfull \hbox (1.8218pt too wide) in paragraph at lines 398--398
-[]\OT1/cmtt/m/n/9 BindingDB[]nonpatent[]Kd
+Underfull \hbox (badness 1237) in paragraph at lines 373--373
+[]\OT1/cmr/m/n/9 (+20) 0.6648 $\OMS/cmsy/m/n/9 ^^F$ \OT1/cmr/m/n/9 (+20) 0.0177
+ /
  []
 
 
-Underfull \hbox (badness 3701) in paragraph at lines 401--401
-[]$\OT1/cmr/m/n/9 (+20) +0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0163$ [$+0\OML/
-cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0064$,
+Underfull \hbox (badness 1237) in paragraph at lines 374--374
+[]\OT1/cmr/m/n/9 (+20) 0.6515 $\OMS/cmsy/m/n/9 ^^F$ \OT1/cmr/m/n/9 (+20) 0.0301
+ /
  []
 
 
-Underfull \hbox (badness 1622) in paragraph at lines 402--403
-[]\OT1/cmr/m/n/9 (+20) temporal rank-ing dif-fer-
+Underfull \hbox (badness 1237) in paragraph at lines 375--376
+[]\OT1/cmr/m/n/9 (+20) 0.6280 $\OMS/cmsy/m/n/9 ^^F$ \OT1/cmr/m/n/9 (+20) 0.0237
+ /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 402--403
-\OT1/cmr/m/n/9 (+20) ence sur-vives with-out
+Underfull \hbox (badness 1237) in paragraph at lines 377--377
+[]\OT1/cmr/m/n/9 (+20) 0.4097 $\OMS/cmsy/m/n/9 ^^F$ \OT1/cmr/m/n/9 (+20) 0.0275
+ /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 403--403
-[]\OT1/cmtt/m/n/9 BindingDB[]Kd /
+Underfull \hbox (badness 1237) in paragraph at lines 379--379
+[]\OT1/cmr/m/n/9 (+20) 0.4090 $\OMS/cmsy/m/n/9 ^^F$ \OT1/cmr/m/n/9 (+20) 0.0570
+ /
  []
 
 
-Underfull \hbox (badness 1308) in paragraph at lines 406--406
-[]$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+2
-0) 0086$ [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it/9 :\OT1/cmr/m
-/n/9 (+20) 0203$,
+Underfull \hbox (badness 1237) in paragraph at lines 380--380
+[]\OT1/cmr/m/n/9 (+20) 0.3840 $\OMS/cmsy/m/n/9 ^^F$ \OT1/cmr/m/n/9 (+20) 0.0269
+ /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 408--408
-[]\OT1/cmtt/m/n/9 BindingDB[]patent /
+Underfull \hbox (badness 1237) in paragraph at lines 381--382
+[]\OT1/cmr/m/n/9 (+20) 0.3601 $\OMS/cmsy/m/n/9 ^^F$ \OT1/cmr/m/n/9 (+20) 0.0502
+ /
  []
 
 
-Overfull \hbox (19.39857pt too wide) in paragraph at lines 408--408
-\OT1/cmtt/m/n/9 patent[]temporal[]pair[]novel| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 411--411
-[]\OT1/cmtt/m/n/9 DTI-LM - RF\OT1/cmr/m/n/9 (+20) :
- []
-
-
-Underfull \hbox (badness 3701) in paragraph at lines 411--411
-\OT1/cmr/m/n/9 (+20) +0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0098$ [$+0\OML/cmm
-/m/it/9 :\OT1/cmr/m/n/9 (+20) 0061$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 413--413
-[]\OT1/cmtt/m/n/9 BindingDB[]patent /
- []
-
-
-Overfull \hbox (19.39857pt too wide) in paragraph at lines 413--413
-\OT1/cmtt/m/n/9 patent[]temporal[]drug[]novel| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 416--416
-[]\OT1/cmtt/m/n/9 DTI-LM - RF\OT1/cmr/m/n/9 (+20) :
- []
-
-
-Underfull \hbox (badness 3701) in paragraph at lines 416--416
-\OT1/cmr/m/n/9 (+20) +0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0047$ [$+0\OML/cmm
-/m/it/9 :\OT1/cmr/m/n/9 (+20) 0009$,
- []
-
-
-Underfull \hbox (badness 5490) in paragraph at lines 417--418
-[]\OT1/cmr/m/n/9 (+20) drug-novel con-trol still
+Overfull \hbox (2.879pt too wide) in alignment at lines 366--383
+[] [] [] [] [] []
  []
 
 
@@ -1365,75 +1342,155 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [20]
-Underfull \hbox (badness 10000) in paragraph at lines 436--437
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 1739$,
+Overfull \hbox (1.8218pt too wide) in paragraph at lines 402--402
+[]\OT1/cmtt/m/n/9 BindingDB[]nonpatent[]Kd
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 437--438
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 1558$,
+Underfull \hbox (badness 3701) in paragraph at lines 405--405
+[]$\OT1/cmr/m/n/9 (+20) +0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0163$ [$+0\OML/
+cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0064$,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 438--439
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0546$,
+Underfull \hbox (badness 1622) in paragraph at lines 406--407
+[]\OT1/cmr/m/n/9 (+20) temporal rank-ing dif-fer-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 439--440
-[]\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
-/9 :\OT1/cmr/m/n/9 (+20) 0203$,
+Underfull \hbox (badness 10000) in paragraph at lines 406--407
+\OT1/cmr/m/n/9 (+20) ence sur-vives with-out
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 407--407
+[]\OT1/cmtt/m/n/9 BindingDB[]Kd /
+ []
+
+
+Underfull \hbox (badness 1308) in paragraph at lines 410--410
+[]$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+2
+0) 0086$ [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it/9 :\OT1/cmr/m
+/n/9 (+20) 0203$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 412--412
+[]\OT1/cmtt/m/n/9 BindingDB[]patent /
+ []
+
+
+Overfull \hbox (19.39857pt too wide) in paragraph at lines 412--412
+\OT1/cmtt/m/n/9 patent[]temporal[]pair[]novel| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 415--415
+[]\OT1/cmtt/m/n/9 DTI-LM - RF\OT1/cmr/m/n/9 (+20) :
+ []
+
+
+Underfull \hbox (badness 3701) in paragraph at lines 415--415
+\OT1/cmr/m/n/9 (+20) +0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0098$ [$+0\OML/cmm
+/m/it/9 :\OT1/cmr/m/n/9 (+20) 0061$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 417--417
+[]\OT1/cmtt/m/n/9 BindingDB[]patent /
+ []
+
+
+Overfull \hbox (19.39857pt too wide) in paragraph at lines 417--417
+\OT1/cmtt/m/n/9 patent[]temporal[]drug[]novel| 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 420--420
+[]\OT1/cmtt/m/n/9 DTI-LM - RF\OT1/cmr/m/n/9 (+20) :
+ []
+
+
+Underfull \hbox (badness 3701) in paragraph at lines 420--420
+\OT1/cmr/m/n/9 (+20) +0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0047$ [$+0\OML/cmm
+/m/it/9 :\OT1/cmr/m/n/9 (+20) 0009$,
+ []
+
+
+Underfull \hbox (badness 5490) in paragraph at lines 421--422
+[]\OT1/cmr/m/n/9 (+20) drug-novel con-trol still
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 440--441
-[]\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
-/9 :\OT1/cmr/m/n/9 (+20) 0175$,
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 1739$,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 441--442
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0441$,
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 1558$,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 442--443
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0384$,
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0546$,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 443--444
 []\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
-/9 :\OT1/cmr/m/n/9 (+20) 0022$,
+/9 :\OT1/cmr/m/n/9 (+20) 0203$,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 444--445
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0061$,
+[]\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
+/9 :\OT1/cmr/m/n/9 (+20) 0175$,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 445--446
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0065$,
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0441$,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 446--447
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0009$,
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0384$,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 447--448
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0064$,
+[]\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
+/9 :\OT1/cmr/m/n/9 (+20) 0022$,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 448--449
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0737$,
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0061$,
  []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 449--450
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0065$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 450--451
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0009$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 451--452
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0064$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 452--453
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0737$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 453--454
 []\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0564$,
  []
 
@@ -1441,183 +1498,34 @@ Underfull \hbox (badness 10000) in paragraph at lines 449--450
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [21]
-Overfull \hbox (19.81068pt too wide) in paragraph at lines 466--466
-[]\OT1/cmtt/m/n/9 patent[]temporal| 
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-
-Overfull \hbox (33.98552pt too wide) in paragraph at lines 466--466
-[]\OT1/cmtt/m/n/9 nonpatent[]temporal| 
- []
-
-
-Overfull \hbox (0.9109pt too wide) in paragraph at lines 466--466
-[]\OT1/cmtt/m/n/9 unseen[]drug| 
- []
-
-
-Overfull \hbox (0.9109pt too wide) in paragraph at lines 466--466
-[]\OT1/cmtt/m/n/9 blind[]start| 
- []
-
-
-Overfull \hbox (10.3608pt too wide) in paragraph at lines 466--466
-[]\OT1/cmtt/m/n/9 unseen[]target| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 469--469
-[]\OT1/cmr/m/n/9 (+20) 0.8249 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 470--470
-[]\OT1/cmr/m/n/9 (+20) 0.7216 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 471--471
-[]\OT1/cmr/m/n/9 (+20) 0.7279 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 472--472
-[]\OT1/cmr/m/n/9 (+20) 0.4488 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 473--473
-[]\OT1/cmr/m/n/9 (+20) 0.5618 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 474--474
-[]\OT1/cmr/m/n/9 (+20) main 3-seed
- []
-
-
-Overfull \hbox (16.40874pt too wide) in paragraph at lines 476--476
-[]\OT1/cmtt/m/n/9 GraphDTA-style| 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 477--477
-[]\OT1/cmr/m/n/9 (+20) 0.7741 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 478--478
-[]\OT1/cmr/m/n/9 (+20) 0.6673 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 479--479
-[]\OT1/cmr/m/n/9 (+20) 0.5386 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 480--480
-[]\OT1/cmr/m/n/9 (+20) 0.4245 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 481--481
-[]\OT1/cmr/m/n/9 (+20) 0.5289 /
- []
-
-
-Underfull \hbox (badness 1642) in paragraph at lines 482--482
-[]\OT1/cmr/m/n/9 (+20) targeted 3-seed
- []
-
-
-Underfull \hbox (badness 4899) in paragraph at lines 483--484
-[]\OT1/cmr/m/n/9 (+20) competitive graph base-line
- []
-
-
-Underfull \hbox (badness 5954) in paragraph at lines 483--484
-\OT1/cmr/m/n/9 (+20) con-clu-sion extends beyond
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 485--485
-[]\OT1/cmr/m/n/9 (+20) 0.7897 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 488--488
-[]\OT1/cmr/m/n/9 (+20) 0.3873 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 489--489
-[]\OT1/cmr/m/n/9 (+20) 0.5308 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 490--490
-[]\OT1/cmr/m/n/9 (+20) main 3-seed
- []
-
-
-Underfull \hbox (badness 1888) in paragraph at lines 491--492
-[]\OT1/cmr/m/n/9 (+20) strongest recent pooled-LM
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 493--493
-[]\OT1/cmr/m/n/9 (+20) 0.7686 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 496--496
-[]\OT1/cmr/m/n/9 (+20) 0.3896 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 497--497
-[]\OT1/cmr/m/n/9 (+20) 0.5294 /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 499--500
-[]\OT1/cmr/m/n/9 (+20) competitive on syn-thetic
- []
-
-
-Underfull \hbox (badness 1024) in paragraph at lines 499--500
-\OT1/cmr/m/n/9 (+20) seed0 splits but weaker on
- []
-
-
-Underfull \hbox (badness 2376) in paragraph at lines 519--520
+ [22]
+Underfull \hbox (badness 2376) in paragraph at lines 473--474
 []\OT1/cmr/m/n/9 (+20) labeled par-ti-tions with \OT1/cmtt/m/n/9 example[]id \O
 T1/cmr/m/n/9 (+20) and
  []
 
 
-Underfull \hbox (badness 2165) in paragraph at lines 520--521
+Underfull \hbox (badness 2165) in paragraph at lines 474--475
 []\OT1/cmr/m/n/9 (+20) lightweight pair-only views for exter-nal
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 521--521
+Underfull \hbox (badness 10000) in paragraph at lines 475--475
 []\OT1/cmtt/m/n/9 drugs.csv \OT1/cmr/m/n/9 (+20) /
  []
 
 
-Overfull \hbox (30.92053pt too wide) in paragraph at lines 523--523
+Overfull \hbox (30.92053pt too wide) in paragraph at lines 477--477
 []\OT1/cmtt/m/n/9 evaluate[]prediction[]csv.py| 
  []
 
-(./main.bbl
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [22]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23]
+(./main.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [24]
@@ -1629,16 +1537,16 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [26]
 (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: DC047420BECB125086B420E0FF4F2329;4276.
+(rerunfilecheck)             Checksum: 67DDE01A3BAD45A22A3DF8F440C99C9D;4038.
  ) 
 Here is how much of TeX's memory you used:
- 14070 strings out of 478287
- 221828 string characters out of 5849289
- 561113 words of memory out of 5000000
- 31707 multiletter control sequences out of 15000+600000
- 501954 words of font info for 256 fonts, out of 8000000 for 9000
+ 14068 strings out of 478287
+ 221790 string characters out of 5849289
+ 561241 words of memory out of 5000000
+ 31705 multiletter control sequences out of 15000+600000
+ 502014 words of font info for 257 fonts, out of 8000000 for 9000
  1151 hyphenation exceptions out of 8191
- 85i,13n,90p,1645b,498s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 85i,13n,90p,1645b,492s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texli
@@ -1659,10 +1567,10 @@ type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/
 public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmtt9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/symbols/msbm10.pfb>
-Output written on main.pdf (26 pages, 360977 bytes).
+Output written on main.pdf (26 pages, 363413 bytes).
 PDF statistics:
- 472 PDF objects out of 1000 (max. 8388607)
- 384 compressed objects within 4 object streams
- 82 named destinations out of 1000 (max. 500000)
- 60075 words of extra memory for PDF output out of 61914 (max. 10000000)
+ 466 PDF objects out of 1000 (max. 8388607)
+ 378 compressed objects within 4 object streams
+ 80 named destinations out of 1000 (max. 500000)
+ 60067 words of extra memory for PDF output out of 61914 (max. 10000000)
 

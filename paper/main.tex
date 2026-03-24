@@ -12,7 +12,7 @@
 \newcommand{\AUROC}{AUROC}
 
 \hypersetup{
-  pdftitle={Benchmarking synthetic and temporal distribution shifts in drug--target interaction prediction},
+  pdftitle={Benchmarking synthetic cold-start and temporal/provenance distribution shifts in drug--target interaction prediction},
   pdfsubject={Journal article manuscript for Journal of Computer-Aided Molecular Design},
   pdfauthor={First Author; Second Author},
   pdfkeywords={drug-target interaction, benchmark design, temporal validation, distribution shift, BindingDB}
@@ -20,7 +20,7 @@
 
 \begin{document}
 
-\title[Benchmarking synthetic and temporal distribution shifts in DTI prediction]{Benchmarking synthetic and temporal distribution shifts in drug--target interaction prediction}
+\title[Benchmarking synthetic cold-start and temporal/provenance shifts in DTI prediction]{Benchmarking synthetic cold-start and temporal/provenance distribution shifts in drug--target interaction prediction}
 
 % Replace the placeholder title-page fields below with the actual author list,
 % institutional affiliations, and corresponding-author email before submission.
@@ -110,7 +110,7 @@ We begin with the \texttt{BindingDB\_Kd} synthetic reference panel. Table~\ref{t
 \begin{table*}[t]
   \centering
   \scriptsize
-  \caption{Synthetic reference panel and primary temporal/provenance benchmarks for the five-model comparison panel. Values are mean $\pm$ std over seeds. Best mean \AUPRC{} in each row is bold. \texttt{RF} is a Random Forest baseline trained on the same Morgan+k-mer descriptor set as \texttt{base}, and \texttt{GraphDTA-style} is the graph-based baseline. The row-wise interpretation of the top-ranked model is discussed in the surrounding text rather than repeated as separate table columns.}
+  \caption{Synthetic reference panel and primary temporal/provenance benchmarks for the five-model comparison panel. Values are mean $\pm$ std over seeds. Best mean \AUPRC{} in each row is bold. \texttt{RF} is a Random Forest baseline trained on the same Morgan+k-mer descriptor set as \texttt{base}, and \texttt{GraphDTA-style} is the graph-based baseline. The \texttt{GraphDTA-style} entry for \texttt{blind\_start} is left blank because only a seed0 screening run was available when the matched graph-based follow-up panel was frozen; to avoid mixing one-seed screens with three-seed rows, that screening value is not combined into the main table. The row-wise interpretation of the top-ranked model is discussed in the surrounding text rather than repeated as separate table columns.}
   \label{tab:main-results}
   \setlength{\tabcolsep}{2.5pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{0.22\textwidth}p{0.05\textwidth}p{0.13\textwidth}p{0.13\textwidth}p{0.13\textwidth}p{0.13\textwidth}p{0.13\textwidth}@{}}
@@ -202,11 +202,11 @@ The overlap-bucket analysis reveals another useful pattern. In the lowest-overla
   \label{fig:patent-diagnosis}
 \end{figure}
 
-\subsection{Supporting target-cold OOD benchmarks still favor the plain base model}
+\subsection{Supporting target-cold OOD benchmarks remain heterogeneous}
 
-We treat \texttt{BindingDB\_Ki / unseen\_target} and \texttt{DAVIS / unseen\_target} as supporting real-OOD benchmarks rather than primary headline axes. Under matched three-seed evaluation, neither pooled language-model baseline overturns the support-panel story. On \texttt{BindingDB\_Ki}, \texttt{base} reaches $0.6934 \pm 0.0257 / 0.7192 \pm 0.0068$, compared with $0.6648 \pm 0.0177 / 0.6936 \pm 0.0044$ for \texttt{DTI-LM} and $0.6515 \pm 0.0301 / 0.6757 \pm 0.0211$ for \texttt{HyperPCM}. On \texttt{DAVIS}, \texttt{base} reaches $0.4097 \pm 0.0275 / 0.8613 \pm 0.0153$, compared with $0.4090 \pm 0.0570 / 0.8718 \pm 0.0152$ for \texttt{DTI-LM} and $0.3840 \pm 0.0269 / 0.8610 \pm 0.0245$ for \texttt{HyperPCM}.
+We treat \texttt{BindingDB\_Ki / unseen\_target} and \texttt{DAVIS / unseen\_target} as supporting real-OOD benchmarks rather than primary headline axes. Under matched three-seed evaluation, they extend the benchmark-sensitivity story rather than collapse it to a single winner. On \texttt{BindingDB\_Ki}, \texttt{base} remains strongest at $0.6934 \pm 0.0257 / 0.7192 \pm 0.0068$, ahead of \texttt{DTI-LM} at $0.6648 \pm 0.0177 / 0.6936 \pm 0.0044$, \texttt{HyperPCM} at $0.6515 \pm 0.0301 / 0.6757 \pm 0.0211$, \texttt{RF} at $0.6328 \pm 0.0465 / 0.6581 \pm 0.0319$, and \texttt{GraphDTA-style} at $0.6280 \pm 0.0237 / 0.6550 \pm 0.0193$. On \texttt{DAVIS}, however, the ordering changes again: \texttt{RF} attains the highest mean \AUPRC{} at $0.4408 \pm 0.0325 / 0.8806 \pm 0.0128$, ahead of \texttt{base} at $0.4097 \pm 0.0275 / 0.8613 \pm 0.0153$, \texttt{DTI-LM} at $0.4090 \pm 0.0570 / 0.8718 \pm 0.0152$, \texttt{HyperPCM} at $0.3840 \pm 0.0269 / 0.8610 \pm 0.0245$, and \texttt{GraphDTA-style} at $0.3601 \pm 0.0502 / 0.8359 \pm 0.0292$.
 
-The \texttt{DAVIS} result is the closest supporting-panel case: \texttt{DTI-LM} is effectively tied with \texttt{base} on mean \AUPRC{} and slightly higher on mean \AUROC{}, but it still does not create a clean ordering separation of the kind seen on the patent benchmark. \texttt{BindingDB\_Ki} is more decisive, with \texttt{base} ahead of both external baselines on both metrics. These auxiliary results are therefore consistent with the main claim of the paper, but they do not carry the same argumentative weight as the patent benchmark because they do not add a cleaner shift axis than temporal/provenance OOD.
+These auxiliary results are therefore consistent with the main claim of the paper, but in a more informative way than the earlier pooled-LM-only view. \texttt{BindingDB\_Ki} and \texttt{DAVIS} do not recover a stable winner. Instead, they show that even among supporting target-cold OOD benchmarks, the apparent best family can differ by benchmark definition. They still carry less argumentative weight than the patent benchmark because they do not provide a cleaner shift axis than temporal/provenance OOD, but they reinforce the same benchmark-qualified interpretation of model generalization.
 
 \section{Discussion}
 
@@ -232,9 +232,9 @@ We presented a validation-oriented study of distribution shift in DTI prediction
 
 \textbf{Author contributions} Author names and contribution details will be finalized at submission.
 
-\textbf{Data availability} The benchmark split manifests, evaluation tables, and standalone evaluator used in this study are available in the accompanying research repository and can be provided by the authors upon reasonable request.
+\textbf{Data availability} A fixed review snapshot corresponding to git commit \texttt{a5d6b8b} (\texttt{a5d6b8bd96c98fed73c5a9771c2a1079c9f12255}) is archived with the submission and mirrored in the project repository at \url{https://github.com/cicisoso/Synthetic-Cold-Splits-Are-Not-Enough}. The snapshot includes the exported benchmark resources under \texttt{benchmark\_resources/}, the benchmark tables under \texttt{reports/}, and the release manifest at \texttt{benchmark\_resources/RELEASE\_MANIFEST.md}. A DOI-backed public archive will be deposited at acceptance.
 
-\textbf{Code availability} The scripts used to construct the benchmark splits, train the comparison models, and reproduce the reported analyses are available in the accompanying research repository and can be provided by the authors upon reasonable request.
+\textbf{Code availability} The exact code used to construct the benchmark splits, train the comparison models, and reproduce the reported analyses corresponds to commit \texttt{a5d6b8b}. The evaluator entry points are \texttt{scripts/evaluate\_prediction\_csv.py} and \texttt{scripts/evaluate\_decision\_csv.py}; the full release contents are enumerated in \texttt{benchmark\_resources/RELEASE\_MANIFEST.md}.
 
 \clearpage
 \begin{appendices}
@@ -355,31 +355,35 @@ Because the five-model comparison panel depends on the \texttt{RF} baseline and 
 
 \section{Additional real-OOD support benchmarks}
 
-The main paper focuses on the strongest evidence chain: the synthetic \texttt{BindingDB\_Kd} reference panel, the primary temporal/provenance benchmarks, and the patent year/overlap diagnosis. \texttt{BindingDB\_Ki} and \texttt{DAVIS} remain supporting real-OOD benchmarks: both now use matched 3-seed evaluation, but they reinforce rather than replace the temporal story. To keep the support analysis focused on the most decision-relevant axes, the table reports the strongest pooled language-model baselines rather than rerunning the full five-model panel.
+The main paper focuses on the strongest evidence chain: the synthetic \texttt{BindingDB\_Kd} reference panel, the primary temporal/provenance benchmarks, and the patent year/overlap diagnosis. \texttt{BindingDB\_Ki} and \texttt{DAVIS} remain supporting real-OOD benchmarks, but they now also use the full matched five-model comparison panel. This broader support table is helpful because it shows that the auxiliary target-cold OOD benchmarks remain heterogeneous as well: \texttt{base} stays strongest on \texttt{BindingDB\_Ki}, whereas \texttt{RF} becomes strongest on \texttt{DAVIS}.
 
-\begin{table*}[t]
+\begin{sidewaystable*}[p]
   \centering
   \scriptsize
-  \caption{Secondary real-OOD support benchmarks for the validation study. These panels use matched 3-seed evaluation, but remain supporting evidence because they reinforce rather than replace the temporal/provenance story established in the main text. To keep the support analysis concise, this table reports the descriptor-based reference and the strongest pooled language-model baselines rather than the full five-model comparison panel.}
+  \caption{Secondary real-OOD support benchmarks for the full five-model comparison panel. These panels use matched 3-seed evaluation, but remain supporting evidence because they reinforce rather than replace the temporal/provenance story established in the main text. Best mean \AUPRC{} in each row is bold.}
   \label{tab:support}
   \setlength{\tabcolsep}{2.5pt}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{0.26\textwidth}p{0.22\textwidth}p{0.22\textwidth}p{0.22\textwidth}@{}}
+  \begin{tabular*}{\textheight}{@{\extracolsep{\fill}}p{0.21\textheight}p{0.15\textheight}p{0.15\textheight}p{0.15\textheight}p{0.15\textheight}p{0.15\textheight}@{}}
     \toprule
-    Benchmark & base (\AUPRC{}/\AUROC{}) & DTI-LM (\AUPRC{}/\AUROC{}) & HyperPCM (\AUPRC{}/\AUROC{}) \\
+    Benchmark & base (\AUPRC{}/\AUROC{}) & RF (\AUPRC{}/\AUROC{}) & DTI-LM (\AUPRC{}/\AUROC{}) & HyperPCM (\AUPRC{}/\AUROC{}) & GraphDTA-style (\AUPRC{}/\AUROC{}) \\
     \midrule
     \texttt{BindingDB\_Ki / unseen\_target} &
     \textbf{0.6934 $\pm$ 0.0257 / 0.7192 $\pm$ 0.0068} &
+    0.6328 $\pm$ 0.0465 / 0.6581 $\pm$ 0.0319 &
     0.6648 $\pm$ 0.0177 / 0.6936 $\pm$ 0.0044 &
-    0.6515 $\pm$ 0.0301 / 0.6757 $\pm$ 0.0211 \\
+    0.6515 $\pm$ 0.0301 / 0.6757 $\pm$ 0.0211 &
+    0.6280 $\pm$ 0.0237 / 0.6550 $\pm$ 0.0193 \\
     \texttt{DAVIS / unseen\_target} &
-    \textbf{0.4097 $\pm$ 0.0275 / 0.8613 $\pm$ 0.0153} &
+    0.4097 $\pm$ 0.0275 / 0.8613 $\pm$ 0.0153 &
+    \textbf{0.4408 $\pm$ 0.0325 / 0.8806 $\pm$ 0.0128} &
     0.4090 $\pm$ 0.0570 / 0.8718 $\pm$ 0.0152 &
-    0.3840 $\pm$ 0.0269 / 0.8610 $\pm$ 0.0245 \\
+    0.3840 $\pm$ 0.0269 / 0.8610 $\pm$ 0.0245 &
+    0.3601 $\pm$ 0.0502 / 0.8359 $\pm$ 0.0292 \\
     \bottomrule
   \end{tabular*}
-\end{table*}
+\end{sidewaystable*}
 
-On the \texttt{BindingDB\_Ki} support split, Table~\ref{tab:support} shows that \texttt{base} remains ahead of both \texttt{DTI-LM} and \texttt{HyperPCM}. On \texttt{DAVIS}, \texttt{base} and \texttt{DTI-LM} are nearly tied on mean \AUPRC{}, but \texttt{base} stays slightly higher on the paper's primary ranking metric. Together, these support panels reinforce the main message that strong recent baselines do not transfer uniformly across OOD definitions.
+On the \texttt{BindingDB\_Ki} support split, Table~\ref{tab:support} shows that \texttt{base} remains ahead of the other four systems. On \texttt{DAVIS}, by contrast, \texttt{RF} becomes the strongest support-panel model by both \AUPRC{} and \AUROC{}, while \texttt{base} and \texttt{DTI-LM} remain close to one another. Together, these support panels reinforce the same message as the primary analyses: strong baselines do not transfer uniformly across OOD definitions, and even the auxiliary target-cold benchmarks do not support a single stable model ranking.
 
 \section{Additional robustness analyses}
 
@@ -451,56 +455,6 @@ Table~\ref{tab:bootstrap-summary} summarizes the paired bootstrap intervals for 
   \end{tabular*}
 \end{table*}
 
-\section{Baseline-selection summary}
-
-To document how the final comparison set was assembled, Table~\ref{tab:recent-screening} summarizes the seed0 screening passes used to decide which additional baselines were carried forward to matched three-seed evaluation. The early external-baseline screen prioritized the strongest recent model on the primary temporal/provenance benchmark \texttt{patent\_temporal}; the later screen then added the Random Forest and graph-based baselines and retained whichever systems materially changed the main synthetic or temporal read.
-
-\begin{sidewaystable*}[p]
-  \centering
-  \scriptsize
-  \caption{Seed0 screening used to select the additional baselines carried forward to matched three-seed evaluation.}
-  \label{tab:recent-screening}
-  \setlength{\tabcolsep}{3.0pt}
-  \begin{tabular*}{\textheight}{@{\extracolsep{\fill}}p{0.09\textheight}p{0.09\textheight}p{0.09\textheight}p{0.09\textheight}p{0.09\textheight}p{0.09\textheight}p{0.12\textheight}p{0.22\textheight}@{}}
-    \toprule
-    Model & \texttt{patent\_temporal} & \texttt{nonpatent\_temporal} & \texttt{unseen\_drug} & \texttt{blind\_start} & \texttt{unseen\_target} & 3-seed follow-up & Rationale \\
-    \midrule
-    \texttt{RF} &
-    0.8249 / 0.7793 &
-    0.7216 / 0.7648 &
-    0.7279 / 0.8912 &
-    0.4488 / 0.7589 &
-    0.5618 / 0.7981 &
-    main 3-seed follow-up &
-    top seed0 system on the temporal axes and on most synthetic axes; retained as the same-feature classical comparator \\
-    \texttt{GraphDTA-style} &
-    0.7741 / 0.7242 &
-    0.6673 / 0.7444 &
-    0.5386 / 0.8159 &
-    0.4245 / 0.7426 &
-    0.5289 / 0.7776 &
-    targeted 3-seed follow-up &
-    competitive graph baseline retained to test whether the conclusion extends beyond descriptor models \\
-    \texttt{DTI-LM} &
-    0.7897 / 0.7435 &
-    -- &
-    -- &
-    0.3873 / 0.7130 &
-    0.5308 / 0.8011 &
-    main 3-seed follow-up &
-    strongest recent pooled-LM baseline on \texttt{patent\_temporal}; retained for the main comparison \\
-    \texttt{HyperPCM} &
-    0.7686 / 0.7247 &
-    -- &
-    -- &
-    0.3896 / 0.7447 &
-    0.5294 / 0.7990 &
-    secondary 3-seed follow-up &
-    competitive on synthetic seed0 splits but weaker on \texttt{patent\_temporal}; retained as a secondary LM comparator \\
-    \bottomrule
-  \end{tabular*}
-\end{sidewaystable*}
-
 \section{Reusable benchmark resources}
 
 The benchmark release is intended to be reused independently of the in-repo models. Table~\ref{tab:resource-release} lists the concrete artifacts exported for each split and how they interact with the standalone evaluator. In practice, an external user only needs the canonical split bundle plus a prediction CSV keyed by \texttt{example\_id}; the evaluator then reproduces the same global metrics and overlap-bucket metrics reported in this paper.
@@ -525,9 +479,9 @@ The benchmark release is intended to be reused independently of the in-repo mode
   \end{tabular*}
 \end{table*}
 
-\section{Method-centric ablations}
+\section{Versioned release snapshot}
 
-Earlier project stages explored routers, conservative target-memory variants, and selective fallback rules. These analyses were useful for method diagnosis, but they do not define the final paper narrative. The benchmark paper is intentionally centered on ranking instability across shift definitions rather than on proposing a new best-performing method.
+The manuscript is tied to a fixed release snapshot so that reviewers can inspect the exact resource bundle used to generate the reported tables. The archived snapshot corresponds to git commit \texttt{a5d6b8b} and includes the exported split bundles under \texttt{benchmark\_resources/}, the prediction and decision evaluators in \texttt{scripts/}, and the benchmark summaries under \texttt{reports/}. The companion manifest \texttt{benchmark\_resources/RELEASE\_MANIFEST.md} records the repository URL, full commit hash, and the concrete artifact paths needed to reproduce the paper tables from external prediction CSVs without rerunning the full training stack.
 
 \end{appendices}
 
