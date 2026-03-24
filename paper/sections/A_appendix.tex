@@ -18,35 +18,35 @@ Because every ranking claim is anchored against \texttt{base}, we make that syst
 
 \input{tables/table_base_spec}
 
-\subsection{Promoted learner-control and graph-family specifications}
+\subsection{Random Forest and graph-based baseline specifications}
 
-Because the expanded panel now hinges on the \texttt{RF} learner-control baseline and the \texttt{GraphDTA-style} graph-family probe, we make those systems explicit as well. Table~\ref{tab:graph-spec} mirrors the level of detail used for \texttt{base}, and also records the core \texttt{RF} hyperparameters that produced the promoted results.
+Because the five-model comparison panel depends on the \texttt{RF} baseline and the \texttt{GraphDTA-style} graph-based baseline, we make those systems explicit as well. Table~\ref{tab:graph-spec} mirrors the level of detail used for \texttt{base}, and also records the core \texttt{RF} hyperparameters used in the reported experiments.
 
 \input{tables/table_graph_spec}
 
 \subsection{Additional real-OOD support benchmarks}
 
-The main paper focuses on the strongest evidence chain: the synthetic \texttt{BindingDB\_Kd} reference panel, the promoted temporal benchmarks, and the patent year/overlap diagnosis. \texttt{BindingDB\_Ki} and \texttt{DAVIS} remain supporting real-OOD benchmarks: both now use matched 3-seed evaluation, but they reinforce rather than replace the temporal story. To keep the promotion budget focused on the most decision-relevant axes, the support table keeps the promoted external baselines rather than rerunning the full five-model panel.
+The main paper focuses on the strongest evidence chain: the synthetic \texttt{BindingDB\_Kd} reference panel, the primary temporal/provenance benchmarks, and the patent year/overlap diagnosis. \texttt{BindingDB\_Ki} and \texttt{DAVIS} remain supporting real-OOD benchmarks: both now use matched 3-seed evaluation, but they reinforce rather than replace the temporal story. To keep the support analysis focused on the most decision-relevant axes, the table reports the strongest pooled language-model baselines rather than rerunning the full five-model panel.
 
 \input{tables/table_support_benchmarks}
 
 On the \texttt{BindingDB\_Ki} support split, Table~\ref{tab:support} shows that \texttt{base} remains ahead of both \texttt{DTI-LM} and \texttt{HyperPCM}. On \texttt{DAVIS}, \texttt{base} and \texttt{DTI-LM} are nearly tied on mean \AUPRC{}, but \texttt{base} stays slightly higher on the paper's primary ranking metric. Together, these support panels reinforce the main message that strong recent baselines do not transfer uniformly across OOD definitions.
 
-\subsection{Review-driven robustness probes}
+\subsection{Additional robustness analyses}
 
-The external review highlighted two concrete risks: that the promoted patent result might be driven mainly by provenance rather than temporal shift, and that the synthetic \texttt{unseen\_drug} split might still be chemically too permissive. Table~\ref{tab:robustness-probes} records the targeted fixes. The first probe constructs a non-patent temporal benchmark directly from the official BindingDB release and shows that even before the learner-control expansion, \texttt{DTI-LM} stays ahead of \texttt{base} over matched 3-seed evaluation. The second probe replaces entity holdout with a Murcko-scaffold holdout and shows that the original synthetic \texttt{HyperPCM} edge does not survive this stricter split. We further add two controlled patent variants that explicitly suppress recurrent train pairs or seen-drug overlap. These do not erase the benchmark-sensitivity finding. Instead, they sharpen it: under \texttt{patent\_temporal\_pair\_novel} and \texttt{patent\_temporal\_drug\_novel}, the AUPRC winner changes again, with \texttt{DTI-LM} overtaking \texttt{RF} while \texttt{RF - base} becomes unreliable on the pair-novel variant.
+Table~\ref{tab:robustness-probes} records the additional analyses used to test whether the main conclusion depends on provenance or overlap policy. The first analysis constructs a non-patent temporal benchmark directly from the official BindingDB release. The second replaces entity holdout with a Murcko-scaffold holdout. We further add two controlled patent variants that explicitly suppress recurrent train pairs or seen-drug overlap. These analyses do not erase the benchmark-sensitivity finding. Instead, they sharpen it: under \texttt{patent\_temporal\_pair\_novel} and \texttt{patent\_temporal\_drug\_novel}, the AUPRC winner changes again, with \texttt{DTI-LM} overtaking \texttt{RF} while \texttt{RF - base} becomes unreliable on the pair-novel variant.
 
 \input{tables/table_robustness_probes}
 
 \subsection{Paired uncertainty support}
 
-Table~\ref{tab:bootstrap-summary} summarizes the paired bootstrap intervals for the expanded-panel comparisons. The strongest supported deltas still include the learner-control baseline on synthetic \texttt{unseen\_drug}, \texttt{blind\_start}, and the aggregate patent and non-patent temporal benchmarks. At the same time, the controlled patent rows show why the paper should not overstate that temporal story. \texttt{RF - base} on \texttt{patent\_pair\_novel} crosses zero, while \texttt{DTI-LM - RF} is strictly positive on both controlled patent variants. By contrast, the synthetic \texttt{unseen\_target} comparison \texttt{RF - base} also crosses zero, and the scaffold-split \texttt{HyperPCM - base} comparison crosses zero as well, which is exactly why those rows are described conservatively in the main text.
+Table~\ref{tab:bootstrap-summary} summarizes the paired bootstrap intervals for the five-model comparison panel. The strongest supported deltas still include \texttt{RF} on synthetic \texttt{unseen\_drug}, \texttt{blind\_start}, and the aggregate patent and non-patent temporal benchmarks. At the same time, the controlled patent rows show why the paper should not overstate the temporal story. \texttt{RF - base} on \texttt{patent\_pair\_novel} crosses zero, while \texttt{DTI-LM - RF} is strictly positive on both controlled patent variants. By contrast, the synthetic \texttt{unseen\_target} comparison \texttt{RF - base} also crosses zero, and the scaffold-split \texttt{HyperPCM - base} comparison crosses zero as well, which is exactly why those rows are described conservatively in the main text.
 
 \input{tables/table_bootstrap_summary}
 
-\subsection{Expanded-panel screening and promotion}
+\subsection{Baseline-selection summary}
 
-To avoid cherry-picking concerns, Table~\ref{tab:recent-screening} summarizes the seed0 screening passes used to decide which additional baselines to promote. The early external-baseline screen prioritized the strongest recent model on the primary real-OOD benchmark \texttt{patent\_temporal}; the later panel-expansion screen then added the learner-control and graph-family probes and promoted whichever systems materially changed the main synthetic or temporal read.
+To document how the final comparison set was assembled, Table~\ref{tab:recent-screening} summarizes the seed0 screening passes used to decide which additional baselines were carried forward to matched three-seed evaluation. The early external-baseline screen prioritized the strongest recent model on the primary temporal/provenance benchmark \texttt{patent\_temporal}; the later screen then added the Random Forest and graph-based baselines and retained whichever systems materially changed the main synthetic or temporal read.
 
 \input{tables/table_recent_screening}
 
