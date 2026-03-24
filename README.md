@@ -1,79 +1,104 @@
-# Distribution-Shift Benchmarking for DTI
+# DTI Benchmark Suite
 
-Research workspace for:
+Code, benchmark builders, and evaluation resources for the benchmark paper:
 
-`cold start in drug target interaction prediction`
+`Benchmarking synthetic cold-start and temporal/provenance distribution shifts in drug-target interaction prediction`
 
-The repository started from an internal method exploration around retrieval-augmented cold-start DTI, but the current primary output is a benchmark/resource paper:
+This repository is benchmark-first rather than method-first. Its purpose is to make the validation setup behind the paper easy to inspect, regenerate, and reuse.
 
-`Synthetic Cold Splits Are Not Enough: Distribution-Shift Benchmarking for Drug-Target Interaction Prediction`
+## Scope
 
-The current thesis is benchmark-first rather than method-first:
+The repository is organized around one methodological claim:
 
-- synthetic cold-start DTI splits are regime-dependent even within one dataset
-- synthetic cold splits and real OOD shifts are not interchangeable evaluation settings
-- model rankings can reverse when the benchmark axis changes
-- reusable split manifests and a standalone evaluator are part of the contribution
+- synthetic cold-start splits in DTI are not interchangeable with temporal/provenance-shifted evaluation
+- model ranking can change across `unseen_drug`, `blind_start`, `unseen_target`, and temporal/provenance benchmarks
+- overlap policy inside the same benchmark family can further change the apparent winner
 
-## What is included
+This repository therefore exposes:
 
-- benchmark-first paper materials under [paper](/root/exp/dti_codex/paper) and [reports](/root/exp/dti_codex/reports)
-- Stage 1 report in [reports/IDEA_REPORT.md](/root/exp/dti_codex/reports/IDEA_REPORT.md)
-- implementation history in [reports/IMPLEMENTATION_PLAN.md](/root/exp/dti_codex/reports/IMPLEMENTATION_PLAN.md)
-- PyTorch implementations of:
-  - benchmark reference encoder: `base`
-  - recent external literature baselines: `DTI-LM`, `HyperPCM`
-  - classical learner control: `RandomForest` on the same Morgan + hashed-k-mer pair features used by `base`
-  - graph-based baseline: `GraphDTA-lite` with a molecular GCN and protein CNN
-  - hashed protein featurization
-  - RDKit Morgan drug featurization
-  - train-only retrieval banks
-  - synthetic `warm / unseen-drug / unseen-target / blind-start` splits via TDC
-  - local patent temporal splits for real-OOD evaluation
-- reusable benchmark resources under `benchmark_resources/<dataset>/<split>/seed<k>/`
-- unified offline evaluator: [scripts/evaluate_prediction_csv.py](/root/exp/dti_codex/scripts/evaluate_prediction_csv.py)
-- pooled-LM recent baseline trainer: [scripts/train_recent_baseline.py](/root/exp/dti_codex/scripts/train_recent_baseline.py)
-- classical baseline trainer: [scripts/train_classical_baseline.py](/root/exp/dti_codex/scripts/train_classical_baseline.py)
-- graph baseline trainer: [scripts/train_graph_baseline.py](/root/exp/dti_codex/scripts/train_graph_baseline.py)
-- benchmark exporter: [scripts/export_benchmark_resource.py](/root/exp/dti_codex/scripts/export_benchmark_resource.py)
-- runnable training entrypoint: [scripts/train_raicd.py](/root/exp/dti_codex/scripts/train_raicd.py)
-- smoke and experiment launch scripts under [scripts](/root/exp/dti_codex/scripts)
+- split builders and benchmark exporters
+- canonical benchmark-resource bundles with stable `example_id`s
+- standalone evaluators for external prediction files
+- reference baselines and analysis scripts used in the manuscript
 
-## Current benchmark snapshot
+## What Is Included
 
-The current paper-ready topline results are summarized in [reports/EXTERNAL_PANEL_LIVE.md](/root/exp/dti_codex/reports/EXTERNAL_PANEL_LIVE.md). The high-level read is:
+- benchmark export and evaluation code in [`scripts/`](scripts)
+- reusable Python package code in [`src/raicd/`](src/raicd)
+- benchmark release notes in [`benchmark_resources/RELEASE_MANIFEST.md`](benchmark_resources/RELEASE_MANIFEST.md)
+- a smoke-example evaluator bundle in [`benchmark_resources_smoke/`](benchmark_resources_smoke)
+- manuscript source and PDF in [`paper/`](paper)
+- benchmark summaries and analysis reports in [`reports/`](reports)
 
-- `BindingDB_Kd / unseen_drug`: `RF` is currently strongest by mean AUPRC
-- `BindingDB_Kd / blind_start`: `RF` is currently strongest by mean AUPRC
-- `BindingDB_Kd / unseen_target`: `base` remains strongest by mean AUPRC
-- `BindingDB_patent / patent_temporal`: `RF` is currently strongest by mean AUPRC
-- `BindingDB_nonpatent_Kd / nonpatent_temporal`: `RF` is currently strongest by mean AUPRC
-- shifted target-cold support panels remain useful as support, but they do not overturn the main expanded-panel read
+## What Is Not Committed By Default
 
-## Environment
+To keep the GitHub repository lightweight and legally clean, the following are intentionally not versioned by default:
 
-Use the local machine described in `AGENTS.md`:
+- raw source datasets under `data/`
+- generated benchmark bundles under `benchmark_resources/<dataset>/<split>/seed<k>/`
+- training outputs under `results/`
+- logs and local caches under `logs/`
 
-```bash
-eval "$(/root/miniconda3/bin/conda shell.bash hook)" && conda activate research
+The committed repository should contain the code, schema, manifests, smoke example, and release instructions. Large benchmark bundles can be attached separately as GitHub release assets or a DOI-backed archive.
+
+## Repository Layout
+
+```text
+.
+├── benchmark_resources/        # release manifest and bundle documentation
+├── benchmark_resources_smoke/  # tiny example bundle for evaluator smoke tests
+├── docs/                       # GitHub-facing benchmark and release documentation
+├── paper/                      # manuscript source and compiled PDF
+├── reports/                    # paper tables, diagnostics, and benchmark summaries
+├── scripts/                    # exporters, evaluators, training, and analysis entrypoints
+└── src/raicd/                  # reusable package code
 ```
 
-## Install
+## Supported Benchmark Families
 
-Already installed in the `research` environment during this run:
+Primary paper benchmarks:
 
-- `pytdc`
-- `scikit-learn`
-- `pandas`
-- `tqdm`
+- `BindingDB_Kd / unseen_drug`
+- `BindingDB_Kd / blind_start`
+- `BindingDB_Kd / unseen_target`
+- `BindingDB_patent / patent_temporal`
+- `BindingDB_nonpatent_Kd / nonpatent_temporal`
 
-## Quick smoke test
+Supporting and robustness benchmarks:
+
+- `BindingDB_Ki / unseen_target`
+- `DAVIS / unseen_target`
+- `BindingDB_Kd / scaffold_drug`
+- `BindingDB_patent / patent_temporal_v2017`
+- `BindingDB_patent / patent_temporal_pair_novel`
+- `BindingDB_patent / patent_temporal_drug_novel`
+
+Benchmark definitions and resource schema are documented in [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md).
+
+## Installation
+
+The repository can be used in two tiers.
+
+Core benchmark export and evaluator usage:
 
 ```bash
-bash scripts/run_smoke.sh
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-core.txt
+pip install -e . --no-deps
 ```
 
-## Export A Reusable Benchmark Split
+Optional training and analysis dependencies:
+
+```bash
+pip install -r requirements-models.txt
+```
+
+The local development environment used in the paper is documented in [`AGENTS.md`](AGENTS.md).
+
+## Quick Start
+
+Export one benchmark bundle:
 
 ```bash
 PYTHONPATH=src python scripts/export_benchmark_resource.py \
@@ -82,86 +107,48 @@ PYTHONPATH=src python scripts/export_benchmark_resource.py \
   --seed 0
 ```
 
-This writes canonical train/valid/test CSVs, entity tables, pair tables, and a manifest under `benchmark_resources/`.
-
-## Initial experiment
+Evaluate an external prediction CSV:
 
 ```bash
-bash scripts/run_bindingdb_cold_drug.sh
+PYTHONPATH=src python scripts/evaluate_prediction_csv.py \
+  --reference-csv benchmark_resources/BindingDB_Kd/unseen_target/seed0/test.csv \
+  --prediction-csv path/to/predictions.csv \
+  --output path/to/eval.json
 ```
 
-This launches a first `BindingDB_Kd` unseen-drug experiment with binary labels from `pKd >= 7.0`.
+Run the smoke example:
 
 ```bash
-bash scripts/run_bindingdb_blind_start.sh
+PYTHONPATH=src python scripts/evaluate_prediction_csv.py \
+  --reference-csv benchmark_resources_smoke/BindingDB_Kd/unseen_target/seed0/test.csv \
+  --prediction-csv benchmark_resources_smoke/mock_predictions.csv \
+  --output benchmark_resources_smoke/mock_eval.json
 ```
 
-This launches the corresponding `blind_start` experiment.
-
-## Main entrypoint
+Export the paper benchmark suite in one shot:
 
 ```bash
-PYTHONPATH=src python scripts/train_raicd.py \
-  --dataset BindingDB_Kd \
-  --split unseen_drug \
-  --model raicd \
-  --epochs 10 \
-  --batch-size 256 \
-  --pkd-threshold 7.0
+bash scripts/export_benchmark_suite.sh
 ```
 
-## Recent Baseline Adapters
+## Reproducibility Guides
 
-```bash
-PYTHONPATH=src python scripts/train_recent_baseline.py \
-  --dataset BindingDB_Kd \
-  --split unseen_target \
-  --model dtilm \
-  --seed 0 \
-  --epochs 4
-```
+- benchmark catalog: [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md)
+- data provenance and local staging: [`docs/DATA_ACCESS.md`](docs/DATA_ACCESS.md)
+- manuscript reproduction and release flow: [`docs/REPRODUCE_BENCHMARKS.md`](docs/REPRODUCE_BENCHMARKS.md)
+- GitHub release checklist: [`docs/GITHUB_RELEASE_CHECKLIST.md`](docs/GITHUB_RELEASE_CHECKLIST.md)
 
-The current recent-baseline panel exposes:
+## Manuscript Assets
 
-- `dtilm`: pooled ChemBERTa + ESM2 MLP adapter aligned to the DTI-LM setup
-- `hyperpcm`: task-conditioned pooled-LM adapter aligned to recent HyperPCM-style target-conditioned modeling
+- compiled paper PDF: [`paper/main.pdf`](paper/main.pdf)
+- live benchmark summary table: [`reports/BENCHMARK_TABLE_LIVE.md`](reports/BENCHMARK_TABLE_LIVE.md)
+- external-panel summary: [`reports/EXTERNAL_PANEL_LIVE.md`](reports/EXTERNAL_PANEL_LIVE.md)
+- patent diagnosis: [`reports/PATENT_SHIFT_DIAGNOSIS.md`](reports/PATENT_SHIFT_DIAGNOSIS.md)
 
-These adapters are intentionally run on the same exported split resources and evaluator as the in-repo models, and they are now the main comparison panel used by the paper.
+## Data Redistribution Note
 
-## Additional Baselines
+This repository is structured so that the public GitHub snapshot can remain lightweight. Before publishing generated benchmark bundles, verify that the redistribution terms for the underlying datasets are compatible with the intended release channel. The expected local data layout and recommended release practice are documented in [`docs/DATA_ACCESS.md`](docs/DATA_ACCESS.md).
 
-Two new panel-expansion baselines are now wired into the same resource/evaluator contract:
+## Release Snapshot
 
-- `rf`: a RandomForest classifier trained on the exact Morgan + hashed-k-mer pair features used by `base`. This isolates the effect of the learner from the effect of the representation.
-- `graphdta`: a GraphDTA-style baseline with a molecular graph encoder and a protein CNN. This adds a genuinely different inductive bias beyond pooled LM and fixed-vector baselines.
-
-Example commands:
-
-```bash
-PYTHONPATH=src python scripts/train_classical_baseline.py \
-  --dataset BindingDB_Kd \
-  --split unseen_target \
-  --model rf \
-  --seed 0
-```
-
-```bash
-PYTHONPATH=src python scripts/train_graph_baseline.py \
-  --dataset BindingDB_Kd \
-  --split unseen_target \
-  --model graphdta \
-  --seed 0 \
-  --epochs 6
-```
-
-Stage-1 launcher scripts:
-
-- [scripts/run_rf_panel_stage1.sh](/root/exp/dti_codex/scripts/run_rf_panel_stage1.sh)
-- [scripts/run_graphdta_panel_stage1.sh](/root/exp/dti_codex/scripts/run_graphdta_panel_stage1.sh)
-
-## Notes
-
-- `BindingDB_Kd` is used as the primary dataset because it gives a healthier positive rate than `DAVIS` under `pKd >= 7.0`.
-- Retrieval is strictly train-only to avoid leakage.
-- Similarity-overlap statistics are saved with the metrics so the model can later be stress-tested under decreasing train-test overlap.
-- `--use-retrieval-gate` is available for ablation, but the current best results use similarity-biased attention without the extra global gate.
+The current manuscript-linked snapshot is described in [`benchmark_resources/RELEASE_MANIFEST.md`](benchmark_resources/RELEASE_MANIFEST.md).
