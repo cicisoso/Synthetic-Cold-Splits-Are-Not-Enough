@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1774352354 "main.aux" "main.bbl" "main" 1774352354
+["bibtex main"] 1774355064 "main.aux" "main.bbl" "main" 1774355064
   "./sn-basic.bst" 1774344597 35515 7cc706cef7829df727b1420a5d0e9fe4 ""
-  "main.aux" 1774352354 14444 3d5e48d7d7f2e89f4affb30367276a52 "pdflatex"
+  "main.aux" 1774355064 17537 3f311013445494452a3d5c6483ff023d "pdflatex"
   "references.bib" 1774343706 6267 a5b7b01010e2dc94e46285f9590a5ecd ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1774352354 "main.tex" "main.pdf" "main" 1774352354
+["pdflatex"] 1774355064 "main.tex" "main.pdf" "main" 1774355064
   "/etc/texmf/web2c/texmf.cnf" 1773884722 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1246382020 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -33,6 +33,7 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm" 1136768653 992 662f679a0b3d2d53c1b94050fdaa3f50 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm" 1136768653 1528 abec98dbc43e172678c11b3b9031252a ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi5.tfm" 1136768653 1508 3b32edd0d68f6498a5a375e78f9edc5e ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1136768653 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi7.tfm" 1136768653 1528 e2423ae06dc7dee599cceb79d1c9dc32 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm" 1136768653 1520 eccf95517727cb11801f4f1aee3a21b4 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm" 1136768653 1524 d89e2d087a9828407a196f428428ef4a ""
@@ -41,11 +42,13 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr17.tfm" 1136768653 1292 296a67155bdbfc32aa9c636f21e91433 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr5.tfm" 1136768653 1220 ad296dff3c8796c18053ab7b9f86ad7c ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr6.tfm" 1136768653 1300 b62933e007d01cfd073f79b963c01526 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr7.tfm" 1136768653 1300 53d07721103816e093902637bc167021 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr8.tfm" 1136768653 1292 21c1c5bfeaebccffdb478fd231a0997d ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr9.tfm" 1136768653 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy5.tfm" 1136768653 1112 14d5d5f6bd3c949edecb5b872f295553 ""
+  "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy7.tfm" 1136768653 1120 2b3f9b25605010c69bc328bea6ac000f ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm" 1136768653 1116 25a7bf822c58caf309a702ef79f4afbb ""
@@ -58,6 +61,7 @@
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb" 1248133631 32298 c6d25bb16d1eac01ebdc6d7084126a1e ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb" 1248133631 36299 5f9df58c2139e7edcf37c8fca4bd384d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb" 1248133631 36281 c355509802a035cadc5f15869451dcee ""
+  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb" 1248133631 35469 70d41d2b9ea31d5d813066df7c99281c ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb" 1248133631 36094 798f80770b3b148ceedd006d487db67c ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb" 1248133631 35752 024fb6c41858982481f6968b5fc26508 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
@@ -154,10 +158,10 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1773884758 2801217 f85095a468ea136966f926b30c1abf55 ""
   "Fig1.pdf" 1774344597 13375 84451dd7f67ddb812c0a328e26bee436 ""
   "Fig2.pdf" 1774344597 17087 62946d4d94909dc32b6dba462452da84 ""
-  "main.aux" 1774352354 14444 3d5e48d7d7f2e89f4affb30367276a52 "pdflatex"
-  "main.bbl" 1774352354 5444 3fb7ec995e478e697af65a5c20e3377a "bibtex main"
-  "main.out" 1774352354 4038 67dde01a3bad45a22a3df8f440c99c9d "pdflatex"
-  "main.tex" 1774352349 55099 a1957f3452048b803c6b18123a924408 ""
+  "main.aux" 1774355064 17537 3f311013445494452a3d5c6483ff023d "pdflatex"
+  "main.bbl" 1774355064 5444 3fb7ec995e478e697af65a5c20e3377a "bibtex main"
+  "main.out" 1774355064 4131 91e535f12d3a6645ec07fba9a064e675 "pdflatex"
+  "main.tex" 1774355055 62834 0ebbedc17700bdf31dc9b7725e8e0d2d ""
   "sn-jnl.cls" 1774344597 55857 c14ef9d34b3d95356940eaf177aff85f ""
   (generated)
   "main.aux"
