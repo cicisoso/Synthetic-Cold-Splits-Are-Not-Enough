@@ -796,10 +796,6 @@ INPUT ./tables/table_taxonomy.tex
 INPUT tables/table_taxonomy.tex
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8t.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrr8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
@@ -813,8 +809,10 @@ INPUT ./sections/4_results.tex
 INPUT ./sections/4_results.tex
 INPUT sections/4_results.tex
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
-INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
-INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmr8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmr8r.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/courier/pcrr8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/courier/pcrr8r.tfm
 INPUT ./tables/table_main_results.tex
 INPUT ./tables/table_main_results.tex
 INPUT ./tables/table_main_results.tex
@@ -823,6 +821,8 @@ INPUT ./tables/table_main_results.tex
 INPUT ./tables/table_main_results.tex
 INPUT tables/table_main_results.tex
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8t.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT /usr/share/texlive/texmf-dist/fonts/vf/adobe/times/ptmb8t.vf
 INPUT /usr/share/texlive/texmf-dist/fonts/tfm/adobe/times/ptmb8r.tfm
 INPUT ./figures/benchmark_delta_summary.pdf

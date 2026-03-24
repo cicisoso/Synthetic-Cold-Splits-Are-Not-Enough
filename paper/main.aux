@@ -23,20 +23,20 @@
 \citation{luo2024druglamp,ouyang2024pmmr,liu2025spdti,yu2025gsdti,zhao2025coldstartcpi}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Related Work}{2}{section.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Synthetic cold-start evaluation in DTI.}{2}{section*.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {paragraph}{Retrieval, inductive, and memory-based DTI models.}{2}{section*.2}\protected@file@percent }
 \citation{ektefaie2024generalizability,shen2025ddiben,delafuente2025inductive}
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Benchmark taxonomy and seed0 split statistics. Test prevalence differs substantially across benchmark families, so AUPRC{} should be compared within benchmark rather than across rows.\relax }}{3}{table.caption.5}\protected@file@percent }
-\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
-\newlabel{tab:taxonomy}{{1}{3}{Benchmark taxonomy and seed0 split statistics. Test prevalence differs substantially across benchmark families, so \AUPRC {} should be compared within benchmark rather than across rows.\relax }{table.caption.5}{}}
+\@writefile{toc}{\contentsline {paragraph}{Retrieval, inductive, and memory-based DTI models.}{3}{section*.2}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Distribution shift and benchmark design.}{3}{section*.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {paragraph}{Positioning.}{3}{section*.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Benchmark Setup}{3}{section.3}\protected@file@percent }
 \citation{liu2007bindingdb}
 \citation{davis2011kinase}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{4}{section.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Synthetic cold splits are already regime-dependent}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Benchmark taxonomy and seed0 split statistics. Test prevalence differs substantially across benchmark families, so AUPRC{} should be compared within benchmark rather than across rows.\relax }}{4}{table.caption.5}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{tab:taxonomy}{{1}{4}{Benchmark taxonomy and seed0 split statistics. Test prevalence differs substantially across benchmark families, so \AUPRC {} should be compared within benchmark rather than across rows.\relax }{table.caption.5}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Synthetic reference panel and promoted real-OOD benchmarks under the expanded five-model panel. Values are mean $\pm $ std over seeds. Best mean AUPRC{} in each row is bold. The classical learner-control baseline (\texttt  {RF}) is trained on the same Morgan+k-mer inputs as \texttt  {base}; \texttt  {GraphDTA-style} provides the architecture-diverse graph-family probe.\relax }}{5}{table.caption.6}\protected@file@percent }
 \newlabel{tab:main-results}{{2}{5}{Synthetic reference panel and promoted real-OOD benchmarks under the expanded five-model panel. Values are mean $\pm $ std over seeds. Best mean \AUPRC {} in each row is bold. The classical learner-control baseline (\texttt {RF}) is trained on the same Morgan+k-mer inputs as \texttt {base}; \texttt {GraphDTA-style} provides the architecture-diverse graph-family probe.\relax }{table.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{5}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Synthetic cold splits are already regime-dependent}{5}{subsection.4.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Real temporal shift favors a different learner again}{5}{subsection.4.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Mean within-benchmark AUPRC{} delta relative to \texttt  {base} under the expanded panel. Bars are shown for the compared systems with paired-bootstrap support currently available. Because prevalence differs across benchmarks, the vertical scale should be read as a row-wise within-benchmark contrast rather than as a cross-benchmark effect-size scale.\relax }}{6}{figure.caption.7}\protected@file@percent }
 \newlabel{fig:delta-summary}{{1}{6}{Mean within-benchmark \AUPRC {} delta relative to \texttt {base} under the expanded panel. Bars are shown for the compared systems with paired-bootstrap support currently available. Because prevalence differs across benchmarks, the vertical scale should be read as a row-wise within-benchmark contrast rather than as a cross-benchmark effect-size scale.\relax }{figure.caption.7}{}}
@@ -47,7 +47,6 @@
 \newlabel{fig:patent-diagnosis}{{2}{7}{Patent temporal/provenance diagnosis in terms of mean \AUPRC {} under the expanded panel. Left: pooled year-band slices, with 2021 merged into the recent stratum. Right: test-set overlap buckets computed from the saved overlap score. Error bars denote seed std over the matched 3-seed runs. In the expanded panel, \texttt {RF} dominates the aggregate temporal benchmark, while \texttt {DTI-LM} remains strongest only in the lowest-overlap bucket.\relax }{figure.caption.9}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Supporting target-cold OOD benchmarks still favor the plain base model}{7}{subsection.4.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{8}{section.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{8}{section.6}\protected@file@percent }
 \bibstyle{unsrtnat}
 \bibdata{references}
 \bibcite{liu2007bindingdb}{{1}{2007}{{Liu et~al.}}{{Liu, Lin, Wen, Jorissen, and Gilson}}}
@@ -58,6 +57,7 @@
 \bibcite{liu2025spdti}{{6}{2025}{{Liu et~al.}}{{Liu, Liu, Xu, Xia, and Li}}}
 \bibcite{yu2025gsdti}{{7}{2025}{{Yu et~al.}}{{Yu, Zhou, Jiang, Shi, and Li}}}
 \bibcite{zhao2025coldstartcpi}{{8}{2025}{{Zhao et~al.}}{{Zhao, Zhao, Guo, Zheng, Li, Ling, Tang, Li, and Wang}}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{9}{section.6}\protected@file@percent }
 \bibcite{ektefaie2024generalizability}{{9}{2024}{{Ektefaie et~al.}}{{Ektefaie, Shen, Bykova, Marin, Zitnik, and Farhat}}}
 \bibcite{shen2025ddiben}{{10}{2025}{{Shen et~al.}}{{Shen, Zhou, Zhang, and Yao}}}
 \bibcite{delafuente2025inductive}{{11}{2025}{{de~la Fuente et~al.}}{{de~la Fuente, Serrano, Veleiro, Casals, Vera, Pizurica, G\'omez-Cebri\'an, Puchades-Carrasco, Pineda-Lucena, Ochoa, Vicent, Gevaert, and Hernaez}}}
@@ -66,28 +66,28 @@
 \@writefile{toc}{\contentsline {section}{\numberline {A}Appendix}{10}{appendix.A}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.1}Patent benchmark specification}{10}{subsection.A.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.2}Non-patent temporal probe specification}{10}{subsection.A.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Reference-model specification}{10}{subsection.A.3}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {A2}{\ignorespaces Explicit specification of the non-patent temporal probe. This benchmark is built from the official BindingDB TSV after filtering to non-patent, positive-\(K_d\), single-chain rows with a valid publication year. The partition is fixed by publication year; the random seed changes model stochasticity, not the split.\relax }}{11}{table.caption.12}\protected@file@percent }
 \newlabel{tab:nonpatent-spec}{{A2}{11}{Explicit specification of the non-patent temporal probe. This benchmark is built from the official BindingDB TSV after filtering to non-patent, positive-\(K_d\), single-chain rows with a valid publication year. The partition is fixed by publication year; the random seed changes model stochasticity, not the split.\relax }{table.caption.12}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {A3}{\ignorespaces Specification of the \texttt  {base} reference model used throughout the benchmark. This table is included to make the anchor system reproducible rather than treating it as an informal baseline label.\relax }}{11}{table.caption.13}\protected@file@percent }
 \newlabel{tab:base-spec}{{A3}{11}{Specification of the \texttt {base} reference model used throughout the benchmark. This table is included to make the anchor system reproducible rather than treating it as an informal baseline label.\relax }{table.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.3}Reference-model specification}{11}{subsection.A.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.4}Promoted learner-control and graph-family specifications}{11}{subsection.A.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.5}Additional real-OOD support benchmarks}{11}{subsection.A.5}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {A4}{\ignorespaces Specification of the promoted learner-control and graph-family additions. This table mirrors Table\nobreakspace  {}\ref  {tab:base-spec} so the new baselines can be reproduced as precisely as the \texttt  {base} anchor.\relax }}{12}{table.caption.14}\protected@file@percent }
 \newlabel{tab:graph-spec}{{A4}{12}{Specification of the promoted learner-control and graph-family additions. This table mirrors Table~\ref {tab:base-spec} so the new baselines can be reproduced as precisely as the \texttt {base} anchor.\relax }{table.caption.14}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {A5}{\ignorespaces Secondary real-OOD support benchmarks under the expanded panel. These panels use matched 3-seed evaluation, but remain supporting evidence because they reinforce rather than replace the temporal benchmark story established in the main panel. To keep promotion focused on the decision-relevant synthetic and temporal axes, the support table reports the promoted external baselines rather than the full five-model panel.\relax }}{12}{table.caption.15}\protected@file@percent }
 \newlabel{tab:support}{{A5}{12}{Secondary real-OOD support benchmarks under the expanded panel. These panels use matched 3-seed evaluation, but remain supporting evidence because they reinforce rather than replace the temporal benchmark story established in the main panel. To keep promotion focused on the decision-relevant synthetic and temporal axes, the support table reports the promoted external baselines rather than the full five-model panel.\relax }{table.caption.15}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.5}Additional real-OOD support benchmarks}{12}{subsection.A.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.6}Review-driven robustness probes}{12}{subsection.A.6}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {A6}{\ignorespaces Targeted robustness probes added after the external review. The non-patent temporal probe tests whether the promoted patent ranking persists when patent provenance is removed. The scaffold probe tests whether the synthetic \texttt  {unseen\_drug} ordering survives a stricter chemistry-aware holdout. The controlled patent variants reduce recurrent pair and seen-drug overlap to test how much the patent ordering depends on allowable overlap. Values are mean $\pm $ std over three seeds.\relax }}{13}{table.caption.16}\protected@file@percent }
 \newlabel{tab:robustness-probes}{{A6}{13}{Targeted robustness probes added after the external review. The non-patent temporal probe tests whether the promoted patent ranking persists when patent provenance is removed. The scaffold probe tests whether the synthetic \texttt {unseen\_drug} ordering survives a stricter chemistry-aware holdout. The controlled patent variants reduce recurrent pair and seen-drug overlap to test how much the patent ordering depends on allowable overlap. Values are mean $\pm $ std over three seeds.\relax }{table.caption.16}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {A7}{\ignorespaces Paired bootstrap support for the expanded-panel comparisons. Positive deltas favor the second model in the comparison; negative deltas favor the first.\relax }}{13}{table.caption.17}\protected@file@percent }
 \newlabel{tab:bootstrap-summary}{{A7}{13}{Paired bootstrap support for the expanded-panel comparisons. Positive deltas favor the second model in the comparison; negative deltas favor the first.\relax }{table.caption.17}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.7}Paired uncertainty support}{13}{subsection.A.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {A.8}Expanded-panel screening and promotion}{13}{subsection.A.8}\protected@file@percent }
 \@writefile{lot}{\contentsline {table}{\numberline {A8}{\ignorespaces Transparent seed0 screening used to decide which additional baselines were promoted to matched three-seed evaluation. The early external-baseline screen predated the non-patent temporal probe; the later panel-expansion screen added \texttt  {RF} and \texttt  {GraphDTA-style} under the final five-model design.\relax }}{14}{table.caption.18}\protected@file@percent }
 \newlabel{tab:recent-screening}{{A8}{14}{Transparent seed0 screening used to decide which additional baselines were promoted to matched three-seed evaluation. The early external-baseline screen predated the non-patent temporal probe; the later panel-expansion screen added \texttt {RF} and \texttt {GraphDTA-style} under the final five-model design.\relax }{table.caption.18}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {A9}{\ignorespaces Reusable benchmark artifacts released with each split. The release is designed so that external predictions can be scored without re-running the in-repo training code.\relax }}{14}{table.caption.19}\protected@file@percent }
 \newlabel{tab:resource-release}{{A9}{14}{Reusable benchmark artifacts released with each split. The release is designed so that external predictions can be scored without re-running the in-repo training code.\relax }{table.caption.19}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A.8}Expanded-panel screening and promotion}{14}{subsection.A.8}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.9}Reusable benchmark resources}{14}{subsection.A.9}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {A.10}Method-centric ablations}{14}{subsection.A.10}\protected@file@percent }
 \gdef \@abspage@last{14}

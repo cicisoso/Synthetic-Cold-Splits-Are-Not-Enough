@@ -52,14 +52,14 @@ The paper should avoid turning into a method-ablation catalog. Older method-cent
   4. preliminary support screens from `BindingDB_Ki` and `DAVIS` suggesting that synthetic `unseen_target` gains do not transfer reliably
 - **Hero figure**: synthetic-vs-real ranking reversal. Left panel: synthetic `blind_start` where `RAICD` wins. Right panel: patent temporal where `base` wins. Caption should explicitly state that the same model family changes rank when the benchmark changes.
 - **Estimated length**: 1.5 pages.
-- **Key citations**: cold-start DTI methods [VERIFY], DTI evaluation benchmarks [VERIFY], distribution-shift benchmark papers in molecular ML [VERIFY].
+- **Key citations**: synthetic cold-start DTI studies such as `DTI-LM`, `DrugLAMP`, `PMMR`, `SP-DTI`, `GS-DTI`, and `ColdstartCPI`; dataset anchors such as `BindingDB` and `DAVIS`; and benchmark-sensitivity precedents such as the inductive drug-repurposing critique, the generalizability analysis of therapeutic ML, and `DDI-Ben`.
 
 ### §2 Related Work
 
 - **Subtopics**:
-  - synthetic cold-start evaluation in DTI [VERIFY]
-  - retrieval, inductive, and memory-based DTI generalization methods [VERIFY]
-  - distribution-shift and benchmark design in molecular ML / biomedical interaction prediction [VERIFY]
+  - synthetic cold-start evaluation in DTI
+  - retrieval, inductive, and memory-based DTI generalization methods
+  - distribution-shift and benchmark design in molecular ML / biomedical interaction prediction
 - **Positioning**:
   - this paper is not introducing another universal DTI architecture
   - the novelty is diagnostic: it demonstrates that conclusions depend on shift definition
@@ -79,15 +79,17 @@ The paper should avoid turning into a method-ablation catalog. Older method-cent
   - split statistics: sample count and prevalence for each benchmark
 - **Models**:
   - `base`
-  - `RAICD`
-  - `FTM sparse`
+  - `RF`
+  - `DTI-LM`
+  - `HyperPCM`
+  - `GraphDTA-style`
 - **Metrics**:
   - AUPRC as primary
   - AUROC as secondary
 - **Reproducibility**:
-  - matched 3-seed reporting for the synthetic reference panel and the promoted patent benchmark
-  - seed0 support only for `BindingDB_Ki` and `DAVIS`
-  - paired bootstrap uncertainty support for key comparisons: `RAICD` vs `base` on synthetic `blind_start`, and `base` vs `RAICD` / `FTM` on patent temporal
+  - matched 3-seed reporting for the synthetic reference panel, the promoted patent benchmark, and the non-patent temporal robustness probe
+  - matched 3-seed support on `BindingDB_Ki` and `DAVIS`
+  - paired bootstrap uncertainty support for the headline expanded-panel comparisons, especially `RF` against `base` and `DTI-LM` on synthetic drug-cold, blind-start, and temporal benchmarks
 - **Setup details to document**:
   - dataset-specific affinity conversion for patent
   - year-based patent split construction
@@ -101,10 +103,10 @@ The paper should avoid turning into a method-ablation catalog. Older method-cent
   - main point: no single method wins all synthetic regimes
   - expected evidence source: [BENCHMARK_TABLE_LIVE.md](/root/exp/dti_codex/reports/BENCHMARK_TABLE_LIVE.md)
 
-- **§4.2 Real temporal shift reverses the retrieval conclusion**
-  - use patent 3-seed panel
-  - main point: `base` beats both `RAICD` and `FTM` on `BindingDB_patent / patent_temporal`
-  - connect directly back to synthetic `blind_start`
+- **§4.2 Real temporal/provenance shift favors a different learner family**
+  - use patent 3-seed panel and the non-patent temporal probe
+  - main point: the promoted temporal benchmarks favor the learner-control `RF` baseline rather than preserving the smaller-panel or pooled-LM-centered ordering
+  - connect directly back to the heterogeneous synthetic reference panel
 
 - **§4.3 Temporal shift is structured across year bands and overlap levels**
   - use year-band and overlap-bucket patent diagnosis
@@ -144,7 +146,7 @@ The paper should avoid turning into a method-ablation catalog. Older method-cent
 
 | ID | Type | Description | Data Source | Priority |
 |----|------|-------------|-------------|----------|
-| Fig 1 | Hero comparison | Two-panel ranking reversal figure: synthetic `blind_start` versus patent temporal, highlighting that `RAICD` wins on one and loses on the other. | [BENCHMARK_TABLE_LIVE.md](/root/exp/dti_codex/reports/BENCHMARK_TABLE_LIVE.md) | HIGH |
+| Fig 1 | Hero comparison | Benchmark-sensitivity summary contrasting the synthetic reference panel with the promoted temporal benchmarks under the expanded five-model panel. | [BENCHMARK_TABLE_LIVE.md](/root/exp/dti_codex/reports/BENCHMARK_TABLE_LIVE.md) | HIGH |
 | Table 1 | Main comparison table | Synthetic reference panel plus promoted patent temporal benchmark. | [PAPER_TABLE_DRAFTS.md](/root/exp/dti_codex/reports/PAPER_TABLE_DRAFTS.md) | HIGH |
 | Fig 2 | Diagnosis figure | Patent temporal year-band and overlap-bucket analysis. | [PATENT_SHIFT_DIAGNOSIS.md](/root/exp/dti_codex/reports/PATENT_SHIFT_DIAGNOSIS.md) | HIGH |
 | Table A1 | Appendix table | `BindingDB_Ki` and `DAVIS` support benchmarks showing non-transfer of synthetic `unseen_target` gains. | [PAPER_TABLE_DRAFTS.md](/root/exp/dti_codex/reports/PAPER_TABLE_DRAFTS.md) | MEDIUM |
@@ -153,26 +155,26 @@ The paper should avoid turning into a method-ablation catalog. Older method-cent
 
 The hero figure should not be an architecture diagram. It should be a benchmark-comparison figure with:
 
-- left panel: `BindingDB_Kd / blind_start` showing `base` and `RAICD`
-- right panel: `BindingDB_patent / patent_temporal` showing `base`, `RAICD`, and `FTM`
-- visual emphasis on the rank swap of `base` and `RAICD`
-- a caption that explicitly says the benchmark choice changes the conclusion
+- left panel: synthetic `BindingDB_Kd` rows highlighting that different synthetic regimes already favor different systems
+- right panel: promoted temporal benchmarks highlighting that `RF` becomes the strongest learner-control baseline on both patent and non-patent temporal axes
+- visual emphasis on benchmark-dependent winner changes and on the fact that the expanded panel is not LM-dominated
+- a caption that explicitly says benchmark choice and overlap policy change the apparent best system
 
 Draft caption:
 
-> Synthetic cold splits and real temporal OOD can yield opposite conclusions. `RAICD` improves over `base` on synthetic `blind_start`, but `base` is the best model on the 3-seed patent temporal benchmark, illustrating a ranking reversal induced by benchmark choice.
+> Different benchmark families can favor different learner families. Within the expanded panel, synthetic `BindingDB_Kd` already shows regime-dependent winners, while the promoted patent and non-patent temporal benchmarks favor the learner-control `RF` baseline rather than preserving a single pooled-LM-centered ordering.
 
 ## Citation Plan
 
 - §1 Intro:
-  - cold-start DTI / DTA motivation papers [VERIFY]
-  - benchmark or generalization papers that motivate evaluation caution [VERIFY]
+  - cold-start DTI / DTA motivation papers already cited in the manuscript
+  - benchmark or generalization papers motivating evaluation caution, including generalizability and benchmark-design precedent
 - §2 Related:
-  - retrieval / inductive DTI methods such as MGDTI [VERIFY], LLMDTA [VERIFY], PMMR [VERIFY]
-  - distribution-shift / domain generalization papers such as MMDG-DTI [VERIFY]
-  - benchmark-design precedent such as DDI-Ben [VERIFY]
+  - retrieval / inductive DTI methods already represented by the cited synthetic cold-start literature
+  - distribution-shift / domain generalization papers represented by the cited molecular benchmark literature
+  - benchmark-design precedent represented by `DDI-Ben` and the inductive-world critique
 - §3 Setup:
-  - data sources and any official benchmark references for BindingDB / DAVIS / patent split [VERIFY]
+  - data-source anchors for BindingDB and DAVIS, with the local patent split documented in the appendix tables
 
 ## Reviewer Feedback
 
@@ -184,9 +186,11 @@ Draft caption:
 
 ## Next Steps
 
-- [ ] Turn [PAPER_TABLE_DRAFTS.md](/root/exp/dti_codex/reports/PAPER_TABLE_DRAFTS.md) into final paper tables / figure captions
+- [x] Turn [PAPER_TABLE_DRAFTS.md](/root/exp/dti_codex/reports/PAPER_TABLE_DRAFTS.md) into final paper tables / figure captions
 - [x] Add paired uncertainty support for the main ranking reversals
-- [ ] Add benchmark taxonomy and split-statistics table
-- [ ] Write Introduction / Setup / Results into journal-style manuscript text
-- [ ] Verify and complete citation list
-- [ ] Compile a first manuscript draft
+- [x] Add benchmark taxonomy and split-statistics table
+- [x] Write Introduction / Setup / Results into journal-style manuscript text
+- [x] Verify and complete citation list
+- [x] Compile a first manuscript draft
+- [ ] Tighten wording and reduce redundancy across Abstract / Introduction / Discussion
+- [ ] Finalize journal-facing figure/table placement and appendix references
