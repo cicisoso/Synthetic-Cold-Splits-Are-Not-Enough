@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex main"] 1774355064 "main.aux" "main.bbl" "main" 1774355064
+["bibtex main"] 1774355925 "main.aux" "main.bbl" "main" 1774355962
   "./sn-basic.bst" 1774344597 35515 7cc706cef7829df727b1420a5d0e9fe4 ""
-  "main.aux" 1774355064 17537 3f311013445494452a3d5c6483ff023d "pdflatex"
+  "main.aux" 1774355962 17537 8f31602df12f44a8a675252dab1b6342 "pdflatex"
   "references.bib" 1774343706 6267 a5b7b01010e2dc94e46285f9590a5ecd ""
   (generated)
   "main.bbl"
   "main.blg"
-["pdflatex"] 1774355064 "main.tex" "main.pdf" "main" 1774355064
+["pdflatex"] 1774355962 "main.tex" "main.pdf" "main" 1774355962
   "/etc/texmf/web2c/texmf.cnf" 1773884722 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy5.tfm" 1246382020 1120 1e8878807317373affa7f7bba4cf2f6a ""
@@ -158,10 +158,10 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1773884758 2801217 f85095a468ea136966f926b30c1abf55 ""
   "Fig1.pdf" 1774344597 13375 84451dd7f67ddb812c0a328e26bee436 ""
   "Fig2.pdf" 1774344597 17087 62946d4d94909dc32b6dba462452da84 ""
-  "main.aux" 1774355064 17537 3f311013445494452a3d5c6483ff023d "pdflatex"
-  "main.bbl" 1774355064 5444 3fb7ec995e478e697af65a5c20e3377a "bibtex main"
-  "main.out" 1774355064 4131 91e535f12d3a6645ec07fba9a064e675 "pdflatex"
-  "main.tex" 1774355055 62834 0ebbedc17700bdf31dc9b7725e8e0d2d ""
+  "main.aux" 1774355962 17537 8f31602df12f44a8a675252dab1b6342 "pdflatex"
+  "main.bbl" 1774355925 5444 3fb7ec995e478e697af65a5c20e3377a "bibtex main"
+  "main.out" 1774355962 4131 91e535f12d3a6645ec07fba9a064e675 "pdflatex"
+  "main.tex" 1774355954 62979 7a3c4472b529d96be771ea49c58ce450 ""
   "sn-jnl.cls" 1774344597 55857 c14ef9d34b3d95356940eaf177aff85f ""
   (generated)
   "main.aux"

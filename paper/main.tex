@@ -281,17 +281,18 @@ Because the main paper depends on \texttt{BindingDB\_patent / patent\_temporal},
   \scriptsize
   \caption{Earlier-cutoff patent robustness probe. This auxiliary table reports the matched 3-seed \texttt{base} versus \texttt{DTI-LM} comparison on \texttt{patent\_temporal\_v2017}. It is included to document the evidence behind the earlier-cutoff statement in the main text, not to replace the five-model main panel.}
   \label{tab:patent-v2017-results}
-  \setlength{\tabcolsep}{3.5pt}
-  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccp{0.38\textwidth}@{}}
+  \setlength{\tabcolsep}{3pt}
+  \renewcommand{\arraystretch}{1.05}
+  \begin{tabular}{p{0.26\textwidth}p{0.18\textwidth}p{0.18\textwidth}p{0.26\textwidth}}
     \toprule
-    Benchmark & \texttt{base} (\AUPRC{}/\AUROC{}) & \texttt{DTI-LM} (\AUPRC{}/\AUROC{}) & Reading \\
+    Benchmark & \shortstack[c]{\texttt{base}\\\AUPRC{}\\\AUROC{}} & \shortstack[c]{\texttt{DTI-LM}\\\AUPRC{}\\\AUROC{}} & \shortstack[c]{Reading} \\
     \midrule
-    \texttt{BindingDB\_patent / patent\_temporal\_v2017} &
-    0.7044 $\pm$ 0.0058 / 0.6624 $\pm$ 0.0079 &
-    0.7134 $\pm$ 0.0027 / 0.6754 $\pm$ 0.0039 &
-    earlier cutoff preserves the same \texttt{DTI-LM > base} direction as the main patent-family robustness screen \\
+    \shortstack[l]{\texttt{BindingDB\_patent}\\\texttt{patent\_temporal\_v2017}} &
+    \shortstack[c]{0.7044 $\pm$ 0.0058\\0.6624 $\pm$ 0.0079} &
+    \shortstack[c]{0.7134 $\pm$ 0.0027\\0.6754 $\pm$ 0.0039} &
+    earlier cutoff preserves the same \texttt{DTI-LM > base} ordering as the main patent-family robustness screen \\
     \bottomrule
-  \end{tabular*}
+  \end{tabular}
 \end{table*}
 
 \section{Non-patent temporal probe specification}
