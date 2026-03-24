@@ -5,14 +5,22 @@ import numpy as np
 
 
 OUT_DIR = Path(__file__).resolve().parent
+PAPER_DIR = OUT_DIR.parent
 
 plt.rcParams.update(
     {
-        "font.family": "serif",
-        "font.serif": ["Times New Roman", "Times", "DejaVu Serif"],
+        "font.family": "sans-serif",
+        "font.sans-serif": [
+            "Helvetica",
+            "TeX Gyre Heros",
+            "Nimbus Sans",
+            "Arial",
+            "Arimo",
+            "DejaVu Sans",
+        ],
         "font.size": 9,
         "axes.labelsize": 9,
-        "axes.titlesize": 10,
+        "axes.titlesize": 9,
         "xtick.labelsize": 8,
         "ytick.labelsize": 8,
         "legend.fontsize": 8,
@@ -20,6 +28,8 @@ plt.rcParams.update(
         "ps.fonttype": 42,
         "axes.spines.top": False,
         "axes.spines.right": False,
+        "axes.linewidth": 0.8,
+        "lines.linewidth": 1.4,
     }
 )
 
@@ -29,11 +39,16 @@ COLORS = {
     "dtilm": "#2A7FFF",
     "hyperpcm": "#D97706",
 }
+HATCHES = {"rf": "////", "dtilm": "....", "hyperpcm": "xx"}
+MARKERS = {"base": "o", "rf": "s", "dtilm": "^"}
+LINESTYLES = {"base": "-", "rf": "--", "dtilm": "-."}
 
 
-def save(fig: plt.Figure, name: str) -> None:
+def save(fig: plt.Figure, stem: str) -> None:
     fig.tight_layout()
-    fig.savefig(OUT_DIR / name, bbox_inches="tight", pad_inches=0.02)
+    fig.savefig(OUT_DIR / f"{stem}.pdf", bbox_inches="tight", pad_inches=0.02)
+    fig.savefig(PAPER_DIR / f"{stem}.pdf", bbox_inches="tight", pad_inches=0.02)
+    fig.savefig(PAPER_DIR / f"{stem}.eps", bbox_inches="tight", pad_inches=0.02)
     plt.close(fig)
 
 
@@ -67,12 +82,21 @@ def plot_delta_summary() -> None:
         3: (-0.0045, 0.0009),
     }
 
-    fig, ax = plt.subplots(figsize=(6.2, 3.2))
-    ax.axhline(0.0, color="black", linewidth=0.9, linestyle="--", alpha=0.7)
+    fig, ax = plt.subplots(figsize=(4.68, 3.0))
+    ax.axhline(0.0, color="black", linewidth=0.9, linestyle="--")
 
     for idx, value in enumerate(rf):
         xpos = x[idx] - width
-        ax.bar(xpos, value, width=width, color=COLORS["rf"], label="RF" if idx == 0 else None)
+        ax.bar(
+            xpos,
+            value,
+            width=width,
+            color=COLORS["rf"],
+            edgecolor="black",
+            linewidth=0.5,
+            hatch=HATCHES["rf"],
+            label="RF" if idx == 0 else None,
+        )
         lo, hi = rf_ci[idx]
         ax.errorbar(
             xpos,
@@ -86,7 +110,16 @@ def plot_delta_summary() -> None:
 
     for idx, value in enumerate(dtilm):
         xpos = x[idx]
-        ax.bar(xpos, value, width=width, color=COLORS["dtilm"], label="DTI-LM" if idx == 0 else None)
+        ax.bar(
+            xpos,
+            value,
+            width=width,
+            color=COLORS["dtilm"],
+            edgecolor="black",
+            linewidth=0.5,
+            hatch=HATCHES["dtilm"],
+            label="DTI-LM" if idx == 0 else None,
+        )
         lo, hi = dtilm_ci[idx]
         ax.errorbar(
             xpos,
@@ -102,7 +135,16 @@ def plot_delta_summary() -> None:
         if np.isnan(value):
             continue
         xpos = x[idx] + width
-        ax.bar(xpos, value, width=width, color=COLORS["hyperpcm"], label="HyperPCM" if idx == 0 else None)
+        ax.bar(
+            xpos,
+            value,
+            width=width,
+            color=COLORS["hyperpcm"],
+            edgecolor="black",
+            linewidth=0.5,
+            hatch=HATCHES["hyperpcm"],
+            label="HyperPCM" if idx == 0 else None,
+        )
         lo, hi = hyperpcm_ci[idx]
         ax.errorbar(
             xpos,
@@ -118,8 +160,9 @@ def plot_delta_summary() -> None:
     ax.set_xticklabels(benchmarks)
     ax.set_ylabel("Mean AUPRC delta vs base")
     ax.set_ylim(-0.07, 0.22)
+    ax.tick_params(length=3, width=0.8)
     ax.legend(frameon=False, loc="upper right", ncol=3)
-    save(fig, "benchmark_delta_summary.pdf")
+    save(fig, "Fig1")
 
 
 def plot_patent_diagnosis() -> None:
@@ -139,7 +182,7 @@ def plot_patent_diagnosis() -> None:
         "dtilm": ([0.6353, 0.7489, 0.8866], [0.0175, 0.0094, 0.0097]),
     }
 
-    fig, axes = plt.subplots(1, 2, figsize=(7.2, 3.1), sharey=False)
+    fig, axes = plt.subplots(1, 2, figsize=(4.68, 2.85), sharey=False)
 
     for key, label in [("base", "base"), ("rf", "RF"), ("dtilm", "DTI-LM")]:
         y, err = year_stats[key]
@@ -147,8 +190,9 @@ def plot_patent_diagnosis() -> None:
             x_year,
             y,
             yerr=err,
-            marker="o",
-            linewidth=1.5,
+            marker=MARKERS[key],
+            linestyle=LINESTYLES[key],
+            linewidth=1.3,
             capsize=3,
             color=COLORS[key],
             label=label,
@@ -156,7 +200,6 @@ def plot_patent_diagnosis() -> None:
     axes[0].set_xticks(x_year)
     axes[0].set_xticklabels(years)
     axes[0].set_ylabel("Mean AUPRC")
-    axes[0].set_title("Patent year bands")
     axes[0].set_ylim(0.72, 0.99)
 
     for key, label in [("base", "base"), ("rf", "RF"), ("dtilm", "DTI-LM")]:
@@ -165,19 +208,23 @@ def plot_patent_diagnosis() -> None:
             x_overlap,
             y,
             yerr=err,
-            marker="o",
-            linewidth=1.5,
+            marker=MARKERS[key],
+            linestyle=LINESTYLES[key],
+            linewidth=1.3,
             capsize=3,
             color=COLORS[key],
             label=label,
         )
     axes[1].set_xticks(x_overlap)
     axes[1].set_xticklabels(overlap)
-    axes[1].set_title("Patent overlap buckets")
     axes[1].set_ylim(0.50, 0.96)
+    for ax in axes:
+        ax.tick_params(length=3, width=0.8)
+    axes[0].text(0.02, 0.98, "(a)", transform=axes[0].transAxes, va="top", ha="left")
+    axes[1].text(0.02, 0.98, "(b)", transform=axes[1].transAxes, va="top", ha="left")
     axes[1].legend(frameon=False, loc="lower right")
 
-    save(fig, "patent_shift_diagnosis.pdf")
+    save(fig, "Fig2")
 
 
 if __name__ == "__main__":

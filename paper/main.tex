@@ -165,7 +165,7 @@ At the same time, two controlled patent variants show that this temporal orderin
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{Fig1.pdf}
+  \includegraphics[width=119mm]{Fig1.pdf}
   \caption{Compact within-benchmark \AUPRC{} delta summary relative to \texttt{base} for the five-model comparison panel. Because the figure is a delta-to-\texttt{base} diagnostic, \texttt{base} defines the zero line and is not drawn as a bar series. The corresponding \texttt{base} \AUPRC{} values are $0.5509$ for \texttt{BindingDB\_Kd / unseen\_drug}, $0.3737$ for \texttt{blind\_start}, $0.5224$ for \texttt{unseen\_target}, $0.7772$ for \texttt{patent\_temporal}, and $0.6369$ for \texttt{nonpatent\_temporal}. We show \texttt{RF}, \texttt{DTI-LM}, and \texttt{HyperPCM} as compact representatives of the descriptor-based, pooled-language-model, and hybrid comparison families; \texttt{GraphDTA-style} remains reported in Table~\ref{tab:main-results} but is omitted here to keep the delta panel readable. Because prevalence differs across benchmarks, the vertical scale should be read as a row-wise within-benchmark contrast rather than as a cross-benchmark effect-size scale}
   \label{fig:delta-summary}
 \end{figure}
@@ -199,8 +199,8 @@ The overlap-bucket analysis reveals another useful pattern. In the lowest-overla
 
 \begin{figure}[t]
   \centering
-  \includegraphics[width=\linewidth]{Fig2.pdf}
-  \caption{Patent temporal/provenance diagnosis in terms of mean \AUPRC{} for the five-model comparison panel. For readability, the plot focuses on \texttt{base}, \texttt{RF}, and \texttt{DTI-LM}, which are the three systems that define the aggregate and slice-level ranking changes in the patent analyses; \texttt{HyperPCM} and \texttt{GraphDTA-style} remain listed in Table~\ref{tab:main-results} but do not lead a year-band or overlap-bucket slice. Left: pooled year-band slices, with 2021 merged into the recent stratum. Right: test-set overlap buckets computed from the saved overlap score. Error bars denote seed std over the matched 3-seed runs. \texttt{RF} dominates the aggregate temporal benchmark, while \texttt{DTI-LM} remains strongest only in the lowest-overlap bucket}
+  \includegraphics[width=119mm]{Fig2.pdf}
+  \caption{Patent temporal/provenance diagnosis in terms of mean \AUPRC{} for the five-model comparison panel. For readability, the plot focuses on \texttt{base}, \texttt{RF}, and \texttt{DTI-LM}, which are the three systems that define the aggregate and slice-level ranking changes in the patent analyses; \texttt{HyperPCM} and \texttt{GraphDTA-style} remain listed in Table~\ref{tab:main-results} but do not lead a year-band or overlap-bucket slice. Panel (a) shows pooled year-band slices, with 2021 merged into the recent stratum. Panel (b) shows test-set overlap buckets computed from the saved overlap score. Error bars denote seed std over the matched 3-seed runs. \texttt{RF} dominates the aggregate temporal benchmark, while \texttt{DTI-LM} remains strongest only in the lowest-overlap bucket}
   \label{fig:patent-diagnosis}
 \end{figure}
 
@@ -232,7 +232,7 @@ We presented a validation-oriented study of distribution shift in DTI prediction
 
 \backmatter
 
-\section*{Declarations}
+\section*{Statements and Declarations}
 
 \textbf{Funding} Not applicable.
 
@@ -246,7 +246,12 @@ We presented a validation-oriented study of distribution shift in DTI prediction
 
 \clearpage
 \begin{appendices}
-\renewcommand{\theHtable}{\thetable}
+\setcounter{table}{3}
+\renewcommand{\thetable}{\arabic{table}}
+\renewcommand{\theHtable}{\arabic{table}}
+\setcounter{figure}{2}
+\renewcommand{\thefigure}{\arabic{figure}}
+\renewcommand{\theHfigure}{\arabic{figure}}
 
 \section{Patent benchmark specification}
 
