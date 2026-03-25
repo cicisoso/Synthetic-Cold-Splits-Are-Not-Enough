@@ -1,4 +1,4 @@
-\begin{thebibliography}{14}
+\begin{thebibliography}{24}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{{#1}}
 \providecommand{\urlprefix}{URL }
@@ -11,6 +11,12 @@ Ahmed KT, Ansari MI, Zhang W (2024) {DTI-LM}: language model powered
   drug--target interaction prediction. Bioinformatics 40(9).
   \doi{10.1093/bioinformatics/btae533},
   \urlprefix\url{https://doi.org/10.1093/bioinformatics/btae533}
+
+\bibitem[{Bai et~al.(2023)Bai, Miljkovi{\'c}, John, and Lu}]{bai2023drugban}
+Bai P, Miljkovi{\'c} F, John B, et~al (2023) Interpretable bilinear attention
+  network with domain adaptation improves drug--target prediction. Nature
+  Machine Intelligence 5(2):126--136. \doi{10.1038/s42256-022-00605-1},
+  \urlprefix\url{https://doi.org/10.1038/s42256-022-00605-1}
 
 \bibitem[{Davis et~al.(2011)Davis, Hunt, Herrgard, Ciceri, Wodicka, Pallares,
   Hocker, Treiber, and Zarrinkar}]{davis2011kinase}
@@ -25,13 +31,30 @@ Ektefaie Y, Shen A, Bykova D, et~al (2024) Evaluating generalizability of
   Intelligence 6(12):1512--1524. \doi{10.1038/s42256-024-00931-6},
   \urlprefix\url{https://doi.org/10.1038/s42256-024-00931-6}
 
-\bibitem[{de~la Fuente et~al.(2025)de~la Fuente, Serrano, Veleiro, Casals,
-  Vera, Pizurica, G\'omez-Cebri\'an, Puchades-Carrasco, Pineda-Lucena, Ochoa,
-  Vicent, Gevaert, and Hernaez}]{delafuente2025inductive}
-de~la Fuente J, Serrano G, Veleiro U, et~al (2025) Towards a more inductive
-  world for drug repurposing approaches. Nature Machine Intelligence
-  7(3):495--508. \doi{10.1038/s42256-025-00987-y},
-  \urlprefix\url{https://doi.org/10.1038/s42256-025-00987-y}
+\bibitem[{Graber et~al.(2025)Graber, Boz, Mayer, Rarey, Brezovska, and
+  Terfloth}]{graber2025resolvingbias}
+Graber O, Boz E, Mayer I, et~al (2025) Resolving data bias improves
+  generalization in binding affinity prediction. Nature Machine Intelligence
+  \doi{10.1038/s42256-025-01124-5},
+  \urlprefix\url{https://doi.org/10.1038/s42256-025-01124-5}
+
+\bibitem[{Huang et~al.(2022)Huang, Fu, Gao, Zhao, Roohani, Leskovec, Coley,
+  Xiao, Sun, and Zitnik}]{huang2022tdc}
+Huang K, Fu T, Gao W, et~al (2022) Therapeutics {Data Commons}: machine
+  learning datasets and tasks for drug discovery and development. In:
+  Proceedings of the Neural Information Processing Systems Track on Datasets
+  and Benchmarks, \urlprefix\url{https://tdcommons.ai}
+
+\bibitem[{Janela and Bajorath(2023)}]{simpd2023}
+Janela T, Bajorath J (2023) {SIMPD}: an algorithm for generating simulated time
+  splits for validating machine learning approaches. Journal of Cheminformatics
+  15(1). \doi{10.1186/s13321-023-00787-9},
+  \urlprefix\url{https://doi.org/10.1186/s13321-023-00787-9}
+
+\bibitem[{Landrein and Schrier(2024)}]{scaffoldsplitoverestimate2024}
+Landrein B, Schrier J (2024) Scaffold splits overestimate virtual screening
+  performance. arXiv preprint arXiv:240600873
+  \urlprefix\url{https://arxiv.org/abs/2406.00873}
 
 \bibitem[{Liu et~al.(2025)Liu, Liu, Xu, Xia, and Li}]{liu2025spdti}
 Liu S, Liu Y, Xu H, et~al (2025) {SP-DTI}: subpocket-informed transformer for
@@ -46,34 +69,38 @@ Liu T, Lin Y, Wen X, et~al (2007) {BindingDB}: a web-accessible database of
   Research 35(Database):D198--D201. \doi{10.1093/nar/gkl999},
   \urlprefix\url{https://doi.org/10.1093/nar/gkl999}
 
+\bibitem[{Luo et~al.(2023)Luo, Ding, Wei, Li, Li, and
+  Li}]{luosystematicstudy2023}
+Luo J, Ding Y, Wei Z, et~al (2023) A systematic study of key elements
+  underlying molecular property prediction. Nature Communications 14(1):6395.
+  \doi{10.1038/s41467-023-41948-6},
+  \urlprefix\url{https://doi.org/10.1038/s41467-023-41948-6}
+
 \bibitem[{Luo et~al.(2024)Luo, Wu, Sun, and Wang}]{luo2024druglamp}
 Luo Z, Wu W, Sun Q, et~al (2024) Accurate and transferable drug--target
   interaction prediction with {DrugLAMP}. Bioinformatics 40(12).
   \doi{10.1093/bioinformatics/btae693},
   \urlprefix\url{https://doi.org/10.1093/bioinformatics/btae693}
 
-\bibitem[{Ouyang et~al.(2024)Ouyang, Feng, Cui, Li, Zhang, and
-  Wang}]{ouyang2024pmmr}
-Ouyang X, Feng Y, Cui C, et~al (2024) Improving generalizability of
-  drug--target binding prediction by pre-trained multi-view molecular
-  representations. Bioinformatics 41(1). \doi{10.1093/bioinformatics/btaf002},
-  \urlprefix\url{https://doi.org/10.1093/bioinformatics/btaf002}
+\bibitem[{Nguyen et~al.(2021)Nguyen, Le, Quinn, Nguyen, Le, and
+  Venkatesh}]{nguyen2021graphdta}
+Nguyen T, Le H, Quinn TP, et~al (2021) {GraphDTA}: predicting drug--target
+  binding affinity with graph neural networks. Bioinformatics 37(8):1140--1147.
+  \doi{10.1093/bioinformatics/btaa921},
+  \urlprefix\url{https://doi.org/10.1093/bioinformatics/btaa921}
 
-\bibitem[{Robinson et~al.(2020)Robinson, Glen, and
-  Lee}]{robinson2020validating}
-Robinson MC, Glen RC, Lee AA (2020) Validating the validation: reanalyzing a
-  large-scale comparison of deep learning and machine learning models for
-  bioactivity prediction. Journal of Computer-Aided Molecular Design
-  34(7):717--730. \doi{10.1007/s10822-019-00274-0},
-  \urlprefix\url{https://doi.org/10.1007/s10822-019-00274-0}
+\bibitem[{Pahikkala et~al.(2015)Pahikkala, Airola, Pietil{\"a}, Shakyawar,
+  Szwajda, Tang, and Aittokallio}]{pahikkala2015toward}
+Pahikkala T, Airola A, Pietil{\"a} S, et~al (2015) Toward more realistic
+  drug--target interaction predictions. Briefings in Bioinformatics
+  16(2):325--337. \doi{10.1093/bib/bbu010},
+  \urlprefix\url{https://doi.org/10.1093/bib/bbu010}
 
-\bibitem[{Rodr{\'i}guez-P{\'e}rez and
-  Bajorath(2021)}]{rodriguezperez2021evaluation}
-Rodr{\'i}guez-P{\'e}rez R, Bajorath J (2021) Evaluation of multi-target deep
-  neural network models for compound potency prediction under increasingly
-  challenging test conditions. Journal of Computer-Aided Molecular Design
-  35(3):285--295. \doi{10.1007/s10822-021-00376-8},
-  \urlprefix\url{https://doi.org/10.1007/s10822-021-00376-8}
+\bibitem[{Schr{\"o}der and Schwaller(2024)}]{datasail2024}
+Schr{\"o}der R, Schwaller P (2024) {DataSAIL}: data splitting against
+  information leakage. Journal of Cheminformatics 16(1).
+  \doi{10.1186/s13321-024-00929-x},
+  \urlprefix\url{https://doi.org/10.1186/s13321-024-00929-x}
 
 \bibitem[{Shen et~al.(2025)Shen, Zhou, Zhang, and Yao}]{shen2025ddiben}
 Shen Z, Zhou M, Zhang Y, et~al (2025) Benchmarking drug--drug interaction
@@ -81,19 +108,47 @@ Shen Z, Zhou M, Zhang Y, et~al (2025) Benchmarking drug--drug interaction
   41(11). \doi{10.1093/bioinformatics/btaf569},
   \urlprefix\url{https://doi.org/10.1093/bioinformatics/btaf569}
 
-\bibitem[{Tanoori et~al.(2021)Tanoori, Zolghadri~Jahromi, and
-  Mansoori}]{tanoori2021binding}
-Tanoori B, Zolghadri~Jahromi M, Mansoori EG (2021) Binding affinity prediction
-  for binary drug--target interactions using semi-supervised transfer learning.
-  Journal of Computer-Aided Molecular Design 35(8):883--900.
-  \doi{10.1007/s10822-021-00404-7},
-  \urlprefix\url{https://doi.org/10.1007/s10822-021-00404-7}
+\bibitem[{Sheridan(2013)}]{sheridan2013timesplit}
+Sheridan RP (2013) Time-split cross-validation as a method for estimating the
+  goodness of prospective prediction. Journal of Chemical Information and
+  Modeling 53(4):783--790. \doi{10.1021/ci400084k},
+  \urlprefix\url{https://doi.org/10.1021/ci400084k}
 
-\bibitem[{Yu et~al.(2025)Yu, Zhou, Jiang, Shi, and Li}]{yu2025gsdti}
-Yu Q, Zhou C, Jiang J, et~al (2025) {GS-DTI}: a graph-structure-aware framework
-  leveraging large language models for drug--target interaction prediction.
-  Bioinformatics 41(8). \doi{10.1093/bioinformatics/btaf445},
-  \urlprefix\url{https://doi.org/10.1093/bioinformatics/btaf445}
+\bibitem[{Singh et~al.(2023)Singh, Sledzieski, Bryson, Cowen, and
+  Berger}]{singh2023conplex}
+Singh R, Sledzieski S, Bryson B, et~al (2023) Contrastive learning in protein
+  language space predicts interactions between drugs and protein targets.
+  Proceedings of the National Academy of Sciences 120(24):e2220778120.
+  \doi{10.1073/pnas.2220778120},
+  \urlprefix\url{https://doi.org/10.1073/pnas.2220778120}
+
+\bibitem[{Tossou et~al.(2024)Tossou, Bello, Mottin, Wohlwend, Lemaitre,
+  Strobelt, {Fern{\'a}ndez del R{\'i}o}, Witschard, Rumo, L{\"o}chner,
+  Engkvist, Sirockin, and Roth}]{benchmarkingcompoundactivity2024}
+Tossou P, Bello D, Mottin S, et~al (2024) Benchmarking compound activity
+  prediction for real-world drug discovery applications. Communications
+  Chemistry 7(1). \doi{10.1038/s42004-024-01204-4},
+  \urlprefix\url{https://doi.org/10.1038/s42004-024-01204-4}
+
+\bibitem[{Wang et~al.(2021)Wang, Min, Chen, and Wu}]{wang2021unified}
+Wang Y, Min Y, Chen X, et~al (2021) A unified drug--target interaction
+  prediction framework based on knowledge graph and recommendation system.
+  Nature Communications 12(1):6775. \doi{10.1038/s41467-021-27137-3},
+  \urlprefix\url{https://doi.org/10.1038/s41467-021-27137-3}
+
+\bibitem[{Wu et~al.(2018)Wu, Ramsundar, Feinberg, Gomes, Geniesse, Pappu,
+  Leswing, and Pande}]{wu2018moleculenet}
+Wu Z, Ramsundar B, Feinberg EN, et~al (2018) {MoleculeNet}: a benchmark for
+  molecular machine learning. Chemical Science 9(2):513--530.
+  \doi{10.1039/C7SC02664A}, \urlprefix\url{https://doi.org/10.1039/C7SC02664A}
+
+\bibitem[{Yang et~al.(2019)Yang, Swanson, Jin, Coley, Eiden, Gao, Guzman-Perez,
+  Hopper, Kelley, Mathea, Palmer, Settels, Jaakkola, Jensen, and
+  Barzilay}]{yang2019chemprop}
+Yang K, Swanson K, Jin W, et~al (2019) Analyzing learned molecular
+  representations for property prediction. Journal of Chemical Information and
+  Modeling 59(8):3370--3388. \doi{10.1021/acs.jcim.9b00237},
+  \urlprefix\url{https://doi.org/10.1021/acs.jcim.9b00237}
 
 \bibitem[{Zhao et~al.(2025)Zhao, Zhao, Guo, Zheng, Li, Ling, Tang, Li, and
   Wang}]{zhao2025coldstartcpi}
@@ -101,5 +156,11 @@ Zhao Q, Zhao H, Guo L, et~al (2025) {ColdstartCPI}: induced-fit theory-guided
   {DTI} predictive model with improved generalization performance. Nature
   Communications 16(1). \doi{10.1038/s41467-025-61745-7},
   \urlprefix\url{https://doi.org/10.1038/s41467-025-61745-7}
+
+\bibitem[{Zheng et~al.(2024)Zheng, Tian, Murugesan, and Tropsha}]{welqrate2024}
+Zheng Y, Tian K, Murugesan J, et~al (2024) {WelQrate}: defining the gold
+  standard in small molecule drug discovery benchmarking. In: Advances in
+  Neural Information Processing Systems,
+  \urlprefix\url{https://proceedings.neurips.cc/paper_files/paper/2024/file/5f2f8305cd1c5be7e8319aea306388ce-Paper-Datasets_and_Benchmarks_Track.pdf}
 
 \end{thebibliography}
