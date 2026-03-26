@@ -159,11 +159,13 @@ class ProteinCNN(nn.Module):
         self.dropout = nn.Dropout(dropout)
         self.act = nn.ReLU()
 
-    def forward(self, tokens: torch.Tensor) -> torch.Tensor:
+    def forward(self, tokens: torch.Tensor, return_sequence: bool = False) -> torch.Tensor:
         x = self.embedding(tokens).transpose(1, 2)
         x = self.dropout(self.act(self.conv1(x)))
         x = self.dropout(self.act(self.conv2(x)))
         x = self.dropout(self.act(self.conv3(x)))
+        if return_sequence:
+            return x.transpose(1, 2)  # (B, L, hidden_dim)
         x = torch.max(x, dim=-1).values
         return x
 
@@ -177,11 +179,13 @@ class DrugGCN(nn.Module):
         self.dropout = nn.Dropout(dropout)
         self.act = nn.ReLU()
 
-    def forward(self, batch: GeometricBatch) -> torch.Tensor:
+    def forward(self, batch: GeometricBatch, return_node_features: bool = False) -> torch.Tensor:
         x, edge_index, graph_index = batch.x, batch.edge_index, batch.batch
         x = self.dropout(self.act(self.conv1(x, edge_index)))
         x = self.dropout(self.act(self.conv2(x, edge_index)))
         x = self.dropout(self.act(self.conv3(x, edge_index)))
+        if return_node_features:
+            return x, graph_index
         pooled_mean = global_mean_pool(x, graph_index)
         pooled_max = global_max_pool(x, graph_index)
         return torch.cat([pooled_mean, pooled_max], dim=-1)
@@ -230,5 +234,191 @@ class GraphDTALite(nn.Module):
         aux = {
             "drug_embed_norm_mean": float(drug_embed.norm(dim=-1).mean().detach().cpu()),
             "target_embed_norm_mean": float(target_embed.norm(dim=-1).mean().detach().cpu()),
+        }
+        return logits, aux
+
+
+class BilinearAttention(nn.Module):
+    """Bilinear attention module inspired by DrugBAN (Bai et al., Nature MI 2023).
+
+    Computes pairwise attention between drug atom features and protein residue
+    features via a learned bilinear mapping, then pools the attended interaction
+    into a fixed-size vector.
+    """
+
+    def __init__(self, drug_dim: int, target_dim: int, hidden_dim: int = 128, n_heads: int = 2, dropout: float = 0.1):
+        super().__init__()
+        self.n_heads = n_heads
+        self.head_dim = hidden_dim // n_heads
+        self.drug_proj = nn.Linear(drug_dim, hidden_dim)
+        self.target_proj = nn.Linear(target_dim, hidden_dim)
+        self.bilinear_weights = nn.Parameter(torch.randn(n_heads, self.head_dim, self.head_dim) * 0.02)
+        self.out_proj = nn.Linear(n_heads, n_heads)
+        self.pool_drug = nn.Linear(hidden_dim, hidden_dim)
+        self.pool_target = nn.Linear(hidden_dim, hidden_dim)
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(
+        self,
+        drug_nodes: torch.Tensor,
+        drug_mask: torch.Tensor,
+        target_seq: torch.Tensor,
+        target_mask: torch.Tensor,
+    ) -> torch.Tensor:
+        """
+        Args:
+            drug_nodes: (B, N_atoms, drug_dim) padded atom features
+            drug_mask: (B, N_atoms) bool mask (True = valid)
+            target_seq: (B, L, target_dim) per-residue features
+            target_mask: (B, L) bool mask (True = valid)
+        Returns:
+            interaction: (B, n_heads * 2) pooled interaction vector
+        """
+        B = drug_nodes.size(0)
+        # project to hidden
+        d = self.drug_proj(drug_nodes)   # (B, N, H)
+        t = self.target_proj(target_seq) # (B, L, H)
+
+        # reshape for multi-head: (B, N, n_heads, head_dim)
+        d_heads = d.view(B, -1, self.n_heads, self.head_dim)
+        t_heads = t.view(B, -1, self.n_heads, self.head_dim)
+
+        # bilinear attention: for each head h, A_h[i,j] = d_i^T W_h t_j
+        # d_heads: (B, N, n_heads, hd) -> (n_heads, B, N, hd)
+        dh = d_heads.permute(2, 0, 1, 3)  # (n_heads, B, N, hd)
+        th = t_heads.permute(2, 0, 1, 3)  # (n_heads, B, L, hd)
+        # dh @ W @ th^T => (n_heads, B, N, L)
+        dW = torch.einsum("hbnd,hde->hbne", dh, self.bilinear_weights)
+        attn = torch.einsum("hbne,hble->hbnl", dW, th)  # (n_heads, B, N, L)
+
+        # mask invalid positions: need (1, B, N, L)
+        dm = drug_mask.unsqueeze(-1)   # (B, N, 1)
+        tm = target_mask.unsqueeze(1)  # (B, 1, L)
+        mask = (dm & tm).unsqueeze(0)  # (1, B, N, L)
+        attn = attn.masked_fill(~mask, float("-inf"))
+
+        # softmax over target dim for drug-attended-by-target
+        attn_d = torch.softmax(attn, dim=-1)  # (n_heads, B, N, L)
+        attn_d = attn_d.masked_fill(~mask, 0.0)
+        attn_d = self.dropout(attn_d)
+
+        # pool: attention-weighted sum over targets for each drug node, then mean over drug nodes
+        # (n_heads, B, N, L) x (n_heads, B, L, hd) -> (n_heads, B, N, hd)
+        ctx_d = torch.einsum("hbnl,hble->hbne", attn_d, th)
+        # mask and mean-pool over drug nodes
+        dm_flat = drug_mask.unsqueeze(0).unsqueeze(-1)  # (1, B, N, 1)
+        ctx_d = (ctx_d * dm_flat).sum(dim=2) / dm_flat.sum(dim=2).clamp(min=1)  # (n_heads, B, hd)
+        ctx_d = ctx_d.permute(1, 0, 2).reshape(B, -1)  # (B, n_heads * hd)
+
+        # softmax over drug dim for target-attended-by-drug
+        attn_t = torch.softmax(attn, dim=-2)  # (n_heads, B, N, L)
+        attn_t = attn_t.masked_fill(~mask, 0.0)
+        attn_t = self.dropout(attn_t)
+
+        # (n_heads, B, N, L)^T x (n_heads, B, N, hd) -> (n_heads, B, L, hd)
+        ctx_t = torch.einsum("hbnl,hbne->hble", attn_t, dh)
+        tm_flat = target_mask.unsqueeze(0).unsqueeze(-1)  # (1, B, L, 1)
+        ctx_t = (ctx_t * tm_flat).sum(dim=2) / tm_flat.sum(dim=2).clamp(min=1)  # (n_heads, B, hd)
+        ctx_t = ctx_t.permute(1, 0, 2).reshape(B, -1)  # (B, n_heads * hd)
+
+        return torch.cat([ctx_d, ctx_t], dim=-1)  # (B, 2 * n_heads * hd)
+
+
+class DrugBANLite(nn.Module):
+    """Simplified DrugBAN with bilinear attention (Bai et al., Nature MI 2023).
+
+    Uses the same GCN drug encoder and CNN protein encoder as GraphDTALite,
+    but replaces global-pool + concatenation with bilinear cross-attention
+    between atom-level and residue-level features.
+    """
+
+    def __init__(
+        self,
+        atom_dim: int,
+        protein_vocab_size: int,
+        graph_hidden_dim: int = 128,
+        graph_out_dim: int = 128,
+        protein_embed_dim: int = 64,
+        protein_hidden_dim: int = 128,
+        ban_hidden_dim: int = 128,
+        ban_n_heads: int = 2,
+        pair_hidden_dim: int = 256,
+        dropout: float = 0.1,
+    ):
+        super().__init__()
+        self.drug_encoder = DrugGCN(
+            in_dim=atom_dim,
+            hidden_dim=graph_hidden_dim,
+            out_dim=graph_out_dim,
+            dropout=dropout,
+        )
+        self.target_encoder = ProteinCNN(
+            vocab_size=protein_vocab_size,
+            embed_dim=protein_embed_dim,
+            hidden_dim=protein_hidden_dim,
+            dropout=dropout,
+        )
+        self.ban = BilinearAttention(
+            drug_dim=graph_out_dim,
+            target_dim=protein_hidden_dim,
+            hidden_dim=ban_hidden_dim,
+            n_heads=ban_n_heads,
+            dropout=dropout,
+        )
+        # BAN outputs 2 * n_heads * (ban_hidden_dim // n_heads) = 2 * ban_hidden_dim
+        ban_out_dim = 2 * ban_hidden_dim
+        self.head = nn.Sequential(
+            nn.Linear(ban_out_dim, pair_hidden_dim),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(pair_hidden_dim, pair_hidden_dim // 2),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(pair_hidden_dim // 2, 1),
+        )
+
+    def forward(self, graph_batch: GeometricBatch, target_tokens: torch.Tensor) -> tuple[torch.Tensor, dict]:
+        B = target_tokens.size(0)
+
+        # Get per-atom features from GCN
+        node_feats, graph_index = self.drug_encoder(graph_batch, return_node_features=True)
+        # node_feats: (total_atoms, out_dim), graph_index: (total_atoms,)
+
+        # Pad atom features to (B, max_atoms, out_dim)
+        max_atoms = 0
+        atom_counts = []
+        for i in range(B):
+            count = int((graph_index == i).sum())
+            atom_counts.append(count)
+            if count > max_atoms:
+                max_atoms = count
+        max_atoms = max(max_atoms, 1)
+
+        drug_nodes = torch.zeros(B, max_atoms, node_feats.size(-1), device=node_feats.device)
+        drug_mask = torch.zeros(B, max_atoms, dtype=torch.bool, device=node_feats.device)
+        for i in range(B):
+            idx = (graph_index == i)
+            n = atom_counts[i]
+            if n > 0:
+                drug_nodes[i, :n] = node_feats[idx]
+                drug_mask[i, :n] = True
+
+        # Get per-residue features from CNN
+        target_seq = self.target_encoder(target_tokens, return_sequence=True)  # (B, L', hidden)
+        # CNN with padding may change sequence length; align mask to CNN output
+        L_out = target_seq.size(1)
+        L_in = target_tokens.size(1)
+        if L_out != L_in:
+            target_mask = torch.nn.functional.pad(target_tokens > 0, (0, L_out - L_in), value=False)
+        else:
+            target_mask = target_tokens > 0  # (B, L)
+
+        # Bilinear cross-attention
+        interaction = self.ban(drug_nodes, drug_mask, target_seq, target_mask)
+
+        logits = self.head(interaction).squeeze(-1)
+        aux = {
+            "drug_atoms_mean": float(np.mean(atom_counts)),
+            "target_len_mean": float(target_mask.sum(dim=-1).float().mean().detach().cpu()),
         }
         return logits, aux

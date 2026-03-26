@@ -14,6 +14,7 @@ from torch.utils.data import DataLoader
 from raicd.benchmark_resource import ensure_benchmark_resource
 from raicd.graph_baselines import (
     AMINO_TO_INDEX,
+    DrugBANLite,
     GraphDTALite,
     GraphPairBatch,
     GraphPairDataset,
@@ -29,7 +30,7 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Train GraphDTA-style baselines on exported benchmark resources.")
     parser.add_argument("--dataset", type=str, required=True)
     parser.add_argument("--split", type=str, required=True)
-    parser.add_argument("--model", type=str, default="graphdta", choices=["graphdta"])
+    parser.add_argument("--model", type=str, default="graphdta", choices=["graphdta", "drugban"])
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--epochs", type=int, default=8)
     parser.add_argument("--batch-size", type=int, default=128)
@@ -140,16 +141,28 @@ def main() -> None:
     valid_loader = DataLoader(valid_ds, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate_graph_pairs)
     test_loader = DataLoader(test_ds, batch_size=args.batch_size, shuffle=False, num_workers=args.num_workers, collate_fn=collate_graph_pairs)
 
-    model = GraphDTALite(
-        atom_dim=atom_feature_dim(),
-        protein_vocab_size=len(AMINO_TO_INDEX) + 1,
-        graph_hidden_dim=args.graph_hidden_dim,
-        graph_out_dim=args.graph_out_dim,
-        protein_embed_dim=args.protein_embed_dim,
-        protein_hidden_dim=args.protein_hidden_dim,
-        pair_hidden_dim=args.pair_hidden_dim,
-        dropout=args.dropout,
-    ).to(device)
+    if args.model == "drugban":
+        model = DrugBANLite(
+            atom_dim=atom_feature_dim(),
+            protein_vocab_size=len(AMINO_TO_INDEX) + 1,
+            graph_hidden_dim=args.graph_hidden_dim,
+            graph_out_dim=args.graph_out_dim,
+            protein_embed_dim=args.protein_embed_dim,
+            protein_hidden_dim=args.protein_hidden_dim,
+            pair_hidden_dim=args.pair_hidden_dim,
+            dropout=args.dropout,
+        ).to(device)
+    else:
+        model = GraphDTALite(
+            atom_dim=atom_feature_dim(),
+            protein_vocab_size=len(AMINO_TO_INDEX) + 1,
+            graph_hidden_dim=args.graph_hidden_dim,
+            graph_out_dim=args.graph_out_dim,
+            protein_embed_dim=args.protein_embed_dim,
+            protein_hidden_dim=args.protein_hidden_dim,
+            pair_hidden_dim=args.pair_hidden_dim,
+            dropout=args.dropout,
+        ).to(device)
 
     pos_rate = float(train_frame["label"].mean())
     pos_weight = (1.0 - pos_rate) / max(pos_rate, 1e-6)
