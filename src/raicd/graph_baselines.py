@@ -422,3 +422,152 @@ class DrugBANLite(nn.Module):
             "target_len_mean": float(target_mask.sum(dim=-1).float().mean().detach().cpu()),
         }
         return logits, aux
+
+
+class ColdstartCPILite(nn.Module):
+    """Simplified ColdstartCPI (Zhao et al., Nature Communications 2025).
+
+    Faithful reimplementation of the core architecture: per-atom drug features
+    and per-residue protein features are concatenated with learnable global
+    tokens and processed by a Transformer self-attention layer.
+    Architecturally distinct from DrugBAN (bilinear attention) and GraphDTA
+    (global-pool + MLP): self-attention enables implicit cross-entity
+    interactions without explicit pairwise scoring.
+    """
+
+    def __init__(
+        self,
+        atom_dim: int,
+        protein_vocab_size: int,
+        graph_hidden_dim: int = 128,
+        graph_out_dim: int = 128,
+        protein_embed_dim: int = 64,
+        protein_hidden_dim: int = 128,
+        unify_dim: int = 128,
+        n_heads: int = 2,
+        pair_hidden_dim: int = 256,
+        dropout: float = 0.1,
+        max_drug_atoms: int = 100,
+        max_protein_len: int = 200,
+    ):
+        super().__init__()
+        self.max_drug_atoms = max_drug_atoms
+        self.max_protein_len = max_protein_len
+        self.unify_dim = unify_dim
+
+        # Encoders (same as GraphDTA/DrugBAN)
+        self.drug_encoder = DrugGCN(
+            in_dim=atom_dim,
+            hidden_dim=graph_hidden_dim,
+            out_dim=graph_out_dim,
+            dropout=dropout,
+        )
+        self.target_encoder = ProteinCNN(
+            vocab_size=protein_vocab_size,
+            embed_dim=protein_embed_dim,
+            hidden_dim=protein_hidden_dim,
+            dropout=dropout,
+        )
+
+        # Projection to unified dimension (like ColdstartCPI's c_m_unit / p_m_unit)
+        self.drug_proj = nn.Sequential(
+            nn.Linear(graph_out_dim, unify_dim), nn.PReLU(),
+            nn.Linear(unify_dim, unify_dim), nn.PReLU(),
+        )
+        self.target_proj = nn.Sequential(
+            nn.Linear(protein_hidden_dim, unify_dim), nn.PReLU(),
+            nn.Linear(unify_dim, unify_dim), nn.PReLU(),
+        )
+
+        # Learnable global tokens (CLS-style for drug and protein)
+        self.drug_global_token = nn.Parameter(torch.randn(1, 1, unify_dim) * 0.02)
+        self.prot_global_token = nn.Parameter(torch.randn(1, 1, unify_dim) * 0.02)
+
+        # Transformer self-attention (single layer, like ColdstartCPI)
+        self.transformer = nn.TransformerEncoderLayer(
+            d_model=unify_dim,
+            nhead=n_heads,
+            dim_feedforward=unify_dim * 4,
+            dropout=dropout,
+            batch_first=True,
+        )
+
+        # Classification head
+        self.head = nn.Sequential(
+            nn.Linear(unify_dim * 2, pair_hidden_dim),
+            nn.PReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(pair_hidden_dim, pair_hidden_dim // 2),
+            nn.PReLU(),
+            nn.Dropout(dropout),
+            nn.Linear(pair_hidden_dim // 2, 1),
+        )
+
+    def forward(self, graph_batch: GeometricBatch, target_tokens: torch.Tensor) -> tuple[torch.Tensor, dict]:
+        B = target_tokens.size(0)
+        device = target_tokens.device
+
+        # --- Per-atom drug features ---
+        node_feats, graph_index = self.drug_encoder(graph_batch, return_node_features=True)
+
+        # Pad to (B, max_drug_atoms, out_dim)
+        drug_tokens_list = []
+        drug_lens = []
+        for i in range(B):
+            idx = (graph_index == i)
+            feats = node_feats[idx][:self.max_drug_atoms]
+            n = feats.size(0)
+            drug_lens.append(n)
+            if n < self.max_drug_atoms:
+                pad = torch.zeros(self.max_drug_atoms - n, feats.size(-1), device=device)
+                feats = torch.cat([feats, pad], dim=0)
+            drug_tokens_list.append(feats)
+        drug_atoms = torch.stack(drug_tokens_list)  # (B, max_drug, out_dim)
+        drug_atoms = self.drug_proj(drug_atoms)  # (B, max_drug, unify)
+
+        # --- Per-residue protein features ---
+        target_seq = self.target_encoder(target_tokens, return_sequence=True)  # (B, L', hidden)
+        target_seq = target_seq[:, :self.max_protein_len, :]  # truncate
+        L = target_seq.size(1)
+        target_seq = self.target_proj(target_seq)  # (B, L, unify)
+
+        # --- Construct sequence: [drug_global, drug_atoms..., prot_global, prot_residues...] ---
+        drug_g = self.drug_global_token.expand(B, -1, -1)  # (B, 1, unify)
+        prot_g = self.prot_global_token.expand(B, -1, -1)  # (B, 1, unify)
+
+        sequence = torch.cat([drug_g, drug_atoms, prot_g, target_seq], dim=1)
+        # shape: (B, 1 + max_drug + 1 + L, unify)
+
+        # --- Padding mask ---
+        # drug_global is always valid (1), drug atoms have variable length, prot_global always valid (1)
+        drug_mask = torch.zeros(B, self.max_drug_atoms, dtype=torch.bool, device=device)
+        for i in range(B):
+            drug_mask[i, :drug_lens[i]] = True
+        prot_mask = (target_tokens[:, :self.max_protein_len] > 0) if self.max_protein_len <= target_tokens.size(1) else torch.ones(B, L, dtype=torch.bool, device=device)
+
+        # CNN may change length; ensure prot_mask matches
+        if prot_mask.size(1) != L:
+            prot_mask = prot_mask[:, :L]
+
+        global_true = torch.ones(B, 1, dtype=torch.bool, device=device)
+        pad_mask = torch.cat([global_true, drug_mask, global_true, prot_mask], dim=1)
+        # TransformerEncoderLayer expects src_key_padding_mask: True = IGNORE
+        src_key_padding_mask = ~pad_mask
+
+        # --- Transformer ---
+        out = self.transformer(sequence, src_key_padding_mask=src_key_padding_mask)
+
+        # Extract global tokens
+        drug_global_out = out[:, 0, :]  # (B, unify)
+        prot_global_idx = 1 + self.max_drug_atoms
+        prot_global_out = out[:, prot_global_idx, :]  # (B, unify)
+
+        # --- Classification ---
+        combined = torch.cat([drug_global_out, prot_global_out], dim=-1)  # (B, 2*unify)
+        logits = self.head(combined).squeeze(-1)
+
+        aux = {
+            "drug_atoms_mean": float(np.mean(drug_lens)),
+            "target_len_mean": float(L),
+        }
+        return logits, aux
