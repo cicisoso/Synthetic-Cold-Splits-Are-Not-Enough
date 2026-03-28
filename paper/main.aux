@@ -49,87 +49,92 @@
 \citation{welqrate2024}
 \citation{ektefaie2024generalizability}
 \citation{benchmarkingcompoundactivity2024}
+\citation{datasail2024,scaffoldsplitoverestimate2024}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Temporal and prospective validation}{5}{subsection.2.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Benchmark sensitivity across molecular ML}{5}{subsection.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Positioning of this work}{5}{subsection.2.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Similarity-aware and structure-enriched evaluation}{5}{subsection.2.5}\protected@file@percent }
 \citation{ahmed2024dtilm}
-\citation{nguyen2021graphdta}
-\citation{bai2023drugban}
-\citation{zhao2025coldstartcpi}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Positioning of this work}{6}{subsection.2.6}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {3}Benchmark Setup}{6}{section.3}\protected@file@percent }
 \newlabel{sec:setup}{{3}{6}{Benchmark Setup}{section.3}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Model panel}{6}{subsection.3.1}\protected@file@percent }
-\citation{liu2025spdti}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Benchmark taxonomy}{7}{subsection.3.2}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Benchmark taxonomy and seed-0 split statistics. Prevalence differs substantially across benchmarks, so AUPRC{} should be compared within benchmark, not across rows.}}{8}{table.1}\protected@file@percent }
-\newlabel{tab:taxonomy}{{1}{8}{Benchmark taxonomy and seed-0 split statistics. Prevalence differs substantially across benchmarks, so \AUPRC {} should be compared within benchmark, not across rows}{table.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Metrics and uncertainty}{9}{subsection.3.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Overlap diagnosis}{9}{subsection.3.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Reusable resources}{9}{subsection.3.5}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{10}{section.4}\protected@file@percent }
-\newlabel{sec:results}{{4}{10}{Results}{section.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Even synthetic cold-start rankings disagree}{10}{subsection.4.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Temporal/provenance benchmarks change the ranking}{10}{subsection.4.2}\protected@file@percent }
-\newlabel{RF1}{11}
-\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Main results: synthetic reference panel and primary temporal/provenance benchmarks. Each cell reports mean $\pm $ std over five seeds (AUPRC{} / AUROC{}). Best mean AUPRC{} per column is bold. ColdstartCPI-style uses 4 seeds on blind-start and target-cold due to one failed run.}}{11}{table.2}\protected@file@percent }
-\newlabel{tab:main-results}{{2}{11}{Main results: synthetic reference panel and primary temporal/provenance benchmarks. Each cell reports mean $\pm $ std over five seeds (\AUPRC {} / \AUROC {}). Best mean \AUPRC {} per column is bold. ColdstartCPI-style uses 4 seeds on blind-start and target-cold due to one failed run}{table.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Overlap policy within the temporal family matters}{12}{subsection.4.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}The temporal shift is structured, not monolithic}{12}{subsection.4.4}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Patent temporal diagnosis by year band and overlap bucket (AUPRC{}, mean $\pm $ seed std). Only the three models that define the aggregate and slice-level ranking changes are shown; the full panel is in Table\nobreakspace  {}\ref  {tab:main-results}. The 2021 slice (72 examples) is pooled into 2020--2021.}}{13}{table.3}\protected@file@percent }
-\newlabel{tab:patent-diagnosis-compact}{{3}{13}{Patent temporal diagnosis by year band and overlap bucket (\AUPRC {}, mean $\pm $ seed std). Only the three models that define the aggregate and slice-level ranking changes are shown; the full panel is in Table~\ref {tab:main-results}. The 2021 slice (72 examples) is pooled into 2020--2021}{table.3}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Supporting benchmarks confirm heterogeneity}{13}{subsection.4.5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces AUPRC{} delta relative to \texttt  {base} across all five primary benchmarks. \texttt  {base} defines the zero line. Prevalence differs across benchmarks, so the vertical axis should be read as a within-benchmark contrast. Full absolute values are in Table\nobreakspace  {}\ref  {tab:main-results}.}}{14}{figure.1}\protected@file@percent }
-\newlabel{fig:delta-summary}{{1}{14}{\AUPRC {} delta relative to \texttt {base} across all five primary benchmarks. \texttt {base} defines the zero line. Prevalence differs across benchmarks, so the vertical axis should be read as a within-benchmark contrast. Full absolute values are in Table~\ref {tab:main-results}}{figure.1}{}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Patent temporal diagnosis. (a)\nobreakspace  {}Year-band AUPRC{} for \texttt  {base}, \texttt  {RF}, and \texttt  {DTI-LM}. (b)\nobreakspace  {}Overlap-bucket AUPRC{}. \texttt  {RF} dominates aggregate and high-overlap strata; \texttt  {DTI-LM} leads only in the lowest-overlap bucket. Error bars: seed std.}}{15}{figure.2}\protected@file@percent }
-\newlabel{fig:patent-diagnosis}{{2}{15}{Patent temporal diagnosis. (a)~Year-band \AUPRC {} for \texttt {base}, \texttt {RF}, and \texttt {DTI-LM}. (b)~Overlap-bucket \AUPRC {}. \texttt {RF} dominates aggregate and high-overlap strata; \texttt {DTI-LM} leads only in the lowest-overlap bucket. Error bars: seed std}{figure.2}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{15}{section.5}\protected@file@percent }
-\newlabel{sec:discussion}{{5}{15}{Discussion}{section.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Implications for DTI model selection}{15}{subsection.5.1}\protected@file@percent }
-\citation{zhao2025coldstartcpi}
-\citation{luo2024druglamp}
-\citation{liu2025spdti}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Why Random Forest frequently wins}{16}{subsection.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Limitations}{16}{subsection.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{17}{section.6}\protected@file@percent }
-\newlabel{sec:conclusion}{{6}{17}{Conclusion}{section.6}{}}
+\citation{nguyen2021graphdta}
 \citation{bai2023drugban}
-\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Specification of the primary patent temporal/provenance benchmarks. The year partition is fixed; the random seed changes training stochasticity only.}}{19}{table.4}\protected@file@percent }
-\newlabel{tab:patent-spec}{{4}{19}{Specification of the primary patent temporal/provenance benchmarks. The year partition is fixed; the random seed changes training stochasticity only}{table.4}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Earlier-cutoff patent robustness probe (\texttt  {patent\_temporal\_v2017}).}}{19}{table.5}\protected@file@percent }
-\newlabel{tab:patent-v2017-results}{{5}{19}{Earlier-cutoff patent robustness probe (\texttt {patent\_temporal\_v2017})}{table.5}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {A}Patent benchmark specification}{19}{appendix.a.A}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {B}Non-patent temporal probe specification}{19}{appendix.a.B}\protected@file@percent }
-\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Specification of the non-patent temporal probe.}}{20}{table.6}\protected@file@percent }
-\newlabel{tab:nonpatent-spec}{{6}{20}{Specification of the non-patent temporal probe}{table.6}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Specification of the \texttt  {base} reference model used throughout the benchmark.}}{20}{table.7}\protected@file@percent }
-\newlabel{tab:base-spec}{{7}{20}{Specification of the \texttt {base} reference model used throughout the benchmark}{table.7}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Specification of the \texttt  {RF}, \texttt  {GraphDTA-style}, and \texttt  {DrugBAN} baselines.}}{21}{table.8}\protected@file@percent }
-\newlabel{tab:graph-spec}{{8}{21}{Specification of the \texttt {RF}, \texttt {GraphDTA-style}, and \texttt {DrugBAN} baselines}{table.8}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {C}Reference-model specification}{21}{appendix.a.C}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {D}Random Forest, graph-based, and cross-attention baseline specifications}{21}{appendix.a.D}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {E}Additional real-OOD support benchmarks}{21}{appendix.a.E}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {F}Additional robustness analyses}{21}{appendix.a.F}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {G}Paired uncertainty support}{21}{appendix.a.G}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {H}Rank concordance analysis}{21}{appendix.a.H}\protected@file@percent }
-\newlabel{sec:rank-concordance}{{H}{21}{Rank concordance analysis}{appendix.a.H}{}}
-\newlabel{RF2}{22}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Supporting real-OOD benchmarks (matched 5-seed where available, 3-seed for legacy models). Best mean AUPRC{} per row is bold.}}{22}{table.9}\protected@file@percent }
-\newlabel{tab:support}{{9}{22}{Supporting real-OOD benchmarks (matched 5-seed where available, 3-seed for legacy models). Best mean \AUPRC {} per row is bold}{table.9}{}}
-\newlabel{RF3}{23}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Robustness analyses: provenance removal, scaffold holdout, and overlap-restricted patent variants. Values are mean $\pm $ std over three seeds.}}{23}{table.10}\protected@file@percent }
-\newlabel{tab:robustness-probes}{{10}{23}{Robustness analyses: provenance removal, scaffold holdout, and overlap-restricted patent variants. Values are mean $\pm $ std over three seeds}{table.10}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Paired bootstrap support for principal ranking comparisons. Positive deltas favor the second model.}}{24}{table.11}\protected@file@percent }
-\newlabel{tab:bootstrap-summary}{{11}{24}{Paired bootstrap support for principal ranking comparisons. Positive deltas favor the second model}{table.11}{}}
-\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Rank concordance analysis. Kendall's $W$ ranges from 0 (no agreement) to 1 (perfect agreement). Spearman $\rho $ is shown for selected benchmark pairs. All analyses use the seven-model panel.}}{24}{table.12}\protected@file@percent }
-\newlabel{tab:rank-concordance}{{12}{24}{Rank concordance analysis. Kendall's $W$ ranges from 0 (no agreement) to 1 (perfect agreement). Spearman $\rho $ is shown for selected benchmark pairs. All analyses use the seven-model panel}{table.12}{}}
+\citation{zhao2025coldstartcpi}
+\citation{liu2025spdti}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Benchmark taxonomy}{8}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Metrics and uncertainty}{9}{subsection.3.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Benchmark taxonomy and seed-0 split statistics. Prevalence differs substantially across benchmarks, so AUPRC{} should be compared within benchmark, not across rows.}}{10}{table.1}\protected@file@percent }
+\newlabel{tab:taxonomy}{{1}{10}{Benchmark taxonomy and seed-0 split statistics. Prevalence differs substantially across benchmarks, so \AUPRC {} should be compared within benchmark, not across rows}{table.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Overlap diagnosis}{10}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Reusable resources}{11}{subsection.3.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {4}Results}{11}{section.4}\protected@file@percent }
+\newlabel{sec:results}{{4}{11}{Results}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Even synthetic cold-start rankings disagree}{11}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Temporal/provenance benchmarks change the ranking}{12}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Overlap policy within the temporal family matters}{12}{subsection.4.3}\protected@file@percent }
+\newlabel{RF1}{13}
+\@writefile{lot}{\contentsline {table}{\numberline {2}{\ignorespaces Main results: synthetic reference panel and primary temporal/provenance benchmarks. Each cell shows two lines: the \emph  {upper line} is AUPRC{} (mean $\pm $ std over five seeds) and the \emph  {lower line} is AUROC{}. Best mean AUPRC{} per column is bold. ColdstartCPI-style uses 4 seeds on blind-start and target-cold.}}{13}{table.2}\protected@file@percent }
+\newlabel{tab:main-results}{{2}{13}{Main results: synthetic reference panel and primary temporal/provenance benchmarks. Each cell shows two lines: the \emph {upper line} is \AUPRC {} (mean $\pm $ std over five seeds) and the \emph {lower line} is \AUROC {}. Best mean \AUPRC {} per column is bold. ColdstartCPI-style uses 4 seeds on blind-start and target-cold}{table.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}The temporal shift is structured, not monolithic}{14}{subsection.4.4}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {3}{\ignorespaces Patent temporal diagnosis by year band and overlap bucket (AUPRC{}, mean $\pm $ seed std). Only the three models that define the aggregate and slice-level ranking changes are shown; the full panel is in Table\nobreakspace  {}\ref  {tab:main-results}. The 2021 slice (72 examples) is pooled into 2020--2021.}}{15}{table.3}\protected@file@percent }
+\newlabel{tab:patent-diagnosis-compact}{{3}{15}{Patent temporal diagnosis by year band and overlap bucket (\AUPRC {}, mean $\pm $ seed std). Only the three models that define the aggregate and slice-level ranking changes are shown; the full panel is in Table~\ref {tab:main-results}. The 2021 slice (72 examples) is pooled into 2020--2021}{table.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces AUPRC{} delta relative to \texttt  {base} across all five primary benchmarks. \texttt  {base} defines the zero line. Prevalence differs across benchmarks, so the vertical axis should be read as a within-benchmark contrast. Full absolute values are in Table\nobreakspace  {}\ref  {tab:main-results}.}}{15}{figure.1}\protected@file@percent }
+\newlabel{fig:delta-summary}{{1}{15}{\AUPRC {} delta relative to \texttt {base} across all five primary benchmarks. \texttt {base} defines the zero line. Prevalence differs across benchmarks, so the vertical axis should be read as a within-benchmark contrast. Full absolute values are in Table~\ref {tab:main-results}}{figure.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Supporting benchmarks confirm heterogeneity}{15}{subsection.4.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Patent temporal diagnosis. (a)\nobreakspace  {}Year-band AUPRC{} for \texttt  {base}, \texttt  {RF}, and \texttt  {DTI-LM}. (b)\nobreakspace  {}Overlap-bucket AUPRC{}. \texttt  {RF} dominates aggregate and high-overlap strata; \texttt  {DTI-LM} leads only in the lowest-overlap bucket. Error bars: seed std.}}{16}{figure.2}\protected@file@percent }
+\newlabel{fig:patent-diagnosis}{{2}{16}{Patent temporal diagnosis. (a)~Year-band \AUPRC {} for \texttt {base}, \texttt {RF}, and \texttt {DTI-LM}. (b)~Overlap-bucket \AUPRC {}. \texttt {RF} dominates aggregate and high-overlap strata; \texttt {DTI-LM} leads only in the lowest-overlap bucket. Error bars: seed std}{figure.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Discussion}{17}{section.5}\protected@file@percent }
+\newlabel{sec:discussion}{{5}{17}{Discussion}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Implications for DTI model selection}{17}{subsection.5.1}\protected@file@percent }
+\citation{zhao2025coldstartcpi}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Why Random Forest frequently wins}{18}{subsection.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Limitations}{18}{subsection.5.3}\protected@file@percent }
+\citation{liu2025spdti}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{20}{section.6}\protected@file@percent }
+\newlabel{sec:conclusion}{{6}{20}{Conclusion}{section.6}{}}
+\citation{bai2023drugban}
+\citation{zhao2025coldstartcpi}
+\@writefile{lot}{\contentsline {table}{\numberline {4}{\ignorespaces Specification of the primary patent temporal/provenance benchmarks. The year partition is fixed; the random seed changes training stochasticity only.}}{22}{table.4}\protected@file@percent }
+\newlabel{tab:patent-spec}{{4}{22}{Specification of the primary patent temporal/provenance benchmarks. The year partition is fixed; the random seed changes training stochasticity only}{table.4}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {5}{\ignorespaces Earlier-cutoff patent robustness probe (\texttt  {patent\_temporal\_v2017}).}}{22}{table.5}\protected@file@percent }
+\newlabel{tab:patent-v2017-results}{{5}{22}{Earlier-cutoff patent robustness probe (\texttt {patent\_temporal\_v2017})}{table.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {A}Patent benchmark specification}{22}{appendix.a.A}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {B}Non-patent temporal probe specification}{22}{appendix.a.B}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {6}{\ignorespaces Specification of the non-patent temporal probe.}}{23}{table.6}\protected@file@percent }
+\newlabel{tab:nonpatent-spec}{{6}{23}{Specification of the non-patent temporal probe}{table.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Specification of the \texttt  {base} reference model used throughout the benchmark.}}{23}{table.7}\protected@file@percent }
+\newlabel{tab:base-spec}{{7}{23}{Specification of the \texttt {base} reference model used throughout the benchmark}{table.7}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Specification of \texttt  {DTI-LM} and \texttt  {HyperPCM} baselines.}}{24}{table.8}\protected@file@percent }
+\newlabel{tab:lm-spec}{{8}{24}{Specification of \texttt {DTI-LM} and \texttt {HyperPCM} baselines}{table.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {C}Reference-model specification}{24}{appendix.a.C}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {D}Language-model baseline specifications}{24}{appendix.a.D}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {E}Random Forest, graph-based, Transformer-fusion, and cross-attention baseline specifications}{24}{appendix.a.E}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {F}Additional real-OOD support benchmarks}{24}{appendix.a.F}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {G}Additional robustness analyses}{24}{appendix.a.G}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {H}Paired uncertainty support}{24}{appendix.a.H}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {I}Rank concordance analysis}{24}{appendix.a.I}\protected@file@percent }
+\newlabel{sec:rank-concordance}{{I}{24}{Rank concordance analysis}{appendix.a.I}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Specification of the \texttt  {RF}, \texttt  {GraphDTA-style}, and \texttt  {DrugBAN} baselines.}}{25}{table.9}\protected@file@percent }
+\newlabel{tab:graph-spec}{{9}{25}{Specification of the \texttt {RF}, \texttt {GraphDTA-style}, and \texttt {DrugBAN} baselines}{table.9}{}}
+\newlabel{RF2}{26}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Supporting real-OOD benchmarks (matched 5-seed where available, 3-seed for legacy models). Best mean AUPRC{} per row is bold.}}{26}{table.10}\protected@file@percent }
+\newlabel{tab:support}{{10}{26}{Supporting real-OOD benchmarks (matched 5-seed where available, 3-seed for legacy models). Best mean \AUPRC {} per row is bold}{table.10}{}}
+\newlabel{RF3}{27}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Robustness analyses: provenance removal, scaffold holdout, and overlap-restricted patent variants. Values are mean $\pm $ std over three seeds.}}{27}{table.11}\protected@file@percent }
+\newlabel{tab:robustness-probes}{{11}{27}{Robustness analyses: provenance removal, scaffold holdout, and overlap-restricted patent variants. Values are mean $\pm $ std over three seeds}{table.11}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Paired bootstrap support for principal ranking comparisons (based on the seed-0 prediction set). Each row shows \texttt  {A $-$ B}; a positive delta means \texttt  {A} outperforms \texttt  {B}. Note: deltas here are sample-level paired bootstrap on a single seed; they may differ slightly from the 5-seed mean deltas in Table\nobreakspace  {}\ref  {tab:main-results} because the table reports cross-seed averages.}}{28}{table.12}\protected@file@percent }
+\newlabel{tab:bootstrap-summary}{{12}{28}{Paired bootstrap support for principal ranking comparisons (based on the seed-0 prediction set). Each row shows \texttt {A $-$ B}; a positive delta means \texttt {A} outperforms \texttt {B}. Note: deltas here are sample-level paired bootstrap on a single seed; they may differ slightly from the 5-seed mean deltas in Table~\ref {tab:main-results} because the table reports cross-seed averages}{table.12}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces Rank concordance analysis. Kendall's $W$ ranges from 0 (no agreement) to 1 (perfect agreement). Spearman $\rho $ is shown for selected benchmark pairs. All analyses use the seven-model panel.}}{28}{table.13}\protected@file@percent }
+\newlabel{tab:rank-concordance}{{13}{28}{Rank concordance analysis. Kendall's $W$ ranges from 0 (no agreement) to 1 (perfect agreement). Spearman $\rho $ is shown for selected benchmark pairs. All analyses use the seven-model panel}{table.13}{}}
 \bibdata{references}
 \bibcite{ahmed2024dtilm}{{1}{2024}{{Ahmed et~al.}}{{Ahmed, Ansari, and Zhang}}}
-\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces Reusable benchmark artifacts released with each split.}}{25}{table.13}\protected@file@percent }
-\newlabel{tab:resource-release}{{13}{25}{Reusable benchmark artifacts released with each split}{table.13}{}}
-\@writefile{toc}{\contentsline {section}{\numberline {I}Reusable benchmark resources}{25}{appendix.a.I}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {J}Versioned release snapshot}{25}{appendix.a.J}\protected@file@percent }
 \bibcite{bai2023drugban}{{2}{2023}{{Bai et~al.}}{{Bai, Miljkovi{\'c}, John, and Lu}}}
 \bibcite{davis2011kinase}{{3}{2011}{{Davis et~al.}}{{Davis, Hunt, Herrgard, Ciceri, Wodicka, Pallares, Hocker, Treiber, and Zarrinkar}}}
+\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Reusable benchmark artifacts released with each split.}}{29}{table.14}\protected@file@percent }
+\newlabel{tab:resource-release}{{14}{29}{Reusable benchmark artifacts released with each split}{table.14}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {J}Reusable benchmark resources}{29}{appendix.a.J}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {K}Versioned release snapshot}{29}{appendix.a.K}\protected@file@percent }
 \bibcite{ektefaie2024generalizability}{{4}{2024}{{Ektefaie et~al.}}{{Ektefaie, Shen, Bykova, Marin, Zitnik, and Farhat}}}
 \bibcite{graber2025resolvingbias}{{5}{2025}{{Graber et~al.}}{{Graber, Boz, Mayer, Rarey, Brezovska, and Terfloth}}}
 \bibcite{huang2022tdc}{{6}{2022}{{Huang et~al.}}{{Huang, Fu, Gao, Zhao, Roohani, Leskovec, Coley, Xiao, Sun, and Zitnik}}}
@@ -151,4 +156,4 @@
 \bibcite{yang2019chemprop}{{22}{2019}{{Yang et~al.}}{{Yang, Swanson, Jin, Coley, Eiden, Gao, Guzman-Perez, Hopper, Kelley, Mathea, Palmer, Settels, Jaakkola, Jensen, and Barzilay}}}
 \bibcite{zhao2025coldstartcpi}{{23}{2025}{{Zhao et~al.}}{{Zhao, Zhao, Guo, Zheng, Li, Ling, Tang, Li, and Wang}}}
 \bibcite{welqrate2024}{{24}{2024}{{Zheng et~al.}}{{Zheng, Tian, Murugesan, and Tropsha}}}
-\gdef \@abspage@last{29}
+\gdef \@abspage@last{33}
