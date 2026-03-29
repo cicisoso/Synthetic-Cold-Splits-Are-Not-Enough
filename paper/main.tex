@@ -43,7 +43,7 @@ Predicting drug--target interactions (DTIs) for novel compounds or proteins is a
 
 This assumption, however, has not been directly tested against temporal and provenance shifts in DTI. In adjacent domains, mounting evidence shows that evaluation design can change model rankings: time-split cross-validation better predicts prospective performance than random splits in QSAR \citep{sheridan2013timesplit}; scaffold splits and random splits can disagree on the best molecular property predictor \citep{yang2019chemprop}; and domain-shifted evaluation alters conclusions in drug--drug interaction and molecular generalizability studies \citep{ektefaie2024generalizability,shen2025ddiben}. Large-scale benchmarking efforts such as MoleculeNet \citep{wu2018moleculenet} and the Therapeutics Data Commons \citep{huang2022tdc} have further highlighted that no single model dominates across all tasks and splits. Yet in DTI specifically, the question of whether \emph{synthetic cold-start rankings transfer to temporal/provenance-shifted settings} has not been posed as a controlled experiment.
 
-We address this gap. Rather than proposing a new architecture, we construct a systematic benchmark study that directly compares model rankings across synthetic cold-start and temporal/provenance evaluation axes. We use a seven-model panel deliberately spanning the major architectural families in current DTI research: a descriptor-based MLP (\texttt{base}), a Random Forest on the same descriptors (\texttt{RF}), two language-model baselines (\texttt{DTI-LM} and \texttt{HyperPCM}), a graph-based baseline (\texttt{GraphDTA-style}), and a cross-attention baseline (\texttt{DrugBAN}). This panel is evaluated on seven benchmarks organized into three families: synthetic cold-start (\texttt{BindingDB\_Kd}), temporal/provenance (patent and non-patent BindingDB time splits), and supporting target-cold OOD (\texttt{BindingDB\_Ki}, \texttt{DAVIS}).
+We address this gap. Rather than proposing a new architecture, we construct a systematic benchmark study that directly compares model rankings across synthetic cold-start and temporal/provenance evaluation axes. We use a seven-model panel deliberately spanning the major architectural families in current DTI research: a descriptor-based MLP (\texttt{base}), a Random Forest on the same descriptors (\texttt{RF}), two language-model baselines (\texttt{DTI-LM} and \texttt{HyperPCM}), a graph-based baseline (\texttt{GraphDTA-style}), a cross-attention baseline (\texttt{DrugBAN}), and a Transformer-fusion baseline designed for cold-start scenarios (\texttt{ColdstartCPI-style}). This panel is evaluated on seven benchmarks—five primary and two supporting—organized into three families: synthetic cold-start (\texttt{BindingDB\_Kd}), temporal/provenance (patent and non-patent BindingDB time splits), and supporting target-cold OOD (\texttt{BindingDB\_Ki}, \texttt{DAVIS}).
 
 Our main contributions are:
 \begin{enumerate}
@@ -105,7 +105,7 @@ We deliberately selected seven models spanning the major architectural families 
 
 This panel is not exhaustive—important architectures such as SP-DTI \citep{liu2025spdti} are not included—but it covers seven distinct architectural families including a model specifically designed for cold-start scenarios, which is sufficient to demonstrate that benchmark sensitivity is a cross-family phenomenon.
 
-\textbf{Training fairness.} To ensure that ranking differences reflect benchmark semantics rather than tuning asymmetry, we applied a uniform optimization protocol across all neural models: AdamW with learning rate $10^{-3}$, weight decay $10^{-4}$, BCE-with-logits loss with class-balanced positive weighting, and early stopping by validation \AUPRC{} within a fixed epoch budget (6--8 epochs). Hyperparameters were not individually tuned per model--benchmark combination; each architecture uses a single configuration across all benchmarks (Appendix Tables~\ref{tab:base-spec} and \ref{tab:graph-spec}). For \texttt{DTI-LM} and \texttt{HyperPCM}, the pretrained language-model encoders (ChemBERTa and ESM-2) are frozen; only the downstream MLP is trained. \texttt{RF} uses \texttt{scikit-learn} defaults with $400$ estimators and balanced class weighting. This design choice sacrifices per-model peak performance in favor of commensurable tuning effort, which is the appropriate trade-off for a study whose conclusion is about ranking stability rather than absolute performance. The reported rankings should therefore be interpreted as reflecting a fixed-tuning-budget regime; individual models might achieve higher absolute performance under dedicated tuning. In particular, language-model and cross-attention approaches may benefit from encoder fine-tuning or larger epoch budgets that our protocol does not provide. However, the ranking instability across benchmark axes is unlikely to vanish under richer tuning, because the reversals arise from benchmark-level distributional shift (e.g., drug-cold versus target-cold extrapolation demands) rather than from underfitting of a particular model family. We encourage future work to test this conjecture with per-model optimized configurations.
+\textbf{Training fairness.} To ensure that ranking differences reflect benchmark semantics rather than tuning asymmetry, we applied a uniform optimization protocol across all neural models: AdamW with learning rate $10^{-3}$, weight decay $10^{-4}$, BCE-with-logits loss with class-balanced positive weighting, and early stopping by validation \AUPRC{} within a fixed epoch budget (6--8 epochs). Hyperparameters were not individually tuned per model--benchmark combination; each architecture uses a single configuration across all benchmarks (Appendix Tables~\ref{tab:base-spec} and \ref{tab:graph-spec}). For \texttt{DTI-LM} and \texttt{HyperPCM}, the pretrained language-model encoders (ChemBERTa and ESM-2) are frozen; only the downstream MLP is trained. \texttt{RF} uses \texttt{scikit-learn} defaults with $400$ estimators and balanced class weighting. This design choice sacrifices per-model peak performance in favor of commensurable tuning effort. The reported rankings should therefore be interpreted as reflecting a fixed-tuning-budget regime; individual models might achieve higher absolute performance under dedicated tuning. In particular, language-model and cross-attention approaches may benefit from encoder fine-tuning or larger epoch budgets that our protocol does not provide. Whether the observed ranking instability would persist under per-model optimized configurations is an open question that we cannot answer from the present data; however, we note that the reversals occur across benchmark-level distributional axes (drug-cold versus target-cold, synthetic versus temporal) rather than along a single difficulty gradient, which suggests that tuning alone is unlikely to eliminate them entirely.
 
 \subsection{Benchmark taxonomy}
 
@@ -113,7 +113,7 @@ We organize benchmarks into three families (Table~\ref{tab:taxonomy}):
 
 \textbf{Synthetic cold-start} (\texttt{BindingDB\_Kd}). Three split definitions—\texttt{unseen\_drug} (S2 in the Pahikkala taxonomy), \texttt{unseen\_target} (S3), and \texttt{blind\_start} (S4, both drug and target unseen)—each removing different forms of entity overlap. These are the standard evaluation settings used in most recent DTI papers.
 
-\textbf{Temporal/provenance}. Two year-based BindingDB benchmarks: a \emph{patent} split (\texttt{patent\_temporal}; train 2013--2017, validation 2018, test 2019--2021; 142K/41K/49K rows), and a \emph{non-patent} split (\texttt{nonpatent\_temporal}; train 1977--2018, validation 2019, test 2020--2023; 36K/3K/7K rows), constructed from the official BindingDB release after excluding patent-derived entries. The non-patent benchmark is critical because it controls for the patent-provenance confound: if rankings change only on the patent benchmark, the effect might be driven by patent curation rather than temporal shift per se. We describe both as ``temporal/provenance OOD'' because even the non-patent benchmark mixes time shift with changes in assay composition and journal sourcing.
+\textbf{Temporal/provenance}. Two year-based BindingDB benchmarks: a \emph{patent} split (\texttt{patent\_temporal}; train 2013--2017, validation 2018, test 2019--2021; 142K/41K/49K rows), and a \emph{non-patent} split (\texttt{nonpatent\_temporal}; train 1977--2018, validation 2019, test 2020--2023; 36K/3K/7K rows), constructed from the official BindingDB release after excluding patent-derived entries. The non-patent benchmark serves as a partial control for the patent-provenance confound: if rankings change only on the patent benchmark, the effect might be driven by patent curation rather than temporal shift per se. We describe both as ``temporal/provenance OOD'' because even the non-patent benchmark mixes time shift with changes in assay composition and journal sourcing.
 
 \textbf{Supporting target-cold OOD}. \texttt{BindingDB\_Ki / unseen\_target} and \texttt{DAVIS / unseen\_target} provide shifted target-cold settings that test stability across assay and dataset boundaries.
 
@@ -144,7 +144,7 @@ Within the temporal family, we further construct two \emph{overlap-restricted va
 
 \subsection{Metrics and uncertainty}
 
-We report \AUPRC{} as the primary metric and \AUROC{} as a secondary check. \AUPRC{} is emphasized because the central question concerns imbalanced ranking quality. Because prevalence ranges from 0.06 (\texttt{DAVIS}) to 0.57 (patent), absolute \AUPRC{} is compared only \emph{within} a benchmark. All benchmarks use matched five-seed evaluation. Paired bootstrap confidence intervals (10,000 resamples) support the principal ranking comparisons; Appendix Table~\ref{tab:bootstrap-summary} collects these intervals.
+We report \AUPRC{} as the primary metric and \AUROC{} as a secondary check. \AUPRC{} is emphasized because the central question concerns imbalanced ranking quality. Because prevalence ranges from 0.06 (\texttt{DAVIS}) to 0.57 (patent), absolute \AUPRC{} is compared only \emph{within} a benchmark. All benchmarks use matched five-seed evaluation (four seeds for \texttt{ColdstartCPI-style} on two synthetic splits where one seed failed to converge). The primary evidence for ranking instability comes from the cross-seed mean comparisons in Table~\ref{tab:main-results} and the Kendall's $W$ analysis (Appendix Section~\ref{sec:rank-concordance}). As a supplementary check, we also report per-seed paired bootstrap confidence intervals (10,000 resamples on each seed's test-set prediction vector); Appendix Table~\ref{tab:bootstrap-summary} collects these intervals.
 
 \subsection{Overlap diagnosis}
 
@@ -165,7 +165,7 @@ We begin with the \texttt{BindingDB\_Kd} synthetic panel (Table~\ref{tab:main-re
 
 This already challenges the common practice of reporting a single cold-start result: the winner on drug-cold is not the winner on target-cold, even within the same dataset. The effect spans all seven architectures and reflects the different demands that drug-side versus target-side extrapolation place on the representation and the learner.
 
-A scaffold-restricted control sharpens this further. When entity holdout is replaced with a Murcko-scaffold split (\texttt{scaffold\_drug}), the earlier \texttt{HyperPCM} edge over \texttt{base} on the drug side vanishes: the paired bootstrap CI for \texttt{HyperPCM}$\,-\,$\texttt{base} crosses zero (Appendix Table~\ref{tab:robustness-probes}). The synthetic panel is useful, but its apparent best model depends on how chemically strict the split is.
+A scaffold-restricted control sharpens this further. Under \texttt{unseen\_drug}, held-out compounds still share high structural similarity with training (median nearest-train Tanimoto $\approx 0.77$; see released overlap statistics). When entity holdout is replaced with a stricter Murcko-scaffold split (\texttt{scaffold\_drug}), the \texttt{HyperPCM}$\,-\,$\texttt{base} difference becomes statistically indistinguishable (paired bootstrap CI crosses zero; Appendix Table~\ref{tab:robustness-probes}). The synthetic panel is therefore useful, but its apparent model ordering depends on how chemically strict the split definition is.
 
 \begin{sidewaystable*}[p]
   \centering
@@ -181,7 +181,7 @@ A scaffold-restricted control sharpens this further. When entity holdout is repl
     \texttt{base} &
     \shortstack[c]{0.6004 $\pm$ 0.0576\\0.8209 $\pm$ 0.0184} &
     \shortstack[c]{0.4296 $\pm$ 0.0770\\0.7184 $\pm$ 0.0340} &
-    \shortstack[c]{\textbf{0.5739 $\pm$ 0.0778}\\0.8076 $\pm$ 0.0416} &
+    \shortstack[c]{\textbf{0.5739 $\pm$ 0.0778}\\\textbf{0.8076 $\pm$ 0.0416}} &
     \shortstack[c]{0.7770 $\pm$ 0.0072\\0.7234 $\pm$ 0.0094} &
     \shortstack[c]{0.6348 $\pm$ 0.0141\\0.7337 $\pm$ 0.0065} \\
     \texttt{RF} &
@@ -193,7 +193,7 @@ A scaffold-restricted control sharpens this further. When entity holdout is repl
     \texttt{DTI-LM} &
     \shortstack[c]{0.5268 $\pm$ 0.0513\\0.7670 $\pm$ 0.0262} &
     \shortstack[c]{0.3510 $\pm$ 0.0802\\0.6561 $\pm$ 0.0430} &
-    \shortstack[c]{0.5300 $\pm$ 0.0818\\\textbf{0.8072 $\pm$ 0.0227}} &
+    \shortstack[c]{0.5300 $\pm$ 0.0818\\0.8072 $\pm$ 0.0227} &
     \shortstack[c]{0.7850 $\pm$ 0.0052\\0.7394 $\pm$ 0.0041} &
     \shortstack[c]{0.6437 $\pm$ 0.0372\\0.7539 $\pm$ 0.0172} \\
     \texttt{HyperPCM} &
@@ -228,13 +228,13 @@ A scaffold-restricted control sharpens this further. When entity holdout is repl
 
 We next evaluate the same panel on the primary temporal/provenance benchmarks (Table~\ref{tab:main-results}, last two columns). On \texttt{patent\_temporal}, \texttt{RF} achieves the highest \AUPRC{} ($0.8240$), followed by \texttt{DTI-LM} ($0.7850$) and \texttt{base} ($0.7770$). \texttt{ColdstartCPI-style} ($0.6285$) ranks last, far below all other models. The key observation is \emph{not} that \texttt{RF} wins—it is that the ranking differs from the synthetic panel (where \texttt{base} led on target-cold) and that the ordering among neural models also shifts (\texttt{DTI-LM} now outperforms \texttt{HyperPCM}, reversing the blind-start pattern).
 
-The non-patent temporal benchmark strengthens this conclusion. On \texttt{nonpatent\_temporal}, \texttt{RF} again leads ($0.7201$), with \texttt{DTI-LM} ($0.6437$) and \texttt{GraphDTA-style} ($0.6289$) above \texttt{base} ($0.6348$). Because this benchmark excludes patent-derived data, the ranking change cannot be attributed solely to patent-provenance curation. The temporal/provenance shift genuinely produces different model orderings from the synthetic cold-start panel.
+The non-patent temporal benchmark strengthens this conclusion. On \texttt{nonpatent\_temporal}, \texttt{RF} again leads ($0.7201$), followed by \texttt{DTI-LM} ($0.6437$), \texttt{base} ($0.6348$), and \texttt{GraphDTA-style} ($0.6289$). Because this benchmark excludes patent-derived data, the ranking change cannot be attributed solely to patent-provenance curation. The temporal/provenance shift genuinely produces different model orderings from the synthetic cold-start panel.
 
 \subsection{Overlap policy within the temporal family matters}
 
 Even within the patent temporal family, the winner is sensitive to how much entity or pair recurrence is allowed (Appendix Table~\ref{tab:robustness-probes}). In the \texttt{pair\_novel} variant—where all test drug--target pairs are absent from training—\texttt{DTI-LM} becomes the \AUPRC{} leader ($0.7491$), overtaking \texttt{RF} ($0.7393$), and the paired bootstrap CI for \texttt{DTI-LM}$\,-\,$\texttt{RF} is strictly positive. In the \texttt{drug\_novel} variant, \texttt{DTI-LM} again leads ($0.7402$ vs.\ $0.7356$ for \texttt{RF}).
 
-This is an important finding: the identity of the best model changes not only across benchmark families but also across overlap policies \emph{within} a single temporal benchmark. It implies that aggregate temporal rankings can be dominated by the easy, high-overlap portion of the test set, and that the model best suited for genuinely novel predictions may differ from the aggregate winner.
+This is an important finding: the identity of the best model changes not only across benchmark families but also across overlap policies \emph{within} a single temporal benchmark. It implies that aggregate temporal rankings can be dominated by the easy, high-overlap portion of the test set, and that the model best suited for low-overlap predictions may differ from the aggregate winner.
 
 An earlier-cutoff probe (\texttt{patent\_temporal\_v2017}) preserves the \texttt{DTI-LM}$\,>\,$\texttt{base} ordering (Appendix Table~\ref{tab:patent-v2017-results}), indicating that the effect is not an artifact of a particular year boundary.
 
@@ -285,7 +285,7 @@ This structured pattern explains the instability: aggregate rankings are a mixtu
 
 \texttt{BindingDB\_Ki / unseen\_target} and \texttt{DAVIS / unseen\_target} provide external checks on ranking stability (Appendix Table~\ref{tab:support}). On \texttt{Ki}, \texttt{base} leads ($0.6934$), ahead of all other models including \texttt{DTI-LM} ($0.6648$), \texttt{RF} ($0.6328$), and \texttt{DrugBAN} ($0.6121$). On \texttt{DAVIS}, \texttt{RF} regains the lead ($0.4408$), while \texttt{DrugBAN} ($0.3164$) falls to the bottom. Neither benchmark recovers a stable winner, reinforcing the main finding. These supporting benchmarks should not be over-interpreted as direct evidence for the temporal/provenance argument, since they differ from the main \texttt{BindingDB\_Kd} setting in assay type and dataset source; their role is to demonstrate that ranking instability extends beyond the primary benchmark family.
 
-\textbf{Metric robustness.} The ranking instability documented above is not an artifact of the \AUPRC{} metric. Across the five primary benchmarks, the identity of the best model under \AUROC{} agrees with \AUPRC{} in four of five cases (Table~\ref{tab:main-results}). A Kendall's $W$ rank concordance analysis confirms low cross-benchmark agreement under both threshold-free metrics: $W = 0.378$ (\AUPRC{}) and $W = 0.374$ (\AUROC{}) across all five benchmarks (Appendix Section~\ref{sec:rank-concordance}). The ranking non-transferability conclusion is therefore supported by two independent threshold-free metrics. Screening-oriented metrics such as enrichment factor or BEDROC would add useful context for low-prevalence benchmarks like \texttt{DAVIS}, but these require threshold or weighting choices that introduce additional benchmarking decisions; we leave them to future extensions.
+\textbf{Metric robustness.} The ranking instability documented above is not an artifact of the \AUPRC{} metric. Across the five primary benchmarks, the identity of the best model under \AUROC{} agrees with \AUPRC{} in all five primary benchmarks (Table~\ref{tab:main-results}). A Kendall's $W$ rank concordance analysis confirms low cross-benchmark agreement under both threshold-free metrics: $W = 0.378$ (\AUPRC{}) and $W = 0.374$ (\AUROC{}) across all five benchmarks (Appendix Section~\ref{sec:rank-concordance}). The ranking non-transferability conclusion is therefore supported by two independent threshold-free metrics. Screening-oriented metrics such as enrichment factor or BEDROC would add useful context for low-prevalence benchmarks like \texttt{DAVIS}, but these require threshold or weighting choices that introduce additional benchmarking decisions; we leave them to future extensions.
 
 %% ============================================================
 \section{Discussion}
@@ -294,12 +294,12 @@ This structured pattern explains the instability: aggregate rankings are a mixtu
 
 \subsection{Implications for DTI model selection}
 
-The central message is straightforward: a single synthetic cold-start split is not sufficient evidence for DTI generalization. Our seven-model panel shows that the winner changes across (a)~cold-start regimes, (b)~synthetic versus temporal/provenance evaluation, and (c)~overlap policies within a temporal benchmark. For CADD practitioners, the results translate into scenario-specific guidance:
+The central message is straightforward: a single synthetic cold-start split is not sufficient evidence for DTI generalization. Our seven-model panel shows that the winner changes across (a)~cold-start regimes, (b)~synthetic versus temporal/provenance evaluation, and (c)~overlap policies within a temporal benchmark. While this study does not provide direct evidence for model selection in specific drug-design workflows, the observed patterns suggest how different CADD scenarios map onto different evaluation regimes:
 
 \begin{itemize}
-    \item \textbf{Hit triage and lead expansion} (new compounds against known targets): the drug-cold regime is most relevant. Here \texttt{RF} and descriptor-based models dominate because held-out compounds remain structurally close to training scaffolds, so local interpolation suffices. A temporal/provenance benchmark should be checked in parallel, because patent-era compounds may introduce provenance-driven ranking shifts.
-    \item \textbf{Target deconvolution and target-family extrapolation} (known compounds against new or distant targets): the target-cold regime applies, where \texttt{base} and language-model baselines outperform \texttt{RF}. In this regime, the overlap-bucket diagnosis shows that the low-overlap slice—where novel target predictions actually matter—favors \texttt{DTI-LM}, even though the aggregate benchmark is won by a different model. Practitioners should evaluate models on the low-overlap stratum rather than the aggregate.
-    \item \textbf{Prospective virtual screening under temporal shift}: the patent temporal benchmark is the closest proxy. The aggregate winner (\texttt{RF}) benefits from high-overlap pairs that recur across years; when pair or drug novelty is enforced, \texttt{DTI-LM} overtakes \texttt{RF}. This means that for genuinely novel screening campaigns, the aggregate temporal leaderboard may overstate tree-ensemble performance.
+    \item \textbf{New-compound prioritization} (drug-cold regime): our data show that descriptor-based models (\texttt{RF}) tend to lead when held-out compounds remain structurally close to training scaffolds. However, a parallel temporal/provenance check is advisable, because the drug-cold winner does not necessarily transfer.
+    \item \textbf{New-target extrapolation} (target-cold regime): the data suggest that \texttt{base} and language-model baselines outperform \texttt{RF} on target-cold splits. The overlap-bucket diagnosis further suggests that model selection for the hardest (lowest-overlap) predictions may differ from the aggregate ranking, though this interpretation is drawn from the patent temporal benchmark rather than a pure target-cold setting.
+    \item \textbf{Temporal deployment}: the patent temporal benchmark shows that aggregate rankings can be dominated by high-overlap pairs. When pair or drug novelty is enforced, the leader changes. This observation is consistent with the hypothesis that aggregate temporal leaderboards may not reflect performance on the most novel predictions, but a direct prospective test would be needed to confirm this.
 \end{itemize}
 
 Three reporting recommendations follow:
@@ -311,13 +311,13 @@ Three reporting recommendations follow:
 
 \subsection{Why Random Forest frequently wins}
 
-An unexpected empirical pattern deserves interpretation. \texttt{RF} leads on synthetic \texttt{unseen\_drug}, \texttt{blind\_start}, and both temporal/provenance panels, yet trails on \texttt{unseen\_target} and \texttt{Ki}. Because \texttt{RF} and \texttt{base} use identical descriptors, the pattern is not about representation. We interpret it as \emph{descriptor-space interpolation under drug-side support}: when held-out drugs remain similar to training scaffolds (median nearest-train Tanimoto 0.77 on \texttt{unseen\_drug}), tree ensembles exploit local descriptor neighborhoods effectively. When the dominant challenge shifts to protein-side extrapolation, the hashed k-mer representation becomes the bottleneck and the \texttt{RF} advantage vanishes.
+An unexpected empirical pattern deserves interpretation. \texttt{RF} leads on synthetic \texttt{unseen\_drug}, \texttt{blind\_start}, and both temporal/provenance panels, yet trails on \texttt{unseen\_target} and \texttt{Ki}. Because \texttt{RF} and \texttt{base} use identical descriptors, the pattern is not about representation. We interpret it as \emph{descriptor-space interpolation under drug-side support}: when held-out drugs remain structurally similar to training scaffolds (as indicated by the high overlap scores in the released split statistics), tree ensembles exploit local descriptor neighborhoods effectively. When the dominant challenge shifts to protein-side extrapolation, the hashed k-mer representation becomes the bottleneck and the \texttt{RF} advantage vanishes.
 
 This interpretation is consistent with the overlap-bucket diagnosis: \texttt{RF} dominates the high-overlap strata where interpolation is easiest, while \texttt{DTI-LM}'s learned representations become advantageous in the low-overlap regime. The recurrent \texttt{RF} gains should therefore not be read as ``classical beats deep learning'' but as evidence that descriptor-level interpolation suffices when drug-side support is high—a regime-specific finding rather than a universal one.
 
 \subsection{Limitations}
 
-\textbf{ColdstartCPI-style fidelity.} Our \texttt{ColdstartCPI-style} model is a simplified reimplementation that preserves the core architectural contribution of \citet{zhao2025coldstartcpi}—Transformer self-attention over concatenated per-atom drug and per-residue protein tokens—but differs from the original in two ways: it uses GCN-derived atom features instead of Mol2Vec embeddings, and CNN-derived residue features instead of ProtTrans-BERT-BFD. It also uses the same fixed-tuning-budget protocol as all other models (6--8 epochs, AdamW with lr~$10^{-3}$). The original ColdstartCPI reports substantially higher numbers on its own BindingDB splits; therefore, the low absolute performance of \texttt{ColdstartCPI-style} in our study likely reflects encoder and tuning differences rather than a fundamental limitation of the Transformer-fusion architecture. For the ranking-stability argument, this is acceptable: the model still represents a genuinely different fusion strategy, and its ranking \emph{relative to other models} varies across benchmarks (e.g., it is closer to the pack on patent temporal than on target-cold synthetic). A fairer head-to-head evaluation of the full ColdstartCPI pipeline with its native encoders is left to future work.
+\textbf{ColdstartCPI-style fidelity.} Our \texttt{ColdstartCPI-style} model is a simplified reimplementation that preserves the core architectural contribution of \citet{zhao2025coldstartcpi}—Transformer self-attention over concatenated per-atom drug and per-residue protein tokens—but differs from the original in two ways: it uses GCN-derived atom features instead of Mol2Vec embeddings, and CNN-derived residue features instead of ProtTrans-BERT-BFD. It also uses the same fixed-tuning-budget protocol as all other models (6--8 epochs, AdamW with lr~$10^{-3}$). The original ColdstartCPI reports substantially higher numbers on its own BindingDB splits; therefore, the low absolute performance of \texttt{ColdstartCPI-style} in our study likely reflects encoder and tuning differences rather than a fundamental limitation of the Transformer-fusion architecture. For the ranking-stability argument, the model still represents a different fusion strategy, and its ranking \emph{relative to other models} varies across benchmarks (e.g., it is closer to the pack on patent temporal than on target-cold synthetic). A fairer head-to-head evaluation of the full ColdstartCPI pipeline with its native encoders is left to future work.
 
 \textbf{Panel scope.} Seven models spanning seven architectural families provide sufficient evidence for ranking instability, but the panel is not exhaustive. Recent token-level fusion methods (e.g., FusionDTI), contrastive approaches (e.g., SiamDTI), and 3D-structure-aware models (e.g., SP-DTI \citep{liu2025spdti}) are not included. Structure-enriched models may behave differently in the low-overlap regime where LM-based approaches currently lead; testing this is a natural extension. A larger community benchmark would be needed to quantify how far the ranking-instability effect extends across the full modern DTI literature.
 
@@ -455,7 +455,7 @@ Table~\ref{tab:nonpatent-spec} lists the source, year cutoffs, label transform, 
     Target encoder & Same architecture as drug encoder, independent parameters. \\
     Pair head & $[d,\; t,\; d \odot t,\; |d-t|] \in \mathbb{R}^{1024}$, then $\mathrm{Linear}(1024,512)$, GELU, dropout $0.1$, $\mathrm{Linear}(512,1)$. \\
     Parameters & $2{,}886{,}145$ total. \\
-    Optimization & BCE-with-logits, Adam (lr $10^{-3}$, wd $10^{-4}$), 8 epochs, batch 256. \\
+    Optimization & BCE-with-logits, AdamW (lr $10^{-3}$, wd $10^{-4}$), 8 epochs, batch 256. \\
     Labeling & Binary from $\mathrm{p}K_d \ge 7.0$ (patent: log-nM conversion per Table~\ref{tab:patent-spec}). \\
     Code path & \texttt{src/raicd/model.py}; training: \texttt{scripts/train\_raicd.py}. \\
     \bottomrule
@@ -524,7 +524,7 @@ Table~\ref{tab:nonpatent-spec} lists the source, year cutoffs, label transform, 
 \begin{sidewaystable*}[p]
   \centering
   \scriptsize
-  \caption{Supporting real-OOD benchmarks (matched 5-seed where available, 3-seed for legacy models). Best mean \AUPRC{} per row is bold.}
+  \caption{Supporting real-OOD benchmarks for the six models evaluated on these splits (5-seed). \texttt{ColdstartCPI-style} was not run on the supporting benchmarks because its primary role is to test cold-start--specific architecture sensitivity on the five main benchmarks. Best mean \AUPRC{} per row is bold.}
   \label{tab:support}
   \setlength{\tabcolsep}{2pt}
   \begin{tabular*}{\textheight}{@{\extracolsep{\fill}}p{0.14\textheight}p{0.13\textheight}p{0.13\textheight}p{0.13\textheight}p{0.13\textheight}p{0.13\textheight}p{0.13\textheight}@{}}
@@ -559,7 +559,7 @@ Table~\ref{tab:nonpatent-spec} lists the source, year cutoffs, label transform, 
   \setlength{\tabcolsep}{4pt}
   \begin{tabular*}{\textheight}{@{\extracolsep{\fill}}p{0.18\textheight}p{0.14\textheight}p{0.28\textheight}p{0.14\textheight}p{0.19\textheight}@{}}
     \toprule
-    Benchmark & Systems & Mean \AUPRC{} / \AUROC{} & Paired \AUPRC{} CI & Read \\
+    Benchmark & Systems & Mean \AUPRC{} / \AUROC{} & Paired \AUPRC{} CI & Interpretation \\
     \midrule
     \texttt{nonpatent\_temporal} &
     \texttt{base} vs \texttt{DTI-LM} &
@@ -585,12 +585,14 @@ Table~\ref{tab:nonpatent-spec} lists the source, year cutoffs, label transform, 
   \end{tabular*}
 \end{sidewaystable*}
 
-\section{Paired uncertainty support}
+\section{Supplementary paired bootstrap intervals}
+
+The intervals below capture \emph{test-set sampling uncertainty} for a single training seed (seed~0) and do not reflect training stochasticity across seeds. They are provided as a supplementary descriptive check; the primary statistical evidence for ranking instability is the cross-seed analysis in Table~\ref{tab:main-results} and the Kendall's $W$ concordance in Section~\ref{sec:rank-concordance}.
 
 \begin{table*}[t]
   \centering
   \scriptsize
-  \caption{Paired bootstrap support for principal ranking comparisons (based on the seed-0 prediction set). Each row shows \texttt{A $-$ B}; a positive delta means \texttt{A} outperforms \texttt{B}. Note: deltas here are sample-level paired bootstrap on a single seed; they may differ slightly from the 5-seed mean deltas in Table~\ref{tab:main-results} because the table reports cross-seed averages.}
+  \caption{Per-seed paired bootstrap intervals (seed~0, 10,000 resamples). Each row shows \texttt{A $-$ B}; a positive delta means \texttt{A} outperforms \texttt{B} on the seed-0 test set. Deltas may differ from the 5-seed mean differences in Table~\ref{tab:main-results}.}
   \label{tab:bootstrap-summary}
   \setlength{\tabcolsep}{3.5pt}
   \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}p{0.48\textwidth}p{0.16\textwidth}p{0.18\textwidth}@{}}

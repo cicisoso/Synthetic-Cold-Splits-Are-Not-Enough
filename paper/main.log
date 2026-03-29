@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.3.18)  28 MAR 2026 08:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.3.18)  28 MAR 2026 18:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -688,26 +688,21 @@ con-clu-sion. On
  []
 
 
-Underfull \hbox (badness 5105) in paragraph at lines 231--232
-\OT1/cmtt/m/n/10.03749 nonpatent[]temporal\OT1/cmr/m/n/10 (+20) , \OT1/cmtt/m/n
-/10.03749 RF \OT1/cmr/m/n/10 (+20) again leads ($0\OML/cmm/m/it/10.03749 :\OT1/
-cmr/m/n/10 (+20) 7201$), with \OT1/cmtt/m/n/10.03749 DTI-LM \OT1/cmr/m/n/10 (+2
-0) ($0\OML/cmm/m/it/10.03749 :\OT1/cmr/m/n/10 (+20) 6437$) and
- []
-
-
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [12]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [13]
-<Fig1.pdf, id=315, 321.60017pt x 201.65074pt>
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14]
+<Fig1.pdf, id=324, 321.60017pt x 201.65074pt>
 File: Fig1.pdf Graphic file (type pdf)
 <use Fig1.pdf>
 Package pdftex.def Info: Fig1.pdf  used on input line 272.
 (pdftex.def)             Requested size: 338.58778pt x 212.30566pt.
-<Fig2.pdf, id=317, 321.94562pt x 190.81024pt>
+<Fig2.pdf, id=326, 321.94562pt x 190.81024pt>
 File: Fig2.pdf Graphic file (type pdf)
 <use Fig2.pdf>
 Package pdftex.def Info: Fig2.pdf  used on input line 279.
@@ -720,9 +715,6 @@ xter-nal
  []
 
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [14]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [15 <./Fig1.pdf>]
@@ -879,85 +871,85 @@ Underfull \hbox (badness 10000) in paragraph at lines 583--584
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [23]
-Underfull \hbox (badness 10000) in paragraph at lines 600--601
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 1739$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 601--602
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 1558$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 602--603
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0546$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 603--604
-[]\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
-/9 :\OT1/cmr/m/n/9 (+20) 0203$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 604--605
-[]\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
-/9 :\OT1/cmr/m/n/9 (+20) 0175$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 605--606
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0441$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 606--607
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0384$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 607--608
-[]\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
-/9 :\OT1/cmr/m/n/9 (+20) 0022$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 608--609
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0061$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 609--610
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0065$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 610--611
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0009$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 611--612
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0064$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 612--613
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0737$,
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 613--614
-[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0564$,
- []
-
-
-Overfull \vbox (16.88907pt too high) has occurred while \output is active []
+Overfull \vbox (7.88907pt too high) has occurred while \output is active []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [24]
+Underfull \hbox (badness 10000) in paragraph at lines 602--603
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 1739$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 603--604
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 1558$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 604--605
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0546$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 605--606
+[]\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
+/9 :\OT1/cmr/m/n/9 (+20) 0203$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 606--607
+[]\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
+/9 :\OT1/cmr/m/n/9 (+20) 0175$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 607--608
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0441$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 608--609
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0384$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 609--610
+[]\OT1/cmr/m/n/9 (+20) [$\OMS/cmsy/m/n/9 ^^@\OT1/cmr/m/n/9 (+20) 0\OML/cmm/m/it
+/9 :\OT1/cmr/m/n/9 (+20) 0022$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 610--611
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0061$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 611--612
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0065$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 612--613
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0009$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 613--614
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0064$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 614--615
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0737$,
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 615--616
+[]\OT1/cmr/m/n/9 (+20) [$+0\OML/cmm/m/it/9 :\OT1/cmr/m/n/9 (+20) 0564$,
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [25]
@@ -967,24 +959,23 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [27]
-Underfull \hbox (badness 2165) in paragraph at lines 660--661
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [28]
+Underfull \hbox (badness 2165) in paragraph at lines 662--663
 []\OT1/cmr/m/n/9 (+20) lightweight pair-only views for exter-nal
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 661--661
+Underfull \hbox (badness 10000) in paragraph at lines 663--663
 []\OT1/cmtt/m/n/9 drugs.csv \OT1/cmr/m/n/9 (+20) /
  []
 
 
-Overfull \hbox (30.92053pt too wide) in paragraph at lines 663--663
+Overfull \hbox (30.92053pt too wide) in paragraph at lines 665--665
 []\OT1/cmtt/m/n/9 evaluate[]prediction[]csv.py| 
  []
 
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [28]
 (./main.bbl
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1027,16 +1018,16 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [33]
 (./main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 59B274445818383DD83DAB4670390ECC;7621.
+(rerunfilecheck)             Checksum: CEE4F278DB8953846DC0FD764C2F6B5E;7694.
  ) 
 Here is how much of TeX's memory you used:
- 14206 strings out of 478287
- 224040 string characters out of 5849289
- 572949 words of memory out of 5000000
+ 14214 strings out of 478287
+ 224094 string characters out of 5849289
+ 572391 words of memory out of 5000000
  31778 multiletter control sequences out of 15000+600000
- 504257 words of font info for 271 fonts, out of 8000000 for 9000
+ 504526 words of font info for 275 fonts, out of 8000000 for 9000
  1151 hyphenation exceptions out of 8191
- 85i,18n,90p,1839b,525s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 85i,18n,90p,1762b,525s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/tex
 mf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dis
@@ -1061,10 +1052,10 @@ sr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/
 fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on main.pdf (33 pages, 467040 bytes).
+Output written on main.pdf (33 pages, 467494 bytes).
 PDF statistics:
- 661 PDF objects out of 1000 (max. 8388607)
- 555 compressed objects within 6 object streams
+ 663 PDF objects out of 1000 (max. 8388607)
+ 557 compressed objects within 6 object streams
  120 named destinations out of 1000 (max. 500000)
  66347 words of extra memory for PDF output out of 74296 (max. 10000000)
 
